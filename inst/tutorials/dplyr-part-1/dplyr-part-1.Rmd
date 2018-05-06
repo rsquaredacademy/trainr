@@ -1,0 +1,128 @@
+---
+title: "dplyr Verbs"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(dplyr)
+knitr::opts_chunk$set(echo = FALSE)
+# ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+
+## Introduction
+
+<hr>
+
+According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf) by [CrowdFlower](https://www.crowdflower.com/), data scientists spend most of their time cleaning and manipulating data rather than mining or modeling them for insights. As such, it becomes important to have tools that make data manipulation faster and easier. In this tutorial, we introduce you to [dplyr](http://dplyr.tidyverse.org/), a grammar of data manipulation. 
+
+
+## Why dplyr
+
+<hr>
+
+- helps us solve the most common data manipulation challenges such as
+- has a consistent syntax 
+- is easier to work with 
+- and is targeted for data analysis tabular data
+
+
+## dplyr Verbs
+
+<hr>
+
+dplyr provides a set of verbs that help us solve the most common data manipulation challenges while working with tabular data (dataframes, tibbles):
+
+- `select`: returns subset of columns
+- `filter`: returns a subset of rows
+- `arrange`: re-order or arrange rows according to single/multiple variables
+- `mutate`: create new columns from existing columns
+- `summarise`: reduce data to a single summary
+
+
+## Case Study
+
+### Introduction
+
+<hr>
+
+We will explore a dummy data set that we have created to resemble web logs of a online retail company. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package. We will use dplyr to answer a few questions we have about the above data:
+
+- what is the average order value by device types?
+- what is the average number of pages visited by purchasers and non-purchasers?
+- what is the average time on site for purchasers vs non-purchasers?
+- what is the average number of pages visited by purchasers and non-purchasers using mobile?
+
+
+## Data
+
+#### Instructions
+
+- click on Run Code to view the data
+
+```{r show,  exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+ecom
+```
+
+## Data Dictionary
+
+<hr>
+
+Below is the description of the data set:
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+
+## Average Order Value
+
+### Introduction
+
+<hr>
+
+**What is the average order value by device types?**
+
+Average value of every order placed over a defined period of time. It is determined using sales per order and not sales per customer. Let us look at the steps to calculate AOV from the ecommerce data set.
+
+![](/images/aov.png)
+
+## AOV Computation
+
+<hr>
+
+- Step 1: Filter Purchasers
+- Step 2: Select data related to AOV (order value, order items) and device
+- Step 3: Group order value and order items by device
+- Step 4: Compute total order value and order items for each device
+- Step 5: Compute AOV for each device
+- Step 6: Select device and AOV data
+
+![](/images/aov_flow_canva.png){width=60%}
+
+## AOV by Devices
+
+<hr>
+
+```{r case, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+ecom %>%
+  filter(purchase == 'true') %>%
+  select(device, order_value, order_items) %>%
+  group_by(device) %>%
+  summarise_all(funs(sum)) %>%
+  mutate(
+    aov = order_value / order_items
+  ) %>%
+  select(device, aov)
+```
+

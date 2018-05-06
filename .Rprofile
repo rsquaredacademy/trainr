@@ -1,0 +1,1 @@
+.libPaths("C:/Users/HP/Documents/R/win-library")
