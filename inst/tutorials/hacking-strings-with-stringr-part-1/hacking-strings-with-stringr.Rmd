@@ -1,0 +1,261 @@
+---
+title: "Hacking strings with stringr"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(stringr)
+library(tibble)
+library(magrittr)
+library(purrr)
+library(dplyr)
+knitr::opts_chunk$set(echo = FALSE)
+mockstring <- readr::read_csv("https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv")
+mock_data <-
+  mockstring %>%
+  slice(1:10) %>%
+  select(email, address, full_name, currency, )
+```
+
+## Introduction
+
+<hr>
+
+In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
+download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package.  Let us begin by installing and loading stringr and a set of other pacakges we will be using.
+
+
+## Case Study
+
+### Introduction
+
+<hr>
+
+- extract domain name from random email ids
+- extract image type from url
+- extract image dimension from url
+- extract extension from domain name
+- extract http protocol from url
+- extract domain name from url
+- extract extension from url
+- extract file type from url
+
+
+## Data
+
+<hr>
+
+```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+mockstring
+```
+
+## Sample Data
+
+<hr>
+
+```{r sample, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+mock_data <-
+  mockstring %>%
+  slice(1:10) %>%
+  select(email, address, full_name, currency, )
+```
+
+## Detect @
+
+<hr>
+
+![](/images/str_detect.png){width=90%}
+
+## Detect @
+
+<hr>
+
+```{r detect, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_detect(mock_data$email, pattern = "@")
+```
+
+## Count @
+
+<hr>
+
+![](/images/str_count.png){width=90%}
+
+## Count @
+
+<hr>
+
+```{r count, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_count(mock_data$email, pattern = "@")
+```
+
+## Concatenate
+
+<hr>
+
+![](/images/str_c.png){width=90%}
+
+## Concatenate
+
+<hr>
+
+```{r concatenate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_c("email id:", mock_data$email)
+```
+
+## Split
+
+<hr>
+
+![](/images/str_split.png){width=90%}
+
+## Split
+
+<hr>
+
+```{r split, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_split(mock_data$email, pattern = "@")
+```
+
+## Sort
+
+<hr>
+
+![](/images/str_sort.png){width=90%}
+
+## Sort
+
+<hr>
+
+```{r sort, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_sort(mock_data$email)
+```
+
+## Sort
+
+<hr>
+
+![](/images/str_sort_descending.png){width=90%}
+
+## Sort
+
+<hr>
+
+```{r sort2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_sort(mock_data$email, descending = TRUE)
+```
+
+## Case
+
+<hr>
+
+![](/images/str_to_upper.png){width=90%}
+
+## Case
+
+<hr>
+
+```{r case, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_to_upper(mock_data$full_name)
+```
+
+## Replace
+
+<hr>
+
+![](/images/str_replace.png){width=90%}
+
+## Replace
+
+<hr>
+
+```{r replace, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_replace(mock_data$address, "Street", "ST")
+```
+
+## Extract
+
+<hr>
+
+![](/images/str_extract.png){width=90%}
+
+## Extract
+
+<hr>
+
+```{r extract, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_extract(mock_data$email, pattern = "com")
+```
+
+## Match
+
+<hr>
+
+![](/images/str_match.png){width=90%}
+
+## Match
+
+<hr>
+
+```{r match, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_match(mock_data$email, pattern = "com")
+```
+
+## Index
+
+<hr>
+
+![](/images/str_which.png){width=90%}
+
+## Index
+
+<hr>
+
+```{r which, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_which(mock_data$email, pattern = "com")
+```
+
+## Locate
+
+<hr>
+
+![](/images/str_locate.png){width=90%}
+
+## Locate
+
+<hr>
+
+```{r locate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_locate(mock_data$email, pattern = "com")
+```
+
+## Length
+
+<hr>
+
+![](/images/str_length.png){width=90%}
+
+## Extract
+
+<hr>
+
+![](/images/str_sub.png){width=90%}
+
+## Extract
+
+<hr>
+
+```{r sub, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+str_sub(mock_data$currency, start = 1, end = 1)
+```
+
+![](/images/word.png){width=90%}
+
+## Word
+
+<hr>
+
+```{r word, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+word(mock_data$full_name, 1)
+```
