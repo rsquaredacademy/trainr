@@ -1,0 +1,302 @@
+---
+title: "Import Data in R - Part 2"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readxl)
+library(haven)
+library(foreign)
+library(sas7bdat)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+## List Sheets
+
+#### Introduction
+
+<hr>
+
+An excel workbook may contain more than 1 sheet. We need to know the name of the sheets in order to read the data.
+`excel_sheets()` will return the names of all the sheet in the workbook. For example, the below code will return the 
+names of all the sheets in the file `xyx.xls`.
+
+```{r import55-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+excel_sheets('xyz.xls')
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- list the sheets in the workbook `sample.xls`
+
+```{r import55, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'List Sheets', exercise.lines=5}
+# list the sheets in sample.xls
+excel_sheets('J:/R/interactive/__________')
+```
+
+```{r import55-solution}
+excel_sheets('J:/R/interactive/sample.xls')
+```
+
+## Read Sheet
+
+#### Introduction
+
+<hr>
+
+Great! Now that we know how many sheets are present in the `sample.xls` file and their respective names, it is time to read 
+in some data. `read_excel()` reads data from `.xls` and `.xlsx` files. You may ask how does it know which sheet to read the 
+data from. That's rigt! In addition to the file name, we have to specify the sheet name or position in the workbook. Below 
+example shows the different ways to specify the sheets in a workbook. 
+
+```{r import56-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+# specify sheet name
+read_excel('xyz.xls', sheet = 'first')
+
+# specify sheet position
+read_excel('xyz.xls', sheet = 1)
+```
+
+<br>
+
+#### Instructions
+
+- read the first sheet in the `sample.xls` file
+
+<hr>
+
+```{r import56, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read Sheets', exercise.lines=5}
+read_excel('J:/R/interactive/sample.xls', sheet = __)
+```
+
+```{r import56-solution}
+read_excel('J:/R/interactive/sample.xls', sheet = 1)
+```
+
+## Read Specific Cells - Part 1
+
+#### Introduction
+
+<hr>
+
+Alright! We now know how to read data from an excel sheet but we may not want to read all the data present in the sheet i.e. sometimes we might want to read a subset of the data (few rows of specific colums). In order to read a subset of data, we need to specify the associated rows and columns. For example, to read data from first 4 rows of columns **B** and **C**, we will specify `"B1:C4"` using the `range` argument. The input for the range must be enclosed in single/double quotes.
+
+```{r import59-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_excel('xyz.xls', sheet = 1, range = "B1:C4")
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from first 5 rows of columns **A**, **B** and **C**
+
+```{r import59, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read Specific Cells', exercise.lines=5}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = "__:__")
+```
+
+```{r import59-solution}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = "A1:C5")
+```
+
+## Read Specific Cells - Part 2
+
+#### Introduction
+
+<hr>
+
+There is another way to specify the subset of data that we might want to read. This approach includes specifying the following:
+
+- specify a cell to start with (say A3)
+- number of rows from to read including row 3
+- number of columns to read including column A
+
+The `range` argument is used to specify the cell but in this approach instead of directly specifying the cells, we will
+use `anchored()` to specify the initial cell and the number of rows and columns to read. It takes two arguments:
+
+- `anchor`: the initial cell (say "A3")
+- `dim`: the number of rows and columns as a vector (c(3, 2) for 3 rows and 2 columns)
+
+```{r import61-eg, echo=TRUE, eval=FALSE,  collapse=FALSE}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, col_names = FALSE,
+  range = anchored("A4", dim = c(3, 2)))
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from 4th to 7th row of columns A & B
+
+```{r import61, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read Specific Cells',  exercise.lines=5}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, col_names = FALSE,
+  range = anchored("__", dim = c(_, _)))
+```
+
+```{r import61-solution}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, col_names = FALSE,
+  range = anchored("A4", dim = c(3, 2)))
+```
+
+## Specify Rows
+
+#### Introduction
+
+<hr>
+
+So far we have explored reading a subset of data i.e. certain rows and columns. In this section, we will read specific rows of 
+all the columns form the excel sheet. We will continue to use the `range` argument and use `cell_rows()` to specify the rows from 
+which to read the data. In the below example, we read data from the first 4 rows.
+
+```{r import62-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = cell_rows(1:4))
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from rows 3 to 5
+
+```{r import62, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Rows',  exercise.lines=5}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = _________)
+```
+
+```{r import62-solution}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = cell_rows(3:5))
+```
+
+## Specify Columns
+
+#### Introduction
+
+<hr>
+
+Let us look at another scenario where we want to read data all the rows but only specific columns. Use `cell_cols()` to
+specify the columns from which the data must be read. In the below example, we use `cell_cols()` to read data from columns
+2 and 3. 
+
+```{r import63-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = cell_cols(2:3))
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from columns 1 to 4
+
+```{r import63, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Columns',  exercise.lines=5}
+read_excel('J:/R/interactive/sample.xls', sheet = 1, range = ___________)
+```
+
+```{r import63-solution}
+read_excel('J:/R/interactive/J:/R/interactive/sample.xls', sheet = 1, range = cell_cols(1:4))
+```
+
+## Other Softwares
+
+<hr>
+
+Sometimes, we might have to read data from files of other statistical packages such as:
+
+- SAS (.sas7bdat)
+- SPSS (.sav)
+- Stata (.dta)
+
+In R, the following packages allow us to read data from the above file formats:
+
+- [haven](http://haven.tidyverse.org/)
+- [foreign](https://cran.r-project.org/package=foreign)
+- [sas7bdat](https://cran.r-project.org/package=sas7bdat)
+
+We will use the [haven](http://haven.tidyverse.org/) package in this tutorial.
+
+## Stata
+
+#### Introduction
+
+<hr>
+
+Stata files have the extension `.dta` and can be read using either `read_dta()` or `read_stata()`.
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from `airline.dta` file
+
+```{r import68, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Columns',  exercise.lines=5}
+# read airline.dta file
+
+```
+
+```{r import68-solution}
+read_stata('airline.dta')  
+```
+
+## SPSS
+
+#### Introduction
+
+<hr>
+
+SPSS files have the extension `.sav` and can be read using either `read_sav()` or `read_spss()`.
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from `employee.sav` file
+
+```{r import71, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Columns',  exercise.lines=5}
+# read employee.sav file
+```
+
+```{r import71-solution}
+read_spss('employee.sav')  
+```
+
+## SAS
+
+#### Introduction
+
+<hr>
+
+SAS files have the extension `.sas7bdat` and can be read using either `read_sas()`.
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- read data from `airline.sas7bdat` file
+
+```{r import73, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Columns',  exercise.lines=5}
+# read airline.sas7bdat file
+```
+
+```{r import73-solution}
+read_sas('airline.sas7bdat')
+```
