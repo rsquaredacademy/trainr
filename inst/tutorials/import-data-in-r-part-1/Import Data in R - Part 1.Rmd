@@ -1,0 +1,274 @@
+---
+title: "Import Data in R - Part 1"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readr)
+knitr::opts_chunk$set(echo = FALSE)
+setwd('J:/R/interactive/import-data-in-r-part-1/')
+```
+
+## Introduction
+
+<hr>
+
+## Overview
+
+<hr>
+
+<br>
+<center>
+![](/images/import_func.png){width=60%}
+</center>
+<br>
+
+The above table gives an overview of the functions for reading different types of files in readr and Base R. All the functions in readr offer a common set of options which are described below. We will learn about them in greater detail in the next section.
+
+- `col_names`: whether data includes column names
+- `n_max`: maximum number of lines/rows to read
+- `col_types`: data type of the columns
+- `skip`: number of lines/rows to skip
+
+
+## Read Data
+
+### Introduction
+
+<hr>
+
+Let us read data from a csv (comma separated values) file and explore the options listed in the previous section. To read a file
+named `xyz.csv`, you will do the following i.e. use `read_csv()` and specify the path to the folder/directory where the file resides.
+
+```{r import2-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_csv('folder_path/xyz.csv')
+```
+
+### Instructions
+
+<hr>
+
+We have provided the partial code which includes the directory path. You need to:
+
+- read the file `hsb2.csv` and observe the output
+
+```{r import2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Introduction', exercise.lines=5}
+read_csv('J:/R/interactive/______')
+```
+
+```{r import2-solution}
+read_csv('J:/R/interactive/hsb2.csv')
+```
+
+Sometimes you may get an error while reading data from a file. In such case try the following:
+
+- check the separator in the file and ensure it is a `comma`
+- check the path to the directory where the file resides
+
+## Column Specification
+
+### Introduction
+
+<hr>
+
+If you observed the output when we read data in the previous tab, it includes the data type detected for each column in the file. When you read data using readr, it will display the data type detected for each column/variable in the data set. If you want to check the data types before reading the data, use `spec_csv()`. We will learn to specify the column types in the next section.
+
+### Instructions
+
+<hr>
+
+- run the below code and observe the output
+
+```{r import3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Introduction', message = FALSE, exercise.lines=5}
+spec_csv('J:/R/interactive/hsb2.csv')
+```
+
+## Column Names
+
+### Introduction
+
+<hr>
+
+Use `col_names` to indicate whether the data includes column names. It takes two values, `TRUE` and `FALSE`. If set to `FALSE`, readr will generate column names. The below code reads data from a file which does not have column names present in the first row.
+
+```{r import1-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_csv('directory_path/file_name.csv', col_names = FALSE)
+```
+
+### Instructions
+
+<hr>
+
+- read data from `hsb3.csv` and indicate that the file does not include column names
+
+```{r import1, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Names', exercise.lines=5}
+read_csv('J:/R/interactive/hsb3.csv', __________)
+```
+
+```{r import1-solution}
+read_csv('J:/R/interactive/hsb3.csv', col_names = FALSE)
+```
+
+## Column Names
+
+### Introduction
+
+<hr>
+
+We learnt how to indicate whether file includes column names or not. What if we want to specify names for the columns while reading data from the file. `col_names` can be used to specify column names as well. All that we need to do is to store the names as a character vector and supply it to `col_names`. Assume you are reading data from a file and need to specify column names, the below example shows how to do it.
+
+```{r import4eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+column_names <- c('col_1', 'col_2', 'col_3')
+read_csv('directory_path/file_name.csv', col_names = column_names)
+```
+
+### Instructions
+
+<hr>
+
+- use `cname` to specify the column names for `hsb3.csv`
+
+```{r import4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Names', exercise.lines=5}
+cnames <- c("id", "female", "race", "ses", "schtyp", "prog", "read", "write", "math", "science", "socst")
+read_csv('J:/R/interactive/hsb3.csv', ______________)
+```
+
+```{r import4-solution}
+cnames <- c("id", "female", "race", "ses", "schtyp", "prog", "read", "write", "math", "science", "socst")
+read_csv('J:/R/interactive/hsb3.csv', col_names = cnames)
+```
+
+## Skip Lines
+
+### Introduction
+
+<hr>
+
+If the file has contents other than data in the first few lines, we need to skip them before reading the data. Use `skip` to skip a certain number of lines. For example, the below example shows how to skip the first 5 lines of a file.
+
+```{r import8-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_csv('directory_path/file_name.csv', skip = 5)
+```
+
+### Instructions
+
+<hr>
+
+- skip the first 3 lines 
+
+```{r import8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Skip Lines', exercise.lines=5}
+read_csv('J:/R/interactive/hsb4.csv', ________)
+```
+
+```{r import8-solution}
+read_csv('J:/R/interactive/hsb4.csv', skip = 3)
+```
+
+## Maximum Lines 
+
+### Introduction
+
+<hr>
+
+Suppose we want to read only 100 rows of data from a file, we can use `n_max` to specify the maximum number of lines to read and set it equal to 100. 
+
+```{r import5-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
+read_csv('directory_path/file_name.csv', n_max = 100)
+```
+
+### Instructions
+
+<hr>
+
+- read the first 120 rows from the `hsb2` file
+- observe the last row in the output and check if it says `# ... with 110 more rows`
+
+```{r import5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Maximum Lines', exercise.lines=5}
+read_csv('J:/R/interactive/hsb2.csv', _______)
+```
+
+```{r import5-solution}
+read_csv('J:/R/interactive/hsb2.csv', n_max = 120)
+```
+
+## Column Types - Intro
+
+<hr>
+
+In certain cases, we need to specify the data type of the columns. It might be related to dates or categorical variables. readr allows us to specify the data types using `col_xxx` functions which include:
+
+- `col_double()`
+- `col_integer()`
+- `col_factor()`
+- `col_character()`
+- `col_datetime()`
+
+To specify the data types, we will use `col_types` argument and supply to it a list indicating the data type (using `col_xxx`) of each column in the data set. In the below example, we read data from `hsb2` file while sprcifying the data types. Keep in mind that we need to specify the data type for each column. 
+
+## Column Types - Practice
+
+### Introduction
+
+<hr>
+
+### Instructions
+
+<hr>
+
+```{r import6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Types', exercise.lines=5}
+read_csv('J:/R/interactive/hsb2.csv', col_types = list(
+  )            
+)
+```
+
+```{r import6-solution}
+read_csv('J:/R/interactive/hsb2.csv', col_types = list(
+  col_integer(), col_factor(levels = c(0, 1)), 
+  col_factor(levels = c(1, 2, 3, 4)), col_factor(levels = c(1, 2, 3)), 
+  col_factor(levels = c(1, 2)), col_factor(levels = c(1, 2, 3)),
+  col_integer(), col_integer(), col_integer(), col_integer(),
+  col_integer())            
+)
+```
+
+## Specific Columns
+
+### Introduction
+
+<hr>
+
+We may not always want to read all the columns from a file. In such cases, we can specify the columns to be read using `col_types` argument and supplying to it the names of the columns to be read. We will use `cols_only()` to specify the column names and their respective data types.
+
+### Instructions
+
+<hr>
+
+```{r import7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Types', exercise.lines=5}
+read_csv('J:/R/interactive/hsb2.csv', col_types = cols_only(id = ,
+  prog = , read = )
+)
+```
+
+```{r import7-solution}
+read_csv('J:/R/interactive/hsb2.csv', col_types = cols_only(id = col_integer(),
+  prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
+)
+```
+
+## Practice 
+
+<hr>
+
+- check the separator type in the following files and read them using appropriate `read_xxx()` function:
+
+    - `hsb.csv`
+    - `mtcars.tsv`
+    - `hsb1.csv`
+    - `hsb.txt`
+
+## Further Readings
+
+
+
