@@ -1,0 +1,402 @@
+---
+title: "Readable Code with Pipes"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(dplyr)
+library(magrittr)
+library(purrr)
+knitr::opts_chunk$set(echo = FALSE)
+ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+```
+
+## Introduction
+
+<hr>
+
+R code contain a lot of parentheses in case of a sequence of multiple operations. When you are dealing with 
+complex code, it results in nested function calls which are hard to read and maintain. The [magrittr](https://CRAN.R-project.org/package=magrittr) package by [Stefan Milton Bache](http://stefanbache.dk/) provides pipes enabling us to write R code that is readable.
+
+Pipes allow us to clearly express a sequence of multiple operations by:
+
+- structuring operations from left to right
+- avoiding
+    - nested function calls
+    - intermediate steps
+    - overwriting of original data
+- minimizing creation of local variables
+
+## Pipes
+
+<hr>
+
+If you are using [tidyverse](https://www.tidyverse.org/), magrittr will be automatically loaded. We will look at 3 different types of pipes:
+
+- `%>%` : pipe a value forward into an expression or function call
+- `%<>%`: result assigned to left hand side object instead of returning it 
+- `%$%` : expose names within left hand side objects to right hand side expressions
+
+## Data
+
+<hr>
+
+```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+ecom
+```
+
+## Data Dictionary
+
+<hr>
+
+- id: row id
+- referrer: referrer website/search engine
+- os: operating system
+- browser: browser
+- device: device used to visit the website
+- n_pages: number of pages visited
+- duration: time spent on the website (in seconds)
+- repeat: frequency of visits
+- country: country of origin
+- purchase: whether visitor purchased
+- order_value: order value of visitor (in dollars)
+
+## head
+
+<hr>
+
+```{r mag1, eval=FALSE, echo=TRUE, collapse=FALSE}
+head(ecom, 10)
+
+# using pipe
+ecom %>% head(10)
+```
+
+## Square Root 
+
+<hr>
+
+```{r mag3, eval=TRUE, echo=TRUE, collapse=FALSE}
+y <- ecom$n_pages
+y <- sqrt(y)
+head(y)
+```
+
+## Square Root
+
+![](/images/pipes_square_root.png){width=100%}
+
+## Square Root 
+
+<hr>
+
+```{r mag4, eval=TRUE, echo=TRUE, collapse=FALSE}
+# select n_pages variable and assign it to y
+y <- ecom %$% n_pages
+head(y)
+
+# compute square root of y and assign it to y 
+y %<>% sqrt()
+head(y)
+```
+
+## Square Root
+
+<hr>
+
+```{r mag5, eval=TRUE, echo=TRUE, collapse=FALSE}
+y <- 
+  ecom %$% 
+  n_pages %>% 
+  sqrt() %>%
+  head()
+y
+```
+
+## Correlation
+
+<hr>
+
+![](/images/pipes_correlation.png){width=100%}
+
+## Correlation
+
+<hr>
+
+```{r mag6, eval=TRUE, echo=TRUE, collapse=FALSE}
+# without pipe
+ecom1 <- subset(ecom, purchase == 'true')
+cor(ecom1$n_pages, ecom1$duration)
+```
+
+```{r mag6a, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+# with pipe
+ecom %>%
+  subset(purchase == 'true') %$% 
+  cor(n_pages, duration)
+```
+
+## Visualization
+
+<hr>
+
+```{r mag21, eval=TRUE, echo=TRUE, collapse=FALSE, fig.align='center', fig.height=4, fig.width=6}
+barplot(table(subset(ecom, purchase == 'true')$referrer))
+```
+
+## Visualization
+
+<hr>
+
+![](/images/pipes_viz_canva.png){width=100%}
+
+## Visualization - Using pipe
+
+<hr>
+
+```{r mag7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data', fig.align='center', fig.height=4, fig.width=6}
+ecom %>%
+  subset(purchase == 'true') %>%
+  extract('referrer') %>%
+  table() %>%
+  barplot()
+```
+
+## Regression
+
+<hr>
+
+```{r mag8, eval=FALSE, echo=TRUE, collapse=FALSE}
+summary(lm(duration ~ n_pages, data = ecom))
+```
+
+## Regression - Using pipe
+
+<hr>
+
+```{r mag22, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+ecom %$%
+  lm(duration ~ n_pages) %>%
+  summary()
+```
+
+## String Manipulation
+
+<hr>
+
+![](/images/pipes_string.png){width=100%}
+
+## String Manipulation
+
+<hr>
+
+```{r mag9, eval=TRUE, echo=TRUE, collapse=FALSE}
+email <- 'jovialcann@anymail.com'
+
+# without pipe
+toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
+
+# with pipe
+email %>%
+  strsplit(split = '@') %>%
+  extract2(1) %>%
+  extract(1) %>%
+  strtrim(width = 6) %>%
+  toupper()
+```
+
+## String Manipulation
+
+<hr>
+
+```{r map39, eval=TRUE, echo=TRUE, collapse=FALSE}
+email %>%
+  strsplit(split = '@') %>%
+  map_chr(1) %>%
+  strtrim(width = 6) %>%
+  toupper()
+```
+
+## Data Extraction
+
+<hr>
+
+- `extract()`
+- `extract2()`
+- `use_series()`
+
+## Extract Column By Name
+
+<hr>
+
+```{r mag10, eval=FALSE, echo=TRUE, collapse=FALSE}
+head(ecom['n_pages'], 3)
+
+ecom %>%
+  extract('n_pages') %>%
+  head(3)
+```
+
+## Extract Column By Position
+
+<hr>
+
+```{r mag23, eval=FALSE, echo=TRUE, collapse=FALSE}
+head(ecom[6], 3)
+
+ecom %>%
+  extract(6) %>%
+  head(3)
+```
+
+## Extract Column (as vector)
+
+<hr>
+
+```{r mag11, eval=FALSE, echo=TRUE, collapse=FALSE}
+head(ecom$n_pages)
+
+ecom %>%
+  use_series('n_pages') %>%
+  head()
+```
+
+## Extract List Element By Name
+
+<hr>
+
+```{r mag12, eval=FALSE, echo=TRUE, collapse=FALSE}
+mt <- as.list(mtcars)
+
+mt[['mpg']]
+
+mt %>%
+  extract2('mpg')
+```
+
+## Extract List Element By Position
+
+<hr>
+
+```{r mag13, eval=FALSE, echo=TRUE, collapse=FALSE}
+mt <- as.list(mtcars)
+
+mt[[1]]
+
+mt %>%
+  extract2(1)
+```
+
+## Extract List Element (as vector)
+
+<hr>
+
+```{r mag14, eval=FALSE, echo=TRUE, collapse=FALSE}
+mt <- as.list(mtcars)
+
+mt$mpg
+
+mt %>%
+  use_series(mpg)
+```
+
+## Arithmetic Operations
+
+<hr>
+
+- `add()`
+- `subtract()`
+- `multiply_by()`
+- `multiply_by_matrix()`
+- `divide_by()`
+- `divide_by_int()`
+- `mod()`
+- `raise_to_power()`
+
+
+## Addition
+
+<hr>
+
+```{r mag15, eval=FALSE, echo=TRUE, collapse=FALSE}
+1:10 %>%
+  `+`(1)
+
+1:10 %>%
+  add(1)
+```
+
+## Multiplication
+
+<hr>
+
+```{r mag16, eval=FALSE, echo=TRUE, collapse=FALSE}
+1:10 %>%
+  `*`(3)
+
+1:10 %>%
+  multiply_by(3)
+```
+
+## Division
+
+<hr>
+
+```{r mag17, eval=FALSE, echo=TRUE, collapse=FALSE}
+1:10 %>%
+  `/`(2)
+
+1:10 %>%
+  divide_by(2)
+```
+
+## Power
+
+<hr>
+
+```{r mag18, eval=FALSE, echo=TRUE, collapse=FALSE}
+1:10 %>%
+  `^`(2)
+
+1:10 %>%
+  raise_to_power(2)
+```
+
+## Logical Operators
+
+<hr>
+
+- `and()`
+- `or()`
+- `equals()`
+- `not()`
+- `is_greater_than()`
+- `is_weakly_greater_than()`
+- `is_less_than()`
+- `is_weakly_less_than()`
+
+## Greater Than
+
+<hr>
+
+```{r mag19, eval=FALSE, echo=TRUE, collapse=FALSE}
+1:10 %>%
+  `>`(5)
+
+1:10 %>%
+  is_greater_than(5)
+```
+
+## Weakly Greater Than
+
+<hr>
+
+```{r mag20, eval=FALSE, echo=TRUE, collapse=FALSE}
+1:10 %>%
+  `>=`(5)
+
+1:10 %>%
+  is_weakly_greater_than(5)
+```
