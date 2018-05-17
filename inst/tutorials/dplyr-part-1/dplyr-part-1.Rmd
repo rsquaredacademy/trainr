@@ -53,7 +53,7 @@ following questions:
 
 - click on Run Code to view the data
 
-```{r show,  exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
 ecom
 ```
 
