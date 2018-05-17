@@ -48,6 +48,42 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h2>Introduction</h2>
 <hr>
 </div>
+<div id="section-file-types" class="section level2">
+<h2>File Types</h2>
+<hr>
+<div id="section-comma-separated-values" class="section level3">
+<h3>Comma Separated Values</h3>
+<br>
+<center>
+<img src="/images/mtcars_comma.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-semicolon-separated-values" class="section level3">
+<h3>Semicolon Separated Values</h3>
+<br>
+<center>
+<img src="/images/mtcars_semicolon.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-space-separated-values" class="section level3">
+<h3>Space Separated Values</h3>
+<br>
+<center>
+<img src="/images/mtcars_space.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-tab-separated-values" class="section level3">
+<h3>Tab Separated Values</h3>
+<br>
+<center>
+<img src="/images/mtcars_tab.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+</div>
 <div id="section-overview" class="section level2">
 <h2>Overview</h2>
 <hr>
@@ -66,12 +102,9 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="section-read-data" class="section level2">
 <h2>Read Data</h2>
-<div id="section-introduction-1" class="section level3">
-<h3>Introduction</h3>
 <hr>
 <p>Let us read data from a csv (comma separated values) file and explore the options listed in the previous section. To read a file named <code>xyz.csv</code>, you will do the following i.e. use <code>read_csv()</code> and specify the path to the folder/directory where the file resides.</p>
 <pre class="r"><code>read_csv(&#39;folder_path/xyz.csv&#39;)</code></pre>
-</div>
 <div id="section-instructions" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -80,26 +113,18 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>read the file <code>hsb2.csv</code> and observe the output</li>
 </ul>
 <div class="tutorial-exercise" data-label="import2" data-caption="Introduction" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/______&#39;)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/    &#39;)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;)</code></pre>
 </div>
-<p>Sometimes you may get an error while reading data from a file. In such case try the following:</p>
-<ul>
-<li>check the separator in the file and ensure it is a <code>comma</code></li>
-<li>check the path to the directory where the file resides</li>
-</ul>
 </div>
 </div>
 <div id="section-column-specification" class="section level2">
 <h2>Column Specification</h2>
-<div id="section-introduction-2" class="section level3">
-<h3>Introduction</h3>
 <hr>
 <p>If you observed the output when we read data in the previous tab, it includes the data type detected for each column in the file. When you read data using readr, it will display the data type detected for each column/variable in the data set. If you want to check the data types before reading the data, use <code>spec_csv()</code>. We will learn to specify the column types in the next section.</p>
-</div>
 <div id="section-instructions-1" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -107,19 +132,16 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>run the below code and observe the output</li>
 </ul>
 <div class="tutorial-exercise" data-label="import3" data-caption="Introduction" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>spec_csv(&#39;J:/R/interactive/hsb2.csv&#39;)</code></pre>
+<pre class="text"><code>spec_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 </div>
 </div>
 <div id="section-column-names" class="section level2">
 <h2>Column Names</h2>
-<div id="section-introduction-3" class="section level3">
-<h3>Introduction</h3>
 <hr>
 <p>Use <code>col_names</code> to indicate whether the data includes column names. It takes two values, <code>TRUE</code> and <code>FALSE</code>. If set to <code>FALSE</code>, readr will generate column names. The below code reads data from a file which does not have column names present in the first row.</p>
 <pre class="r"><code>read_csv(&#39;directory_path/file_name.csv&#39;, col_names = FALSE)</code></pre>
-</div>
 <div id="section-instructions-2" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -127,23 +149,20 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>read data from <code>hsb3.csv</code> and indicate that the file does not include column names</li>
 </ul>
 <div class="tutorial-exercise" data-label="import1" data-caption="Column Names" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, __________)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv&#39;, __________)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, col_names = FALSE)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv&#39;, col_names = FALSE)</code></pre>
 </div>
 </div>
 </div>
 <div id="section-column-names-1" class="section level2">
 <h2>Column Names</h2>
-<div id="section-introduction-4" class="section level3">
-<h3>Introduction</h3>
 <hr>
 <p>We learnt how to indicate whether file includes column names or not. What if we want to specify names for the columns while reading data from the file. <code>col_names</code> can be used to specify column names as well. All that we need to do is to store the names as a character vector and supply it to <code>col_names</code>. Assume you are reading data from a file and need to specify column names, the below example shows how to do it.</p>
 <pre class="r"><code>column_names &lt;- c(&#39;col_1&#39;, &#39;col_2&#39;, &#39;col_3&#39;)
 read_csv(&#39;directory_path/file_name.csv&#39;, col_names = column_names)</code></pre>
-</div>
 <div id="section-instructions-3" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -152,23 +171,29 @@ read_csv(&#39;directory_path/file_name.csv&#39;, col_names = column_names)</code
 </ul>
 <div class="tutorial-exercise" data-label="import4" data-caption="Column Names" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code>cnames &lt;- c(&quot;id&quot;, &quot;female&quot;, &quot;race&quot;, &quot;ses&quot;, &quot;schtyp&quot;, &quot;prog&quot;, &quot;read&quot;, &quot;write&quot;, &quot;math&quot;, &quot;science&quot;, &quot;socst&quot;)
-read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, ______________)</code></pre>
+read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv&#39;, ______________)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import4-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>cnames &lt;- c(&quot;id&quot;, &quot;female&quot;, &quot;race&quot;, &quot;ses&quot;, &quot;schtyp&quot;, &quot;prog&quot;, &quot;read&quot;, &quot;write&quot;, &quot;math&quot;, &quot;science&quot;, &quot;socst&quot;)
-read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, col_names = cnames)</code></pre>
+read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv&#39;, col_names = cnames)</code></pre>
 </div>
 </div>
 </div>
 <div id="section-skip-lines" class="section level2">
 <h2>Skip Lines</h2>
-<div id="section-introduction-5" class="section level3">
-<h3>Introduction</h3>
+<hr>
+<br>
+<center>
+<img src="/images/mtcars_skip_lines_file.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-skip-lines-1" class="section level2">
+<h2>Skip Lines</h2>
 <hr>
 <p>If the file has contents other than data in the first few lines, we need to skip them before reading the data. Use <code>skip</code> to skip a certain number of lines. For example, the below example shows how to skip the first 5 lines of a file.</p>
 <pre class="r"><code>read_csv(&#39;directory_path/file_name.csv&#39;, skip = 5)</code></pre>
-</div>
 <div id="section-instructions-4" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -176,22 +201,19 @@ read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, col_names = cnames)</code></pre>
 <li>skip the first 3 lines</li>
 </ul>
 <div class="tutorial-exercise" data-label="import8" data-caption="Skip Lines" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb4.csv&#39;, ________)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb4.csv&#39;, ________)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import8-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb4.csv&#39;, skip = 3)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb4.csv&#39;, skip = 3)</code></pre>
 </div>
 </div>
 </div>
 <div id="section-maximum-lines" class="section level2">
 <h2>Maximum Lines</h2>
-<div id="section-introduction-6" class="section level3">
-<h3>Introduction</h3>
 <hr>
 <p>Suppose we want to read only 100 rows of data from a file, we can use <code>n_max</code> to specify the maximum number of lines to read and set it equal to 100.</p>
 <pre class="r"><code>read_csv(&#39;directory_path/file_name.csv&#39;, n_max = 100)</code></pre>
-</div>
 <div id="section-instructions-5" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -200,44 +222,39 @@ read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, col_names = cnames)</code></pre>
 <li>observe the last row in the output and check if it says <code># ... with 110 more rows</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import5" data-caption="Maximum Lines" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;, _______)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;, _______)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import5-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;, n_max = 120)</code></pre>
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;, n_max = 120)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-column-types---intro" class="section level2">
-<h2>Column Types - Intro</h2>
+<div id="section-column-types" class="section level2">
+<h2>Column Types</h2>
 <hr>
 <p>In certain cases, we need to specify the data type of the columns. It might be related to dates or categorical variables. readr allows us to specify the data types using <code>col_xxx</code> functions which include:</p>
-<ul>
-<li><code>col_double()</code></li>
-<li><code>col_integer()</code></li>
-<li><code>col_factor()</code></li>
-<li><code>col_character()</code></li>
-<li><code>col_datetime()</code></li>
-</ul>
-<p>To specify the data types, we will use <code>col_types</code> argument and supply to it a list indicating the data type (using <code>col_xxx</code>) of each column in the data set. In the below example, we read data from <code>hsb2</code> file while sprcifying the data types. Keep in mind that we need to specify the data type for each column.</p>
+<br>
+<center>
+<img src="/images/column_types_list_canva.png" style="width:70.0%" />
+</center>
+<p><br></p>
 </div>
-<div id="section-column-types---practice" class="section level2">
-<h2>Column Types - Practice</h2>
-<div id="section-introduction-7" class="section level3">
-<h3>Introduction</h3>
+<div id="section-column-types-1" class="section level2">
+<h2>Column Types</h2>
 <hr>
-</div>
+<p>To specify the data types, we will use <code>col_types</code> argument and supply to it a list indicating the data type (using <code>col_xxx</code>) of each column in the data set. In the below example, we read data from <code>hsb2</code> file while sprcifying the data types. Keep in mind that we need to specify the data type for each column.</p>
 <div id="section-instructions-6" class="section level3">
 <h3>Instructions</h3>
 <hr>
 <div class="tutorial-exercise" data-label="import6" data-caption="Column Types" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;, col_types = list(
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;, col_types = list(
   )            
 )</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import6-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;, col_types = list(
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;, col_types = list(
   col_integer(), col_factor(levels = c(0, 1)), 
   col_factor(levels = c(1, 2, 3, 4)), col_factor(levels = c(1, 2, 3)), 
   col_factor(levels = c(1, 2)), col_factor(levels = c(1, 2, 3)),
@@ -249,22 +266,28 @@ read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, col_names = cnames)</code></pre>
 </div>
 <div id="section-specific-columns" class="section level2">
 <h2>Specific Columns</h2>
-<div id="section-introduction-8" class="section level3">
-<h3>Introduction</h3>
+<hr>
+<br>
+<center>
+<img src="/images/column_objective_function_map.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-specific-columns-1" class="section level2">
+<h2>Specific Columns</h2>
 <hr>
 <p>We may not always want to read all the columns from a file. In such cases, we can specify the columns to be read using <code>col_types</code> argument and supplying to it the names of the columns to be read. We will use <code>cols_only()</code> to specify the column names and their respective data types.</p>
-</div>
 <div id="section-instructions-7" class="section level3">
 <h3>Instructions</h3>
 <hr>
 <div class="tutorial-exercise" data-label="import7" data-caption="Column Types" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;, col_types = cols_only(id = ,
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;, col_types = cols_only(id = ,
   prog = , read = )
 )</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import7-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;J:/R/interactive/hsb2.csv&#39;, col_types = cols_only(id = col_integer(),
+<pre class="text"><code>read_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;, col_types = cols_only(id = col_integer(),
   prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )</code></pre>
 </div>
@@ -273,18 +296,13 @@ read_csv(&#39;J:/R/interactive/hsb3.csv&#39;, col_names = cnames)</code></pre>
 <div id="section-practice" class="section level2">
 <h2>Practice</h2>
 <hr>
-<ul>
-<li><p>check the separator type in the following files and read them using appropriate <code>read_xxx()</code> function:</p>
+<p>Check the separator type in the following files and read them using appropriate <code>read_xxx()</code> function:</p>
 <ul>
 <li><code>hsb.csv</code></li>
 <li><code>mtcars.tsv</code></li>
 <li><code>hsb1.csv</code></li>
 <li><code>hsb.txt</code></li>
-</ul></li>
 </ul>
-</div>
-<div id="section-further-readings" class="section level2">
-<h2>Further Readings</h2>
 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)

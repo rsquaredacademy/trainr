@@ -15,6 +15,43 @@ setwd('J:/R/interactive/import-data-in-r-part-1/')
 
 <hr>
 
+## File Types
+
+<hr>
+
+### Comma Separated Values
+
+<br>
+<center>
+![](/images/mtcars_comma.png){width=70%}
+</center>
+<br>
+
+### Semicolon Separated Values
+
+<br>
+<center>
+![](/images/mtcars_semicolon.png){width=70%}
+</center>
+<br>
+
+### Space Separated Values
+
+<br>
+<center>
+![](/images/mtcars_space.png){width=70%}
+</center>
+<br>
+
+### Tab Separated Values
+
+<br>
+<center>
+![](/images/mtcars_tab.png){width=70%}
+</center>
+<br>
+
+
 ## Overview
 
 <hr>
@@ -32,10 +69,7 @@ The above table gives an overview of the functions for reading different types o
 - `col_types`: data type of the columns
 - `skip`: number of lines/rows to skip
 
-
 ## Read Data
-
-### Introduction
 
 <hr>
 
@@ -55,21 +89,14 @@ We have provided the partial code which includes the directory path. You need to
 - read the file `hsb2.csv` and observe the output
 
 ```{r import2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Introduction', exercise.lines=5}
-read_csv('J:/R/interactive/______')
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/    ')
 ```
 
 ```{r import2-solution}
-read_csv('J:/R/interactive/hsb2.csv')
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv')
 ```
 
-Sometimes you may get an error while reading data from a file. In such case try the following:
-
-- check the separator in the file and ensure it is a `comma`
-- check the path to the directory where the file resides
-
 ## Column Specification
-
-### Introduction
 
 <hr>
 
@@ -82,12 +109,10 @@ If you observed the output when we read data in the previous tab, it includes th
 - run the below code and observe the output
 
 ```{r import3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Introduction', message = FALSE, exercise.lines=5}
-spec_csv('J:/R/interactive/hsb2.csv')
+spec_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv')
 ```
 
 ## Column Names
-
-### Introduction
 
 <hr>
 
@@ -104,16 +129,14 @@ read_csv('directory_path/file_name.csv', col_names = FALSE)
 - read data from `hsb3.csv` and indicate that the file does not include column names
 
 ```{r import1, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Names', exercise.lines=5}
-read_csv('J:/R/interactive/hsb3.csv', __________)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv', __________)
 ```
 
 ```{r import1-solution}
-read_csv('J:/R/interactive/hsb3.csv', col_names = FALSE)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv', col_names = FALSE)
 ```
 
 ## Column Names
-
-### Introduction
 
 <hr>
 
@@ -132,17 +155,25 @@ read_csv('directory_path/file_name.csv', col_names = column_names)
 
 ```{r import4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Names', exercise.lines=5}
 cnames <- c("id", "female", "race", "ses", "schtyp", "prog", "read", "write", "math", "science", "socst")
-read_csv('J:/R/interactive/hsb3.csv', ______________)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv', ______________)
 ```
 
 ```{r import4-solution}
 cnames <- c("id", "female", "race", "ses", "schtyp", "prog", "read", "write", "math", "science", "socst")
-read_csv('J:/R/interactive/hsb3.csv', col_names = cnames)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb3.csv', col_names = cnames)
 ```
 
 ## Skip Lines
 
-### Introduction
+<hr>
+
+<br>
+<center>
+![](/images/mtcars_skip_lines_file.png){width=70%}
+</center>
+<br>
+
+## Skip Lines
 
 <hr>
 
@@ -159,16 +190,14 @@ read_csv('directory_path/file_name.csv', skip = 5)
 - skip the first 3 lines 
 
 ```{r import8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Skip Lines', exercise.lines=5}
-read_csv('J:/R/interactive/hsb4.csv', ________)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb4.csv', ________)
 ```
 
 ```{r import8-solution}
-read_csv('J:/R/interactive/hsb4.csv', skip = 3)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb4.csv', skip = 3)
 ```
 
 ## Maximum Lines 
-
-### Introduction
 
 <hr>
 
@@ -186,45 +215,44 @@ read_csv('directory_path/file_name.csv', n_max = 100)
 - observe the last row in the output and check if it says `# ... with 110 more rows`
 
 ```{r import5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Maximum Lines', exercise.lines=5}
-read_csv('J:/R/interactive/hsb2.csv', _______)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv', _______)
 ```
 
 ```{r import5-solution}
-read_csv('J:/R/interactive/hsb2.csv', n_max = 120)
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv', n_max = 120)
 ```
 
-## Column Types - Intro
+## Column Types
 
 <hr>
 
 In certain cases, we need to specify the data type of the columns. It might be related to dates or categorical variables. readr allows us to specify the data types using `col_xxx` functions which include:
 
-- `col_double()`
-- `col_integer()`
-- `col_factor()`
-- `col_character()`
-- `col_datetime()`
+<br>
+<center>
+![](/images/column_types_list_canva.png){width=70%}
+</center>
+<br>
+
+## Column Types 
+
+<hr>
 
 To specify the data types, we will use `col_types` argument and supply to it a list indicating the data type (using `col_xxx`) of each column in the data set. In the below example, we read data from `hsb2` file while sprcifying the data types. Keep in mind that we need to specify the data type for each column. 
 
-## Column Types - Practice
-
-### Introduction
-
-<hr>
 
 ### Instructions
 
 <hr>
 
 ```{r import6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Types', exercise.lines=5}
-read_csv('J:/R/interactive/hsb2.csv', col_types = list(
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv', col_types = list(
   )            
 )
 ```
 
 ```{r import6-solution}
-read_csv('J:/R/interactive/hsb2.csv', col_types = list(
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv', col_types = list(
   col_integer(), col_factor(levels = c(0, 1)), 
   col_factor(levels = c(1, 2, 3, 4)), col_factor(levels = c(1, 2, 3)), 
   col_factor(levels = c(1, 2)), col_factor(levels = c(1, 2, 3)),
@@ -235,7 +263,15 @@ read_csv('J:/R/interactive/hsb2.csv', col_types = list(
 
 ## Specific Columns
 
-### Introduction
+<hr>
+
+<br>
+<center>
+![](/images/column_objective_function_map.png){width=70%}
+</center>
+<br>
+
+## Specific Columns
 
 <hr>
 
@@ -246,13 +282,13 @@ We may not always want to read all the columns from a file. In such cases, we ca
 <hr>
 
 ```{r import7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Column Types', exercise.lines=5}
-read_csv('J:/R/interactive/hsb2.csv', col_types = cols_only(id = ,
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv', col_types = cols_only(id = ,
   prog = , read = )
 )
 ```
 
 ```{r import7-solution}
-read_csv('J:/R/interactive/hsb2.csv', col_types = cols_only(id = col_integer(),
+read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv', col_types = cols_only(id = col_integer(),
   prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )
 ```
@@ -261,14 +297,13 @@ read_csv('J:/R/interactive/hsb2.csv', col_types = cols_only(id = col_integer(),
 
 <hr>
 
-- check the separator type in the following files and read them using appropriate `read_xxx()` function:
+Check the separator type in the following files and read them using appropriate `read_xxx()` function:
 
-    - `hsb.csv`
-    - `mtcars.tsv`
-    - `hsb1.csv`
-    - `hsb.txt`
+- `hsb.csv`
+- `mtcars.tsv`
+- `hsb1.csv`
+- `hsb.txt`
 
-## Further Readings
 
 
 
