@@ -17,8 +17,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## List Sheets
 
-#### Introduction
-
 <hr>
 
 An excel workbook may contain more than 1 sheet. We need to know the name of the sheets in order to read the data.
@@ -47,8 +45,6 @@ excel_sheets('J:/R/interactive/sample.xls')
 ```
 
 ## Read Sheet
-
-#### Introduction
 
 <hr>
 
@@ -81,9 +77,17 @@ read_excel('J:/R/interactive/sample.xls', sheet = __)
 read_excel('J:/R/interactive/sample.xls', sheet = 1)
 ```
 
-## Read Specific Cells - Part 1
+## Read Specific Cells 
 
-#### Introduction
+<hr>
+
+<br>
+<center>
+![](/images/readxl_range.png){width=70%}
+</center>
+<br>
+
+## Read Specific Cells 
 
 <hr>
 
@@ -109,9 +113,17 @@ read_excel('J:/R/interactive/sample.xls', sheet = 1, range = "__:__")
 read_excel('J:/R/interactive/sample.xls', sheet = 1, range = "A1:C5")
 ```
 
-## Read Specific Cells - Part 2
+## Read Specific Cells
 
-#### Introduction
+<hr>
+
+<br>
+<center>
+![](/images/readxl_anchored_lucid.png){width=70%}
+</center>
+<br>
+
+## Read Specific Cells
 
 <hr>
 
@@ -150,9 +162,17 @@ read_excel('J:/R/interactive/sample.xls', sheet = 1, col_names = FALSE,
   range = anchored("A4", dim = c(3, 2)))
 ```
 
-## Specify Rows
+## Read Specific Cells
 
-#### Introduction
+<hr>
+
+<br>
+<center>
+![](/images/readxl_cell_limits_lucid.png){width=70%}
+</center>
+<br>
+
+## Specify Rows
 
 <hr>
 
@@ -182,8 +202,6 @@ read_excel('J:/R/interactive/sample.xls', sheet = 1, range = cell_rows(3:5))
 
 ## Specify Columns
 
-#### Introduction
-
 <hr>
 
 Let us look at another scenario where we want to read data all the rows but only specific columns. Use `cell_cols()` to
@@ -210,6 +228,16 @@ read_excel('J:/R/interactive/sample.xls', sheet = 1, range = ___________)
 read_excel('J:/R/interactive/J:/R/interactive/sample.xls', sheet = 1, range = cell_cols(1:4))
 ```
 
+## Range Summary
+
+<hr>
+
+<br>
+<center>
+![](/images/range_summary.png){width=50%}
+</center>
+<br>
+
 ## Other Softwares
 
 <hr>
@@ -229,8 +257,6 @@ In R, the following packages allow us to read data from the above file formats:
 We will use the [haven](http://haven.tidyverse.org/) package in this tutorial.
 
 ## Stata
-
-#### Introduction
 
 <hr>
 
@@ -255,8 +281,6 @@ read_stata('airline.dta')
 
 ## SPSS
 
-#### Introduction
-
 <hr>
 
 SPSS files have the extension `.sav` and can be read using either `read_sav()` or `read_spss()`.
@@ -279,8 +303,6 @@ read_spss('employee.sav')
 
 ## SAS
 
-#### Introduction
-
 <hr>
 
 SAS files have the extension `.sas7bdat` and can be read using either `read_sas()`.
@@ -300,3 +322,13 @@ SAS files have the extension `.sas7bdat` and can be read using either `read_sas(
 ```{r import73-solution}
 read_sas('airline.sas7bdat')
 ```
+
+## Summary
+
+<hr>
+
+<br>
+<center>
+![](/images/readxl_summary_lucid.png){width=80%}
+</center>
+<br>

@@ -49,13 +49,10 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="section-list-sheets" class="section level2">
 <h2>List Sheets</h2>
-<div id="section-introduction-1" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>An excel workbook may contain more than 1 sheet. We need to know the name of the sheets in order to read the data. <code>excel_sheets()</code> will return the names of all the sheet in the workbook. For example, the below code will return the names of all the sheets in the file <code>xyx.xls</code>.</p>
 <pre class="r"><code>excel_sheets(&#39;xyz.xls&#39;)</code></pre>
 <p><br></p>
-</div>
 <div id="section-instructions" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -74,8 +71,6 @@ excel_sheets(&#39;J:/R/interactive/__________&#39;)</code></pre>
 </div>
 <div id="section-read-sheet" class="section level2">
 <h2>Read Sheet</h2>
-<div id="section-introduction-2" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>Great! Now that we know how many sheets are present in the <code>sample.xls</code> file and their respective names, it is time to read in some data. <code>read_excel()</code> reads data from <code>.xls</code> and <code>.xlsx</code> files. You may ask how does it know which sheet to read the data from. That’s rigt! In addition to the file name, we have to specify the sheet name or position in the workbook. Below example shows the different ways to specify the sheets in a workbook.</p>
 <pre class="r"><code># specify sheet name
@@ -84,7 +79,6 @@ read_excel(&#39;xyz.xls&#39;, sheet = &#39;first&#39;)
 # specify sheet position
 read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <p><br></p>
-</div>
 <div id="section-instructions-1" class="section level4">
 <h4>Instructions</h4>
 <ul>
@@ -100,15 +94,21 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-read-specific-cells---part-1" class="section level2">
-<h2>Read Specific Cells - Part 1</h2>
-<div id="section-introduction-3" class="section level4">
-<h4>Introduction</h4>
+<div id="section-read-specific-cells" class="section level2">
+<h2>Read Specific Cells</h2>
+<hr>
+<br>
+<center>
+<img src="/images/readxl_range.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-read-specific-cells-1" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
 <p>Alright! We now know how to read data from an excel sheet but we may not want to read all the data present in the sheet i.e. sometimes we might want to read a subset of the data (few rows of specific colums). In order to read a subset of data, we need to specify the associated rows and columns. For example, to read data from first 4 rows of columns <strong>B</strong> and <strong>C</strong>, we will specify <code>&quot;B1:C4&quot;</code> using the <code>range</code> argument. The input for the range must be enclosed in single/double quotes.</p>
 <pre class="r"><code>read_excel(&#39;xyz.xls&#39;, sheet = 1, range = &quot;B1:C4&quot;)</code></pre>
 <p><br></p>
-</div>
 <div id="section-instructions-2" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -124,10 +124,17 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-read-specific-cells---part-2" class="section level2">
-<h2>Read Specific Cells - Part 2</h2>
-<div id="section-introduction-4" class="section level4">
-<h4>Introduction</h4>
+<div id="section-read-specific-cells-2" class="section level2">
+<h2>Read Specific Cells</h2>
+<hr>
+<br>
+<center>
+<img src="/images/readxl_anchored_lucid.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
+<div id="section-read-specific-cells-3" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
 <p>There is another way to specify the subset of data that we might want to read. This approach includes specifying the following:</p>
 <ul>
@@ -143,7 +150,6 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <pre class="r"><code>read_excel(&#39;J:/R/interactive/sample.xls&#39;, sheet = 1, col_names = FALSE,
   range = anchored(&quot;A4&quot;, dim = c(3, 2)))</code></pre>
 <p><br></p>
-</div>
 <div id="section-instructions-3" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -161,15 +167,21 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 </div>
 </div>
+<div id="section-read-specific-cells-4" class="section level2">
+<h2>Read Specific Cells</h2>
+<hr>
+<br>
+<center>
+<img src="/images/readxl_cell_limits_lucid.png" style="width:70.0%" />
+</center>
+<p><br></p>
+</div>
 <div id="section-specify-rows" class="section level2">
 <h2>Specify Rows</h2>
-<div id="section-introduction-5" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>So far we have explored reading a subset of data i.e. certain rows and columns. In this section, we will read specific rows of all the columns form the excel sheet. We will continue to use the <code>range</code> argument and use <code>cell_rows()</code> to specify the rows from which to read the data. In the below example, we read data from the first 4 rows.</p>
 <pre class="r"><code>read_excel(&#39;J:/R/interactive/sample.xls&#39;, sheet = 1, range = cell_rows(1:4))</code></pre>
 <p><br></p>
-</div>
 <div id="section-instructions-4" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -187,13 +199,10 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 <div id="section-specify-columns" class="section level2">
 <h2>Specify Columns</h2>
-<div id="section-introduction-6" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>Let us look at another scenario where we want to read data all the rows but only specific columns. Use <code>cell_cols()</code> to specify the columns from which the data must be read. In the below example, we use <code>cell_cols()</code> to read data from columns 2 and 3.</p>
 <pre class="r"><code>read_excel(&#39;J:/R/interactive/sample.xls&#39;, sheet = 1, range = cell_cols(2:3))</code></pre>
 <p><br></p>
-</div>
 <div id="section-instructions-5" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -208,6 +217,15 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <pre class="text"><code>read_excel(&#39;J:/R/interactive/J:/R/interactive/sample.xls&#39;, sheet = 1, range = cell_cols(1:4))</code></pre>
 </div>
 </div>
+</div>
+<div id="section-range-summary" class="section level2">
+<h2>Range Summary</h2>
+<hr>
+<br>
+<center>
+<img src="/images/range_summary.png" style="width:50.0%" />
+</center>
+<p><br></p>
 </div>
 <div id="section-other-softwares" class="section level2">
 <h2>Other Softwares</h2>
@@ -228,12 +246,9 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 <div id="section-stata" class="section level2">
 <h2>Stata</h2>
-<div id="section-introduction-7" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>Stata files have the extension <code>.dta</code> and can be read using either <code>read_dta()</code> or <code>read_stata()</code>.</p>
 <p><br></p>
-</div>
 <div id="section-instructions-6" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -251,12 +266,9 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 <div id="section-spss" class="section level2">
 <h2>SPSS</h2>
-<div id="section-introduction-8" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>SPSS files have the extension <code>.sav</code> and can be read using either <code>read_sav()</code> or <code>read_spss()</code>.</p>
 <p><br></p>
-</div>
 <div id="section-instructions-7" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -274,12 +286,9 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 <div id="section-sas" class="section level2">
 <h2>SAS</h2>
-<div id="section-introduction-9" class="section level4">
-<h4>Introduction</h4>
 <hr>
 <p>SAS files have the extension <code>.sas7bdat</code> and can be read using either <code>read_sas()</code>.</p>
 <p><br></p>
-</div>
 <div id="section-instructions-8" class="section level4">
 <h4>Instructions</h4>
 <hr>
@@ -295,9 +304,14 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-further-reading.." class="section level2">
-<h2>Further Reading..</h2>
-
+<div id="section-summary" class="section level2">
+<h2>Summary</h2>
+<hr>
+<br>
+<center>
+<img src="/images/readxl_summary_lucid.png" style="width:80.0%" />
+</center>
+<br> 
 <script type="application/shiny-prerendered" data-context="server-start">
 library(learnr)
 library(readxl)
