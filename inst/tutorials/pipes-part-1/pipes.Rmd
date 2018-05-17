@@ -67,7 +67,7 @@ ecom
 
 <hr>
 
-```{r mag1, eval=FALSE, echo=TRUE, collapse=FALSE}
+```{r mag1, eval=TRUE, echo=TRUE, collapse=FALSE}
 head(ecom, 10)
 
 # using pipe
@@ -86,7 +86,11 @@ head(y)
 
 ## Square Root
 
+<br>
+<center>
 ![](/images/pipes_square_root.png){width=100%}
+</center>
+<br>
 
 ## Square Root 
 
@@ -119,7 +123,11 @@ y
 
 <hr>
 
+<br>
+<center>
 ![](/images/pipes_correlation.png){width=100%}
+</center>
+<br>
 
 ## Correlation
 
@@ -150,7 +158,11 @@ barplot(table(subset(ecom, purchase == 'true')$referrer))
 
 <hr>
 
+<br>
+<center>
 ![](/images/pipes_viz_canva.png){width=100%}
+</center>
+<br>
 
 ## Visualization - Using pipe
 
@@ -168,7 +180,7 @@ ecom %>%
 
 <hr>
 
-```{r mag8, eval=FALSE, echo=TRUE, collapse=FALSE}
+```{r mag8, eval=TRUE, echo=TRUE, collapse=FALSE}
 summary(lm(duration ~ n_pages, data = ecom))
 ```
 
@@ -186,7 +198,11 @@ ecom %$%
 
 <hr>
 
-![](/images/pipes_string.png){width=100%}
+<br>
+<center>
+![](/images/pipes_string.png){width=60%}
+</center>
+<br>
 
 ## String Manipulation
 
@@ -197,7 +213,13 @@ email <- 'jovialcann@anymail.com'
 
 # without pipe
 toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
+```
 
+## String Manipulation
+
+<hr>
+
+```{r mag9a, eval=TRUE, echo=TRUE, collapse=FALSE}
 # with pipe
 email %>%
   strsplit(split = '@') %>%
@@ -231,75 +253,66 @@ email %>%
 
 <hr>
 
-```{r mag10, eval=FALSE, echo=TRUE, collapse=FALSE}
-head(ecom['n_pages'], 3)
+```{r mag10, eval=TRUE, echo=TRUE, collapse=FALSE}
+ecom['n_pages']
 
-ecom %>%
-  extract('n_pages') %>%
-  head(3)
+extract(ecom, 'n_pages') 
 ```
 
 ## Extract Column By Position
 
 <hr>
 
-```{r mag23, eval=FALSE, echo=TRUE, collapse=FALSE}
-head(ecom[6], 3)
+```{r mag23, eval=TRUE, echo=TRUE, collapse=FALSE}
+ecom[6]
 
-ecom %>%
-  extract(6) %>%
-  head(3)
+extract(ecom, 6) 
 ```
 
 ## Extract Column (as vector)
 
 <hr>
 
-```{r mag11, eval=FALSE, echo=TRUE, collapse=FALSE}
-head(ecom$n_pages)
+```{r mag11, eval=TRUE, echo=TRUE, collapse=FALSE}
+ecom$n_pages
 
-ecom %>%
-  use_series('n_pages') %>%
-  head()
+use_series(ecom, 'n_pages')   
 ```
 
 ## Extract List Element By Name
 
 <hr>
 
-```{r mag12, eval=FALSE, echo=TRUE, collapse=FALSE}
+```{r mag12, eval=TRUE, echo=TRUE, collapse=FALSE}
 mt <- as.list(mtcars)
 
 mt[['mpg']]
 
-mt %>%
-  extract2('mpg')
+extract2(mt, 'mpg')
 ```
 
 ## Extract List Element By Position
 
 <hr>
 
-```{r mag13, eval=FALSE, echo=TRUE, collapse=FALSE}
+```{r mag13, eval=TRUE, echo=TRUE, collapse=FALSE}
 mt <- as.list(mtcars)
 
 mt[[1]]
 
-mt %>%
-  extract2(1)
+extract2(mt, 1)
 ```
 
 ## Extract List Element (as vector)
 
 <hr>
 
-```{r mag14, eval=FALSE, echo=TRUE, collapse=FALSE}
+```{r mag14, eval=TRUE, echo=TRUE, collapse=FALSE}
 mt <- as.list(mtcars)
 
 mt$mpg
 
-mt %>%
-  use_series(mpg)
+use_series(mt, mpg)
 ```
 
 ## Arithmetic Operations
@@ -320,48 +333,40 @@ mt %>%
 
 <hr>
 
-```{r mag15, eval=FALSE, echo=TRUE, collapse=FALSE}
-1:10 %>%
-  `+`(1)
+```{r mag15, eval=TRUE, echo=TRUE, collapse=FALSE}
+1:10 + 1
 
-1:10 %>%
-  add(1)
+add(1:10, 1)
 ```
 
 ## Multiplication
 
 <hr>
 
-```{r mag16, eval=FALSE, echo=TRUE, collapse=FALSE}
-1:10 %>%
-  `*`(3)
+```{r mag16, eval=TRUE, echo=TRUE, collapse=FALSE}
+1:10 * 3
 
-1:10 %>%
-  multiply_by(3)
+multiply_by(1:10, 3)
 ```
 
 ## Division
 
 <hr>
 
-```{r mag17, eval=FALSE, echo=TRUE, collapse=FALSE}
-1:10 %>%
-  `/`(2)
+```{r mag17, eval=TRUE, echo=TRUE, collapse=FALSE}
+1:10 / 2
 
-1:10 %>%
-  divide_by(2)
+divide_by(1:10, 2)
 ```
 
 ## Power
 
 <hr>
 
-```{r mag18, eval=FALSE, echo=TRUE, collapse=FALSE}
-1:10 %>%
-  `^`(2)
+```{r mag18, eval=TRUE, echo=TRUE, collapse=FALSE}
+1:10 ^ 2
 
-1:10 %>%
-  raise_to_power(2)
+raise_to_power(1:10, 2)
 ```
 
 ## Logical Operators
@@ -381,22 +386,19 @@ mt %>%
 
 <hr>
 
-```{r mag19, eval=FALSE, echo=TRUE, collapse=FALSE}
-1:10 %>%
-  `>`(5)
+```{r mag19, eval=TRUE, echo=TRUE, collapse=FALSE}
+1:10 > 5
 
-1:10 %>%
-  is_greater_than(5)
+is_greater_than(1:10, 5)
 ```
 
 ## Weakly Greater Than
 
 <hr>
 
-```{r mag20, eval=FALSE, echo=TRUE, collapse=FALSE}
+```{r mag20, eval=TRUE, echo=TRUE, collapse=FALSE}
 1:10 %>%
   `>=`(5)
 
-1:10 %>%
-  is_weakly_greater_than(5)
+is_weakly_greater_than(1:10, 5)
 ```
