@@ -47,7 +47,7 @@ download the data for the case study from [here](https://raw.githubusercontent.c
 
 <hr>
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r show, eval=TRUE, echo=TRUE, collapse=TRUE}
 mockstring
 ```
 
@@ -55,122 +55,205 @@ mockstring
 
 <hr>
 
-```{r sample, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r sample, eval=TRUE, echo=TRUE, collapse=TRUE}
 mock_data <-
   mockstring %>%
   slice(1:10) %>%
   select(email, address, full_name, currency, )
+
+mock_data
 ```
 
-## Detect @
+## Detect matches
 
 <hr>
 
 ![](/images/str_detect.png){width=90%}
 
-## Detect @
+```{r detect_eg, eval=TRUE, echo=TRUE}
+str_detect(string = "James Bond", pattern = "b")
+str_detect(string = "James Bond", pattern = "B")
+```
+
+## Detect matches
+
+<hr>
+
+### Instructions
 
 <hr>
 
 ```{r detect, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r detect-solution}
 str_detect(mock_data$email, pattern = "@")
 ```
 
-## Count @
+## Count matches
 
 <hr>
 
 ![](/images/str_count.png){width=90%}
 
-## Count @
+```{r count_eg, eval=TRUE, echo=TRUE}
+str_count(string = "James Bond", pattern = "b")
+str_count(string = "James Bond", pattern = "B")
+```
+
+## Count matches
+
+<hr>
+
+### Instructions
 
 <hr>
 
 ```{r count, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r count-solution}
 str_count(mock_data$email, pattern = "@")
 ```
 
-## Concatenate
+## Concatenate strings
 
 <hr>
 
 ![](/images/str_c.png){width=90%}
 
-## Concatenate
+```{r concat_eg, eval=TRUE, echo=TRUE}
+str_c("hello", "world")
+```
+
+## Concatenate strings
+
+<hr>
+
+### Instructions
 
 <hr>
 
 ```{r concatenate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r concatenate-solution}
 str_c("email id:", mock_data$email)
 ```
 
-## Split
+## Split strings
 
 <hr>
 
 ![](/images/str_split.png){width=90%}
 
-## Split
+```{r split_eg, eval=TRUE, echo=TRUE}
+str_split(string = "https://www.r-project.org/", pattern = ":")
+str_split(string = "https://www.r-project.org/", pattern = "-")
+str_split(string = "https://www.r-project.org/", pattern = ".")
+```
+
+## Split strings
 
 <hr>
 
 ```{r split, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r split-solution}
 str_split(mock_data$email, pattern = "@")
 ```
 
-## Sort
+## Sort strings
 
 <hr>
 
 ![](/images/str_sort.png){width=90%}
 
-## Sort
+```{r sort_eg, eval=TRUE, echo=TRUE}
+str_sort(c("Asia", "Africa", "Europe", "North America", "South America", "Australia", "Antartica"))
+```
+
+## Sort strings
 
 <hr>
 
 ```{r sort, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-str_sort(mock_data$email)
+
 ```
 
+```{r sort-solution}
+str_sort(mock_data$email)
+```
 ## Sort
 
 <hr>
 
 ![](/images/str_sort_descending.png){width=90%}
 
+```{r sort2_eg, eval=TRUE, echo=TRUE}
+str_sort(c("Asia", "Africa", "Europe", "North America", "South America", "Australia", "Antartica"), descending = TRUE)
+```
+
 ## Sort
 
 <hr>
 
 ```{r sort2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r sort2-solution}
 str_sort(mock_data$email, descending = TRUE)
 ```
 
-## Case
+## String case
 
 <hr>
 
 ![](/images/str_to_upper.png){width=90%}
 
-## Case
+```{r case_eg, eval=FALSE, echo=TRUE}
+str_to_lower("I am a very satisfied R user.")
+str_to_upper("I am a very satisfied R user.")
+str_to_title("I am a very satisfied R user.")
+```
+
+## String case
 
 <hr>
 
 ```{r case, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r case-solution}
 str_to_upper(mock_data$full_name)
 ```
 
-## Replace
+## Replace strings
 
 <hr>
 
 ![](/images/str_replace.png){width=90%}
 
-## Replace
+```{r replace_eg, eval=TRUE, echo=TRUE}
+str_replace("Hello World", "H", "B")
+```
+
+## Replace strings
 
 <hr>
 
 ```{r replace, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+
+```
+
+```{r replace-solution}
 str_replace(mock_data$address, "Street", "ST")
 ```
 
