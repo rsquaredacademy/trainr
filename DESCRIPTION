@@ -7,7 +7,6 @@ Description: Interactive tutorials to learn R and statistics built using the lea
 Depends:
     R(>= 3.2)
 Imports:
-    cli,
     clisymbols,
     crayon,
     learnr,
