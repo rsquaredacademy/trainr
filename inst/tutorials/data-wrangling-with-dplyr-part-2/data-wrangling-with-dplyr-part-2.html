@@ -115,8 +115,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <p><code>left_join()</code> returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.</p>
 <div class="figure">
-<img src="/images/draw_left.png" alt="alt text" style="width:90.0%" />
-<p class="caption">alt text</p>
+<img src="/images/draw_left.png" style="width:90.0%" />
+
 </div>
 <div class="tutorial-exercise" data-label="dplyr4" data-caption="Left Join" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>left_join(customer, order)</code></pre>
@@ -128,8 +128,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <p><code>right_join()</code> returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.</p>
 <div class="figure">
-<img src="/images/draw_right.png" alt="alt text" style="width:90.0%" />
-<p class="caption">alt text</p>
+<img src="/images/draw_right.png" style="width:90.0%" />
+
 </div>
 <div class="tutorial-exercise" data-label="dplyr5" data-caption="Right Join" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>right_join(customer, order)</code></pre>
@@ -141,8 +141,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <p><code>semi_join()</code> returns all rows from x where there are matching values in y, keeping just columns from x. A semi join differs from an inner join because an inner join will return one row of x for each matching row of y, where a semi join will never duplicate rows of x.</p>
 <div class="figure">
-<img src="/images/draw_semi.png" alt="alt text" style="width:90.0%" />
-<p class="caption">alt text</p>
+<img src="/images/draw_semi.png" style="width:90.0%" />
+
 </div>
 <div class="tutorial-exercise" data-label="dplyr6" data-caption="Semi Join" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>semi_join(customer, order)</code></pre>
@@ -154,8 +154,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <p><code>anti_join()</code> returns all rows from x where there are not matching values in y, keeping just columns from x.</p>
 <div class="figure">
-<img src="/images/draw_anti.png" alt="alt text" style="width:90.0%" />
-<p class="caption">alt text</p>
+<img src="/images/draw_anti.png" style="width:90.0%" />
+
 </div>
 <div class="tutorial-exercise" data-label="dplyr7" data-caption="Anti Join" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>anti_join(customer, order)</code></pre>
@@ -167,8 +167,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <p><code>full_join()</code> returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.</p>
 <div class="figure">
-<img src="/images/draw_full.png" alt="alt text" style="width:90.0%" />
-<p class="caption">alt text</p>
+<img src="/images/draw_full.png" style="width:90.0%" />
+
 </div>
 <div class="tutorial-exercise" data-label="dplyr8" data-caption="Full Join" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>full_join(customer, order)</code></pre>
