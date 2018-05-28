@@ -26,9 +26,13 @@ transact <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets
 
 ```{r origin, eval=TRUE, echo=TRUE, collapse=TRUE}
 origin
+
 now()
+
 today()
+
 am(now())  
+
 pm(now())
 ```
 
@@ -75,8 +79,11 @@ questions we have about the transact data.
 
 ```{r lub18, eval=TRUE, echo=TRUE, collapse=TRUE}
 this_day <- as_date('2017-03-23')
+ 
 day(this_day)
+
 month(this_day)
+
 year(this_day)
 ```
 
@@ -92,7 +99,7 @@ year(this_day)
 
 ```{r lub2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 mutate(transact,
-  due_day   =         ,
+  due_day   =           ,
   due_month =           ,
   due_year  = 
 )
@@ -118,8 +125,11 @@ mutate(transact,
 
 ```{r lub19, eval=TRUE, echo=TRUE, collapse=TRUE}
 course_start    <- as_date('2017-04-12')
+
 course_end      <- as_date('2017-04-21')
+
 course_duration <- course_end - course_start
+
 course_duration
 ```
 
@@ -179,6 +189,7 @@ Is due year a leap year? You can check if a particular year is a leap year using
 
 ```{r lub5a, eval=TRUE, echo=TRUE, collapse=TRUE}
 leap_year(2018)
+
 leap_year(2016)
 ```
 
@@ -212,6 +223,18 @@ If due day is February 29, is it a leap year?
 ```{r lub6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 transact %>%
   mutate(
+    due_day   =           ,
+    due_month =           ,
+    due_year  =           ,
+    is_leap   = 
+  ) %>%
+  select(-(Invoice), -(Payment)) %>%
+  filter(due_month == 2 & due_day == 29)
+```
+
+```{r lub6-solution}
+transact %>%
+  mutate(
     due_day   = day(Due),
     due_month = month(Due),
     due_year  = year(Due),
@@ -233,8 +256,23 @@ transact %>%
 
 ```{r lab40, eval=TRUE, echo=TRUE, collapse=TRUE}
 course_start <- as_date('2017-04-12')
+ 
 course_start + days(2)
-course_start + weeks(1)
+```
+
+```{r lub40a, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+# shift course start date by 3 weeks
+
+
+# shift course start date by 1 year
+
+```
+
+```{r lub40a-solution}
+# shift course start date by 3 weeks
+course_start + weeks(3)
+
+# shift course start date by 1 year
 course_start + years(1)
 ```
 
@@ -250,7 +288,9 @@ course_start + years(1)
 
 ```{r lub10, eval=TRUE, echo=TRUE, collapse=TRUE}
 course_start <- as_date('2017-04-12')
+
 course_end   <- as_date('2017-04-21')
+
 interval(course_start, course_end)
 ```
 
@@ -266,10 +306,27 @@ interval(course_start, course_end)
 
 ```{r lab50, eval=TRUE, echo=TRUE, collapse=TRUE}
 course_start    <- as_date('2017-04-12')
+
 course_end      <- as_date('2017-04-21')
+
 course_interval <- interval(course_start, course_end)
+
 int_shift(course_interval, by = days(1))
-int_shift(course_interval, by = weeks(1))
+```
+
+```{r lub50a, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+# shift course interval by 3 weeks
+
+
+# shift course interval by 1 year
+
+```
+
+```{r lub50a-solution}
+# shift course interval start date by 3 weeks
+int_shift(course_interval, by = weeks(3))
+
+# shift course interval start date by 1 year
 int_shift(course_interval, by = years(1))
 ```
 
@@ -285,8 +342,11 @@ int_shift(course_interval, by = years(1))
 
 ```{r lub60, eval=TRUE, echo=TRUE, collapse=TRUE}
 vacation_start    <- as_date('2017-04-19')
+
 vacation_end      <- as_date('2017-04-25')
+
 vacation_interval <- interval(vacation_start, vacation_end)
+
 int_overlaps(course_interval, vacation_interval)
 ```
 
@@ -297,6 +357,17 @@ int_overlaps(course_interval, vacation_interval)
 How many invoices were settled within due date?
 
 ```{r lub7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+transact %>%
+  mutate(
+    inv_due_interval = ,
+    due_next         = ,
+    due_pay_interval = ,
+    overlaps         = 
+  ) %>%
+  select(Invoice, Due, Payment, overlaps)
+```
+
+```{r lub7-solution}
 transact %>%
   mutate(
     inv_due_interval = interval(Invoice, Due),
@@ -314,6 +385,18 @@ transact %>%
 How many invoices were settled within due date?
 
 ```{r lub12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+# using int_shift
+transact %>%
+  mutate(
+    inv_due_interval = ,
+    due_pay_interval = ,  
+    due_pay_next     = ,
+    overlaps         = 
+  ) %>%
+  select(Invoice, Due, Payment, overlaps)
+```
+
+```{r lub12-solution}
 # using int_shift
 transact %>%
   mutate(
@@ -337,6 +420,7 @@ transact %>%
 
 ```{r lub30, eval=TRUE, echo=TRUE, collapse=TRUE}
 conference <- as_date('2017-04-15')
+
 conference %within% interval(course_start, course_end)
 ```
 
@@ -349,8 +433,17 @@ How many invoices were settled within due date?
 ```{r lub13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 transact %>%
   mutate(
+    inv_due_interval = ,
+    overlaps         = 
+  ) %>%
+  select(Due, Payment, overlaps)
+```
+
+```{r lub13-solution}
+transact %>%
+  mutate(
     inv_due_interval = interval(Invoice, Due),
-    overlaps = Payment %within% inv_due_interval
+    overlaps         = Payment %within% inv_due_interval
   ) %>%
   select(Due, Payment, overlaps)
 ```
@@ -367,7 +460,9 @@ transact %>%
 
 ```{r lub20, eval=TRUE, echo=TRUE, collapse=TRUE}
 course_start
+
 quarter(course_start)
+
 quarter(course_start, with_year = TRUE)
 ```
 
@@ -413,58 +508,111 @@ course_duration %>%
   duration(units = 'days')
 ```
 
-## Convert
+## Convert Interval
 
 <hr>
 
 ![](/images/convert.png){width=90%}
+
+```{r lub11a, eval=TRUE, echo=TRUE, collapse=TRUE}
+interval(course_start, course_end) / dseconds()
+
+interval(course_start, course_end) / dminutes()
+```
 
 ## Case Study
 
 <hr>
 
 ```{r lub11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-interval(course_start, course_end) / dseconds()
-interval(course_start, course_end) / dminutes()
+# compute interval in hours
+
+
+# compute interval in weeks
+
+
+# compute interval in years
+
+```
+
+```{r lub11-solution}
+# compute interval in hours
 interval(course_start, course_end) / dhours()
+
+# compute interval in weeks
 interval(course_start, course_end) / dweeks()
+
+# compute interval in years
 interval(course_start, course_end) / dyears()
 ```
 
-## Convert
+## Convert Interval
 
 <hr>
 
 ![](/images/time_length.png){width=90%}
+
+```{r lub16a, eval=TRUE, echo=TRUE, collapse=TRUE}
+interval(course_start, course_end) %>%
+  time_length(unit = "seconds")
+```
 
 ## Case Study
 
 <hr>
 
 ```{r lub16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-interval(course_start, course_end) %>%
-  time_length(unit = "seconds")
+# compute interval in minutes
+
+
+
+# compute interval in hours
+
+
+```
+
+```{r lub16-solution}
+# compute interval in minutes
 interval(course_start, course_end) %>%
   time_length(unit = "minutes")
+
+# compute interval in hours  
 interval(course_start, course_end) %>%
   time_length(unit = "hours")
 ```
 
-## Convert
+## Convert Interval
 
 <hr>
 
 ![](/images/as_period.png){width=90%}
+
+```{r lub17a, eval=TRUE, echo=TRUE, collapse=TRUE}
+interval(course_start, course_end) %>%
+  as.period(unit = "seconds")
+```
+
 
 ## Case Study
 
 <hr>
 
 ```{r lub17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-interval(course_start, course_end) %>%
-  as.period(unit = "seconds")
+# compute interval in minutes
+
+
+
+# compute interval in hours
+
+
+```
+
+```{r lub17-solution}
+# compute interval in minutes
 interval(course_start, course_end) %>%
   as.period(unit = "minutes")
+
+# compute interval in hours
 interval(course_start, course_end) %>%
   as.period(unit = "hours")
 ```
