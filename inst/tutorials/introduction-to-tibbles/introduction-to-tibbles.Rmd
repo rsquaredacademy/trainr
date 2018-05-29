@@ -372,8 +372,6 @@ tibble(
 
 ## Add Rows
 
-### Introduction
-
 <hr>
 
 Rows and columns can be added to a tibble using 
@@ -382,15 +380,11 @@ Rows and columns can be added to a tibble using
 - `add_column()`
 
 Let us say we have a tibble with data about website traffic driven by different browsers.
-
-```{r browsers, echo=TRUE, collapse=FALSE}
-browsers <- enframe(c(chrome = 40, firefox = 20))
-browsers
-```
-
 Now, if we want to add another row of data for Internet Explorer, we can use `add_row()`
 
-```{r browsers2, eval=TRUE, echo=TRUE}
+```{r browsers, echo=TRUE, collapse=TRUE}
+browsers <- enframe(c(chrome = 40, firefox = 20))
+browsers
 add_row(browsers, name = 'IE', value = 30)
 ```
 
@@ -410,6 +404,10 @@ browsers
 ```{r tibbles17-solution}
 add_row(browsers, name = 'safari', value = 10)
 ```
+
+## Add Rows
+
+<hr>
 
 In order to add the rows or columns at a specific index, use the following arguments
 
@@ -529,7 +527,7 @@ glimpse(mtcars)
 
 `has_name()` can be used to check if a tibble has a specific column.
 
-```{r tibble30, eval=TRUE, echo=TRUE}
+```{r tibble30, eval=TRUE, echo=TRUE, collapse=TRUE}
 has_name(mtcars, 'cyl')
 has_name(mtcars, 'gears')
 ```
@@ -540,6 +538,17 @@ has_name(mtcars, 'gears')
 
 
 ## Summary
+
+<hr>
+
+### Creating tibbles
+
+<hr>
+
+- use `tibble()` to create tibbles
+- use `as_tibble()` to coerce other objects to tibble
+- use `enframe()` to coerce vector to tibble
+- use `tribble()` to create tibble using data entry
 
 ### Manipulating tibbles
 
@@ -561,13 +570,4 @@ has_name(mtcars, 'gears')
 - use `glimpse()` to get an overview of data
 
 
-## Summary
 
-### Creating tibbles
-
-<hr>
-
-- use `tibble()` to create tibbles
-- use `as_tibble()` to coerce other objects to tibble
-- use `enframe()` to coerce vector to tibble
-- use `tribble()` to create tibble using data entry
