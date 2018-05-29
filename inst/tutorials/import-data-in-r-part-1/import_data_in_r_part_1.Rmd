@@ -19,6 +19,11 @@ setwd('J:/R/interactive/import-data-in-r-part-1/')
 
 <hr>
 
+In any data analysis workflow, we end up dealing with different types of data sources. Flat or delimited
+files are amongst the most common type of files that you will come across. Others include spreadsheets,
+databases and APIs. Before we start reading data into R, let us take a quick look at the different types
+of delimited files:
+
 ### Comma Separated Values
 
 <br>
@@ -51,10 +56,14 @@ setwd('J:/R/interactive/import-data-in-r-part-1/')
 </center>
 <br>
 
+Now that we have some idea about the different formats in which data will be available, let us get going and read in some data.
 
 ## Overview
 
 <hr>
+
+In this tutorial, we will be using the [readr](https://readr.tidyverse.org/) library. Below we show, the 
+functions available in both readr and utils package for reading data. 
 
 <br>
 <center>
@@ -62,7 +71,7 @@ setwd('J:/R/interactive/import-data-in-r-part-1/')
 </center>
 <br>
 
-The above table gives an overview of the functions for reading different types of files in readr and Base R. All the functions in readr offer a common set of options which are described below. We will learn about them in greater detail in the next section.
+All the functions in readr offer a common set of options which are described below. We will learn about them in greater detail in the next section.
 
 - `col_names`: whether data includes column names
 - `n_max`: maximum number of lines/rows to read
@@ -73,8 +82,7 @@ The above table gives an overview of the functions for reading different types o
 
 <hr>
 
-Let us read data from a csv (comma separated values) file and explore the options listed in the previous section. To read a file
-named `xyz.csv`, you will do the following i.e. use `read_csv()` and specify the path to the folder/directory where the file resides.
+Let us read data from a csv (comma separated values) file and explore the options listed in the previous section. To read a file named `xyz.csv`, you will do the following i.e. use `read_csv()` and specify the path to the folder/directory where the file resides.
 
 ```{r import2-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
 read_csv('folder_path/xyz.csv')
@@ -100,7 +108,8 @@ read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2
 
 <hr>
 
-If you observed the output when we read data in the previous tab, it includes the data type detected for each column in the file. When you read data using readr, it will display the data type detected for each column/variable in the data set. If you want to check the data types before reading the data, use `spec_csv()`. We will learn to specify the column types in the next section.
+If you observed the output in the previous tab, it includes the data type detected for each column in the file. When you read data using readr, it will display the data type detected for each column/variable in the data set. If you want to check the data types before reading the data, use `spec_csv()`. It will detect the data type based on the first 1000 rows of data.
+
 
 ### Instructions
 
@@ -112,11 +121,13 @@ If you observed the output when we read data in the previous tab, it includes th
 spec_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv')
 ```
 
+At times, readr may not be able to detect the data type correctly. In such cases, we will have to specify the data type of the columns. We will learn how to specify the data types in a later section.
+
 ## Column Names
 
 <hr>
 
-Use `col_names` to indicate whether the data includes column names. It takes two values, `TRUE` and `FALSE`. If set to `FALSE`, readr will generate column names. The below code reads data from a file which does not have column names present in the first row.
+Usually, data comes with column names or headers but in some cases, the column names or header will be provided in a separate file. In such cases, if we read the data as is, the first row of data is converted into the column name and it can lead to a lot of confusion and errors. It is a good practice to inspect the file before reading in the data. The `col_names` option is used to indicate whether the data includes column names. It takes two values, `TRUE` and `FALSE`. If set to `FALSE`, readr will generate column names. The below code reads data from a file which does not have column names present in the first row.
 
 ```{r import1-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
 read_csv('directory_path/file_name.csv', col_names = FALSE)

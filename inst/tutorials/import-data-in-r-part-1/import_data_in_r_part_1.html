@@ -51,6 +51,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-file-types" class="section level2">
 <h2>File Types</h2>
 <hr>
+<p>In any data analysis workflow, we end up dealing with different types of data sources. Flat or delimited files are amongst the most common type of files that you will come across. Others include spreadsheets, databases and APIs. Before we start reading data into R, let us take a quick look at the different types of delimited files:</p>
 <div id="section-comma-separated-values" class="section level3">
 <h3>Comma Separated Values</h3>
 <br>
@@ -82,17 +83,19 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <img src="/images/mtcars_tab.png" style="width:70.0%" />
 </center>
 <p><br></p>
+<p>Now that we have some idea about the different formats in which data will be available, let us get going and read in some data.</p>
 </div>
 </div>
 <div id="section-overview" class="section level2">
 <h2>Overview</h2>
 <hr>
+<p>In this tutorial, we will be using the <a href="https://readr.tidyverse.org/">readr</a> library. Below we show, the functions available in both readr and utils package for reading data.</p>
 <br>
 <center>
 <img src="/images/import_func.png" style="width:60.0%" />
 </center>
 <p><br></p>
-<p>The above table gives an overview of the functions for reading different types of files in readr and Base R. All the functions in readr offer a common set of options which are described below. We will learn about them in greater detail in the next section.</p>
+<p>All the functions in readr offer a common set of options which are described below. We will learn about them in greater detail in the next section.</p>
 <ul>
 <li><code>col_names</code>: whether data includes column names</li>
 <li><code>n_max</code>: maximum number of lines/rows to read</li>
@@ -124,7 +127,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-column-specification" class="section level2">
 <h2>Column Specification</h2>
 <hr>
-<p>If you observed the output when we read data in the previous tab, it includes the data type detected for each column in the file. When you read data using readr, it will display the data type detected for each column/variable in the data set. If you want to check the data types before reading the data, use <code>spec_csv()</code>. We will learn to specify the column types in the next section.</p>
+<p>If you observed the output in the previous tab, it includes the data type detected for each column in the file. When you read data using readr, it will display the data type detected for each column/variable in the data set. If you want to check the data types before reading the data, use <code>spec_csv()</code>. It will detect the data type based on the first 1000 rows of data.</p>
 <div id="section-instructions-1" class="section level3">
 <h3>Instructions</h3>
 <hr>
@@ -135,12 +138,13 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <pre class="text"><code>spec_csv(&#39;https://raw.githubusercontent.com/rsquaredacademy/datasets/master/hsb2.csv&#39;)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
+<p>At times, readr may not be able to detect the data type correctly. In such cases, we will have to specify the data type of the columns. We will learn how to specify the data types in a later section.</p>
 </div>
 </div>
 <div id="section-column-names" class="section level2">
 <h2>Column Names</h2>
 <hr>
-<p>Use <code>col_names</code> to indicate whether the data includes column names. It takes two values, <code>TRUE</code> and <code>FALSE</code>. If set to <code>FALSE</code>, readr will generate column names. The below code reads data from a file which does not have column names present in the first row.</p>
+<p>Usually, data comes with column names or headers but in some cases, the column names or header will be provided in a separate file. In such cases, if we read the data as is, the first row of data is converted into the column name and it can lead to a lot of confusion and errors. It is a good practice to inspect the file before reading in the data. The <code>col_names</code> option is used to indicate whether the data includes column names. It takes two values, <code>TRUE</code> and <code>FALSE</code>. If set to <code>FALSE</code>, readr will generate column names. The below code reads data from a file which does not have column names present in the first row.</p>
 <pre class="r"><code>read_csv(&#39;directory_path/file_name.csv&#39;, col_names = FALSE)</code></pre>
 <div id="section-instructions-2" class="section level3">
 <h3>Instructions</h3>
