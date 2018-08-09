@@ -1,6 +1,7 @@
 #' @importFrom learnr run_tutorial
 #' @importFrom clisymbols symbol
 #' @importFrom crayon red green
+#' @importFrom rstudioapi showQuestion
 #' @title Display Tutorials
 #' @description Show all tutorials
 #' @export
@@ -19,6 +20,7 @@ tr_tutorials_list <- function() {
                      "Readable Code with Pipes"))
   
   if (tutorial == 1) {
+    
     cat(crayon::bold$blue$underline(" Import Data into R - Part 1 "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -34,9 +36,18 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "read specific set of columns from the data"), "\n",
     paste(crayon::blue(clisymbols::symbol$tick), 
-          "and skip columns while reading data")
+          "and skip columns while reading data"), "\n\n"
     )
+    
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_import_part_1()
+    }
+
   } else if (tutorial == 2) {
+
     cat(crayon::bold$blue$underline(" Import Data into R - Part 2 "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -52,7 +63,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "read data from SAS, STATA and SPSS files")
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_import_part_2()
+    }
+
   } else if (tutorial == 3) {
+
     cat(crayon::bold$blue$underline(" Data Wrangling with dplyr - Part 1 "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -66,7 +86,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "create new variables")
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_dplyr_part_1()
+    }
+
   } else if (tutorial == 4) {
+
     cat(crayon::bold$blue$underline(" Data Wrangling with dplyr - Part 2 "),  
     "\n\n In this tutorial, you will learn to join tables using:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -82,7 +111,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "full join")
     )
+    
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_dplyr_part_2()
+    }
+    
   } else if (tutorial == 5) {
+
     cat(crayon::bold$blue$underline(" Data Wrangling with dplyr - Part 3 "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -100,7 +138,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "generate counts"), "\n"
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_dplyr_part_3()
+    }
+    
   } else if (tutorial == 6) {
+
     cat(crayon::bold$blue$underline(" Hacking Strings with stringr "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -118,7 +165,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_string_manipulation()
+    }
+    
   } else if (tutorial == 7) {
+
     cat(crayon::bold$blue$underline(" Manipulating Date & Time with lubridate "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -136,7 +192,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_date_manipulation()
+    }
+
   } else if (tutorial == 8) {
+
     cat(crayon::bold$blue$underline(" Categorical Data Analysis with forcats "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -154,7 +219,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_categorical_analysis()
+    }
+
   } else if (tutorial == 9) {
+
     cat(crayon::bold$blue$underline(" Introduction to tibbles "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -172,7 +246,16 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_intro_tibbles()
+    }
+
   } else if (tutorial == 10) {
+
     cat(crayon::bold$blue$underline(" Readable Code with Pipes "),  
     "\n\n In this tutorial, you will learn to:", "\n\n", 
     paste(crayon::blue(clisymbols::symbol$tick), 
@@ -190,6 +273,14 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+
+    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+      "Yes", "No")
+    
+    if (launch_tutorial) {
+      tr_intro_pipes()
+    }
+    
   }
 
 }

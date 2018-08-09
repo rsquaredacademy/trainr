@@ -8,7 +8,6 @@ runtime: shiny_prerendered
 library(learnr)
 library(readr)
 knitr::opts_chunk$set(echo = FALSE)
-setwd('J:/R/interactive/import-data-in-r-part-1/')
 ```
 
 ## Introduction
