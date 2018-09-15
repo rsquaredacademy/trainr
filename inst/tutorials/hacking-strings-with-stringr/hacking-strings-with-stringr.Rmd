@@ -47,7 +47,7 @@ download the data for the case study from [here](https://raw.githubusercontent.c
 
 <hr>
 
-```{r show, eval=TRUE, echo=TRUE, collapse=TRUE}
+```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 mockstring
 ```
 
@@ -55,35 +55,40 @@ mockstring
 
 <hr>
 
-```{r sample, eval=TRUE, echo=TRUE, collapse=TRUE}
-mock_data <-
-  mockstring %>%
-  slice(1:10) %>%
-  select(email, address, full_name, currency, )
+Since the data set has 1000 rows, we will use a smaller sample for better
+readability.
 
-mock_data
+```{r sample, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sample Data'}
+mockdata <- 
+mockdata
 ```
 
-## Detect matches
+```{r sample-solution}
+mockdata <- slice(mockstring, 1:10)
+mockdata
+```
+
+## Detect @
 
 <hr>
 
 ![](/images/str_detect.png){width=90%}
 
-```{r detect_eg, eval=TRUE, echo=TRUE}
-str_detect(string = "James Bond", pattern = "b")
-str_detect(string = "James Bond", pattern = "B")
-```
-
-## Detect matches
+## Detect @
 
 <hr>
 
-### Instructions
+One of the columns in the case study data is `email`. It contains random email 
+ids. We want to ensure that the email ids adher to a particular format .i.e
 
-<hr>
+- they contain `@`
+- they contain only one `@`
 
-```{r detect, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+Let us first detect if the email ids contain `@`. Use `str_detect()` to detect 
+`@`.
+
+
+```{r detect, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Detect'}
 
 ```
 
@@ -91,26 +96,19 @@ str_detect(string = "James Bond", pattern = "B")
 str_detect(mock_data$email, pattern = "@")
 ```
 
-## Count matches
+## Count @
 
 <hr>
 
 ![](/images/str_count.png){width=90%}
 
-```{r count_eg, eval=TRUE, echo=TRUE}
-str_count(string = "James Bond", pattern = "b")
-str_count(string = "James Bond", pattern = "B")
-```
-
-## Count matches
+## Count @
 
 <hr>
 
-### Instructions
+Use `str_count()` to count the number of times `@` appears in the email ids.
 
-<hr>
-
-```{r count, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r count, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Count'}
 
 ```
 
@@ -118,25 +116,20 @@ str_count(string = "James Bond", pattern = "B")
 str_count(mock_data$email, pattern = "@")
 ```
 
-## Concatenate strings
+## Concatenate
 
 <hr>
 
 ![](/images/str_c.png){width=90%}
 
-```{r concat_eg, eval=TRUE, echo=TRUE}
-str_c("hello", "world")
-```
-
-## Concatenate strings
+## Concatenate
 
 <hr>
 
-### Instructions
+We can use `str_c()` to concatenate strings. Let us add the string `email id:` 
+before each email id in the data set.
 
-<hr>
-
-```{r concatenate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r concatenate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Concatenate'}
 
 ```
 
@@ -144,23 +137,23 @@ str_c("hello", "world")
 str_c("email id:", mock_data$email)
 ```
 
-## Split strings
+## Split
 
 <hr>
 
 ![](/images/str_split.png){width=90%}
 
-```{r split_eg, eval=TRUE, echo=TRUE}
-str_split(string = "https://www.r-project.org/", pattern = ":")
-str_split(string = "https://www.r-project.org/", pattern = "-")
-str_split(string = "https://www.r-project.org/", pattern = ".")
-```
-
-## Split strings
+## Split
 
 <hr>
 
-```{r split, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+If we want to split a string into two parts using a particular pattern, we use 
+`str_split()`. Let us split the domain name and extension from the domain 
+column in the data. The domain name and extension are separated by `.` and we 
+will use it to split the domain column. Since `.` is a special character, we 
+will use two slashes to escape the special character. 
+
+```{r split, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Split'}
 
 ```
 
@@ -168,42 +161,54 @@ str_split(string = "https://www.r-project.org/", pattern = ".")
 str_split(mock_data$email, pattern = "@")
 ```
 
-## Sort strings
+## Truncate
+
+We can truncate a string using `str_trunc()`. The default truncation happens at 
+the beggining of the string but we can truncate the central part or the end of 
+the string as well. 
+
+```{r trunc, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Truncate Strings'}
+str_trunc(mockdata$email, width = 10)
+str_trunc(mockdata$email, width = 10, side = "left")
+str_trunc(mockdata$email, width = 10, side = "center")
+```
+
+```{r trunc-solution}
+str_split(mock_data$email, pattern = "@")
+```
+
+## Sort
 
 <hr>
 
 ![](/images/str_sort.png){width=90%}
 
-```{r sort_eg, eval=TRUE, echo=TRUE}
-str_sort(c("Asia", "Africa", "Europe", "North America", "South America", "Australia", "Antartica"))
-```
-
-## Sort strings
+## Sort
 
 <hr>
 
-```{r sort, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+Strings can be sorted using `str_sort()`. Let us quickly sort the emails in 
+both ascending and descending orders.
+
+```{r sort, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sort'}
 
 ```
 
 ```{r sort-solution}
 str_sort(mock_data$email)
 ```
+
 ## Sort
 
 <hr>
 
 ![](/images/str_sort_descending.png){width=90%}
 
-```{r sort2_eg, eval=TRUE, echo=TRUE}
-str_sort(c("Asia", "Africa", "Europe", "North America", "South America", "Australia", "Antartica"), descending = TRUE)
-```
-
 ## Sort
 
 <hr>
 
-```{r sort2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r sort2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sort - Descending'}
 
 ```
 
@@ -211,50 +216,53 @@ str_sort(c("Asia", "Africa", "Europe", "North America", "South America", "Austra
 str_sort(mock_data$email, descending = TRUE)
 ```
 
-## String case
+## Case
 
 <hr>
 
 ![](/images/str_to_upper.png){width=90%}
 
-```{r case_eg, eval=FALSE, echo=TRUE}
-str_to_lower("I am a very satisfied R user.")
-str_to_upper("I am a very satisfied R user.")
-str_to_title("I am a very satisfied R user.")
-```
-
-## String case
+## Case
 
 <hr>
 
-```{r case, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+The case of a string can be changed to upper, lower or title case as shown 
+below.
+
+```{r case, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Change Case'}
 
 ```
 
 ```{r case-solution}
-str_to_upper(mock_data$full_name)
+str_to_upper(mockdata$full_name)
+str_to_lower(mockdata$full_name)
 ```
 
-## Replace strings
+## Replace
 
 <hr>
 
 ![](/images/str_replace.png){width=90%}
 
-```{r replace_eg, eval=TRUE, echo=TRUE}
-str_replace("Hello World", "H", "B")
-```
-
-## Replace strings
+## Replace
 
 <hr>
 
-```{r replace, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+Parts of a string can be replaced using `str_replace()`. In the `address` 
+column of the data set, let us replace:
+
+- Street with ST
+- Road with RD
+
+```{r replace, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Replace'}
+
+
 
 ```
 
 ```{r replace-solution}
-str_replace(mock_data$address, "Street", "ST")
+str_replace(mockdata$address, "Street", "ST")
+str_replace(mockdata$address, "Road", "RD")
 ```
 
 ## Extract
@@ -267,8 +275,15 @@ str_replace(mock_data$address, "Street", "ST")
 
 <hr>
 
-```{r extract, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-str_extract(mock_data$email, pattern = "com")
+We can extract parts of the string that match a particular pattern using 
+`str_extract()`.
+
+```{r extract, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract'}
+
+```
+
+```{r extract-solution}
+str_extract(mock_data$email, pattern = "org")
 ```
 
 ## Match
@@ -281,8 +296,15 @@ str_extract(mock_data$email, pattern = "com")
 
 <hr>
 
-```{r match, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-str_match(mock_data$email, pattern = "com")
+Before we extract, we need to know whether the string contains text that match 
+our pattern. Use `str_match()` to see if the pattern is present in the string.
+
+```{r match, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Match'}
+
+```
+
+```{r match-solution}
+str_match(mock_data$email, pattern = "org")
 ```
 
 ## Index
@@ -295,8 +317,17 @@ str_match(mock_data$email, pattern = "com")
 
 <hr>
 
-```{r which, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-str_which(mock_data$email, pattern = "com")
+If we are dealing with a character vector and know that the pattern we are 
+looking at is present in the vector, we might want to know the index of the 
+strings in which it is present. Use `str_which()` to identify the index of 
+the strings that match our pattern.
+
+```{r which, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Index'}
+
+```
+
+```{r which-solution}
+str_which(mock_data$email, pattern = "org")
 ```
 
 ## Locate
@@ -309,7 +340,15 @@ str_which(mock_data$email, pattern = "com")
 
 <hr>
 
-```{r locate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+Another objective might be to locate the position of the pattern we are looking 
+for in the string. For example, if we want to know the position of `@`  in the 
+email ids, we can use `str_locate()`.
+
+```{r locate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Locate'}
+
+```
+
+```{r locate-solution}
 str_locate(mock_data$email, pattern = "com")
 ```
 
@@ -318,6 +357,21 @@ str_locate(mock_data$email, pattern = "com")
 <hr>
 
 ![](/images/str_length.png){width=90%}
+
+## Length
+
+<hr>
+
+The length of the string can be computed using `str_length()`. Let us ensure 
+that the length of the strings in the `password` column is 16.
+
+```{r length, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Length'}
+
+```
+
+```{r length-solution}
+str_length(mockdata$passwords)
+```
 
 ## Extract
 
@@ -329,9 +383,18 @@ str_locate(mock_data$email, pattern = "com")
 
 <hr>
 
-```{r sub, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+We can extract parts of a string by specifying the starting and ending position 
+using `str_sub()`. Let us extract the currency type from the `currency` column.
+
+```{r sub, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract'}
+
+```
+
+```{r sub-solution}
 str_sub(mock_data$currency, start = 1, end = 1)
 ```
+
+## Word
 
 ![](/images/word.png){width=90%}
 
@@ -339,6 +402,15 @@ str_sub(mock_data$currency, start = 1, end = 1)
 
 <hr>
 
-```{r word, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+One final function that we will look at before the case study is `word()`. It 
+extracts word(s) from sentences. We do not have any sentences in the data set, 
+but let us use it to extract the first and last name from the `full_name` 
+column.
+
+```{r word, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Word'}
+
+```
+
+```{r word-solution}
 word(mock_data$full_name, 1)
 ```
