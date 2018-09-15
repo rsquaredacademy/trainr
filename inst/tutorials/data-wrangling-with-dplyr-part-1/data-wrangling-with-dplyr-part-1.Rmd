@@ -7,6 +7,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(dplyr)
+library(readr)
 knitr::opts_chunk$set(echo = FALSE)
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
 ```
@@ -53,7 +54,7 @@ following questions:
 
 - click on Run Code to view the data
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+```{r show,  exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
 ecom
 ```
 

@@ -7,10 +7,12 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(dplyr)
+library(readr)
 knitr::opts_chunk$set(echo = FALSE)
 options(tibble.width = Inf)
-order <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv')
-customer <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv')
+order <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/order.csv', 
+delim = ';')
+customer <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/customer.csv', delim = ';')
 ```
 
 ## Introduction
@@ -37,7 +39,9 @@ The following types of `join` functions are provided in dplyr:
 
 ![](/images/join_data.png){width=90%}
 
-We have two data sets with details of customers and their orders. We will use the above functions to combine the data sets in different ways to glean information about customer orders. 
+We have two data sets with details of customers and their orders. We will use 
+the above functions to combine the data sets in different ways to glean 
+information about customer orders. 
 
 ## Data
 
@@ -69,68 +73,110 @@ customer
 
 ![](/images/draw_inner.png){width=90%}
 
-`inner_join()` returns all rows from x where there are matching values in y, and all columns from x and y. If there are multiple matches between x and y, all combination of the matches are returned.
+`inner_join()` returns all rows from x where there are matching values in y, 
+and all columns from x and y. If there are multiple matches between x and y, 
+all combination of the matches are returned.
 
 ```{r dplyr3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Inner Join'}
-inner_join(customer, order)
+
+```
+
+```{r dplyr3-solution}
+inner_join(customer, order, by = "id")
 ```
 
 ## Left Join
 
 <hr>
 
-`left_join()` returns all rows from x, and all columns from x and y. Rows in x with no match in y will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
+`left_join()` returns all rows from x, and all columns from x and y. Rows in x 
+with no match in y will have NA values in the new columns. If there are 
+multiple matches between x and y, all combinations of the matches are returned.
 
 ![](/images/draw_left.png){width=90%}
 
 ```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Left Join'}
-left_join(customer, order)
+
+```
+
+```{r dplyr4-solution}
+left_join(customer, order, by = "id")
 ```
 
 ## Right Join
 
 <hr>
 
-`right_join()` returns all rows from y, and all columns from x and y. Rows in y with no match in x will have NA values in the new columns. If there are multiple matches between x and y, all combinations of the matches are returned.
+`right_join()` returns all rows from y, and all columns from x and y. Rows in y 
+with no match in x will have NA values in the new columns. If there are 
+multiple matches between x and y, all combinations of the matches are returned.
 
 ![](/images/draw_right.png){width=90%}
 
 ```{r dplyr5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Right Join'}
-right_join(customer, order)
+
+```
+
+```{r dplyr5-solution}
+right_join(customer, order, by = "id")
 ```
 
 ## Semi Join
 
 <hr>
 
-`semi_join()` returns all rows from x where there are matching values in y, keeping just columns from x. A semi join differs from an inner join because an inner join will return one row of x for each matching row of y, where a semi join will never duplicate rows of x.
+`semi_join()` returns all rows from x where there are matching values in y, 
+keeping just columns from x. A semi join differs from an inner join because an 
+inner join will return one row of x for each matching row of y, where a semi 
+join will never duplicate rows of x.
 
 ![](/images/draw_semi.png){width=90%}
 
 ```{r dplyr6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Semi Join'}
-semi_join(customer, order)
+
+```
+
+```{r dplyr6-solution}
+semi_join(customer, order, by = "id")
 ```
 
 ## Anti Join
 
 <hr>
 
-`anti_join()` returns all rows from x where there are not matching values in y, keeping just columns from x.
+`anti_join()` returns all rows from x where there are not matching values in y, 
+keeping just columns from x.
 
 ![](/images/draw_anti.png){width=90%}
 
 ```{r dplyr7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Anti Join'}
-anti_join(customer, order)
+
+```
+
+```{r dplyr7-solution}
+anti_join(customer, order, by = "id")
 ```
 
 ## Full Join
 
 <hr>
 
-`full_join()` returns all rows and all columns from both x and y. Where there are not matching values, returns NA for the one missing.
+`full_join()` returns all rows and all columns from both x and y. Where there 
+are not matching values, returns NA for the one missing.
 
 ![](/images/draw_full.png){width=90%}
 
 ```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Full Join'}
-full_join(customer, order)
+
 ```
+
+```{r dplyr8-solution}
+full_join(customer, order, by = "id")
+```
+
+## References
+
+<hr>
+
+- https://dplyr.tidyverse.org/
+- http://r4ds.had.co.nz/relational-data.html

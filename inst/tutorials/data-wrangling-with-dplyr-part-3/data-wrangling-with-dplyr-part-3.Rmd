@@ -7,8 +7,18 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(dplyr)
+library(readr)
 knitr::opts_chunk$set(echo = FALSE)
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      purchase = col_logical(), bouncers = col_logical(), duration = col_double(),
+      n_visit = col_double(), n_pages = col_double()
+    )
+  )
+ecom_mini <- sample_n(ecom, size = 10)
+ecom_sample <- sample_n(ecom, 30)
 ```
 
 ## Introduction
@@ -29,9 +39,9 @@ In this module, we will explore a set of helper functions in order to:
 
 <hr>
 
-Let us look at a case study (e-commerce data) and see how we can use dplyr helper functions to answer questions we have about and to modify/transform the underlying data set. You can download the data from [here](https://github.com/rsquaredacademy/datasets/blob/master/web.csv) or import it directly using `read_csv()` from the [readr](readr.tidyverse.org) package.
+Let us look at a case study (e-commerce data) and see how we can use dplyr helper functions to answer questions we have about and to modify/transform the underlying data set. 
 
-## Data
+### Data
 
 <hr>
 
@@ -39,21 +49,17 @@ Let us look at a case study (e-commerce data) and see how we can use dplyr helpe
 ecom
 ```
 
-## Data Dictionary
+### Data Dictionary
 
 <hr>
 
-- id: row id
 - referrer: referrer website/search engine
-- os: operating system
-- browser: browser
 - device: device used to visit the website
-- n_pages: number of pages visited
+- bouncers: whether a visit bounced (exited from landing page)
 - duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
 - purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
+- n_visit: number of visits
+- n_pages: number of pages visited/browsed
 
 
 ## Data Sanitization
@@ -66,15 +72,27 @@ ecom
 
 <hr>
 
-```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Traffic Sources'}
-distinct(ecom, referrer)
-```
+Let us ensure that the data is sanitized by checking the sources of traffic
+and devices used to visit the site. We will use `distinct()` to examine the
+values in the `referrer` column.
 
-## Device Types
+### Syntax
 
 <hr>
 
-```{r dplyr30, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Device Types'}
+```{r dplyr2-syntax, eval=TRUE, echo=TRUE}
+distinct(ecom, referrer)
+```
+
+### Instructions
+
+<hr>
+
+```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Traffic Sources'}
+
+```
+
+```{r dplyr2-solution}
 distinct(ecom, device)
 ```
 
@@ -88,7 +106,25 @@ distinct(ecom, device)
 
 <hr>
 
+Columns can be renamed using `rename()`. 
+
+## Syntax
+
+<hr>
+
+```{r dplyr3-syntax, eval=FALSE, echo=TRUE}
+rename(data, new_name = current_name)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Rename Columns'}
+
+```
+
+```{r dplyr3-solution}
 rename(ecom, time_on_site = duration)
 ```
 
@@ -102,7 +138,27 @@ rename(ecom, time_on_site = duration)
 
 <hr>
 
+dplyr offers sampling functions which allow us to specify either the
+number or percentage of observations. `sample_n()` allows sampling a specific
+number of observations.  
+
+## Syntax
+
+<hr>
+
+```{r dplyr4-syntax, eval=FALSE, echo=TRUE}
+sample_n(ecom, sample_size)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sampling - Part 1'}
+
+```
+
+```{r dplyr4-solution}
 sample_n(ecom, 700)
 ```
 
@@ -110,7 +166,25 @@ sample_n(ecom, 700)
 
 <hr>
 
+`sample_frac()` allows a specific percentage of observations.
+
+## Syntax
+
+<hr>
+
+```{r dplyr6-syntax, eval=FALSE, echo=TRUE}
+sample_frac(ecom, sample_percentage)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sampling - Part 3'}
+
+```
+
+```{r dplyr6-solution}
 sample_frac(ecom, size = 0.7)
 ```
 
@@ -124,24 +198,81 @@ sample_frac(ecom, size = 0.7)
 
 <hr>
 
+dplyr verbs always return a tibble. What if you want to extract a specific 
+column or a bunch of rows but not as a tibble? Use `pull` to extract columns 
+either by name or position. It will return a vector. 
+
+## Syntax
+
+<hr>
+
+```{r dplyr8-syntax, eval=FALSE, echo=TRUE}
+pull(data, column_name)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 1'}
-pull(ecom, device)
+
+```
+
+```{r dplyr8-solution}
+pull(ecom_mini, device)
 ```
 
 ## Extract Columns
+
+<hr>
+
+Let us extract the first column from `ecom` using column position instead of 
+name.
+
+## Syntax
+
+<hr>
+
+```{r dplyr9-syntax, eval=FALSE, echo=TRUE}
+pull(data, column_position)
+```
+
+## Instructions
 
 <hr>
 
 ```{r dplyr9, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 2'}
-pull(ecom, 1)
+
+```
+
+```{r dplyr9-solution}
+pull(ecom_mini, 1) 
 ```
 
 ## Extract Columns
 
 <hr>
 
+You can use `-` before the column position to indicate the position in reverse.
+
+## Syntax
+
+<hr>
+
+```{r dplyr10-syntax, eval=FALSE, echo=TRUE}
+pull(data, -column_position)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 3'}
-pull(ecom, -1)
+
+```
+
+```{r dplyr10-solution}
+pull(ecom_mini, -1)
 ```
 
 ## Extract Rows
@@ -154,15 +285,37 @@ pull(ecom, -1)
 
 <hr>
 
+Let us now look at extracting rows using `slice()`. 
+
+## Syntax
+
+<hr>
+
+```{r dplyr11-syntax, eval=FALSE, echo=TRUE}
+slice(data, row_numbers)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 4'}
+
+```
+
+```{r dplyr11-solution}
 slice(ecom, 1:20)
 ```
 
-## Extract Row
+## Instructions
 
 <hr>
 
 ```{r dplyr12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 5'}
+
+```
+
+```{r dplyr12-solution}
 slice(ecom, n())
 ```
 
@@ -177,7 +330,29 @@ slice(ecom, n())
 
 <hr>
 
+Let us now look at the proportion or share of visits driven by different sources
+of traffic. 
+
+## Syntax
+
+<hr>
+
+```{r dplyr14-syntax, eval=FALSE, echo=TRUE}
+data %>%
+  group_by(column_name) %>%
+  tally()
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr14, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 2'}
+
+
+```
+
+```{r dplyr14-solution}
 ecom %>%
   group_by(referrer) %>%
   tally()
@@ -187,17 +362,20 @@ ecom %>%
 
 <hr>
 
-```{r dplyr15, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 3'}
-ecom %>%
-  group_by(referrer, bouncers) %>%
-  tally()
-```
+Let us look at how many conversions happen across different devices.
 
-## Tabulate Data
+## Instructions
 
 <hr>
 
 ```{r dplyr16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 4'}
+
+
+
+
+```
+
+```{r dplyr16-solution}
 ecom %>%
   group_by(referrer, purchase) %>%
   tally()
@@ -207,18 +385,49 @@ ecom %>%
 
 <hr>
 
+
+
+## Instructions
+
+<hr>
+
 ```{r dplyr25, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 5'}
+
+
+
+
+```
+
+```{r dplyr25-solution}
 ecom %>%
   group_by(referrer, purchase) %>%
   tally() %>%
-  filter(purchase == 'true')
+  filter(purchase)
 ```
 
 ## Count
 
 <hr>
 
+Another way to extract the above information is by using `count`
+
+## Syntax
+
+<hr>
+
+```{r dplyr17-syntax, eval=FALSE, echo=TRUE}
+count(data, column_name)
+```
+
+## Instructions
+
+<hr>
+
 ```{r dplyr17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 6'}
+
+```
+
+```{r dplyr17-solution}
 count(ecom, referrer, purchase)
 ```
 
@@ -228,24 +437,34 @@ count(ecom, referrer, purchase)
 
 ![](/images/top_n.png){width=90%}
 
-## Top Referrers
-
-<hr>
-
-```{r dplyr18, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 7'}
-ecom %>%
-  count(referrer, purchase) %>%
-  filter(purchase == 'true') %>%
-  arrange(desc(n)) %>%
-  top_n(n = 2)
-```
 
 ## Between
 
 <hr>
 
+`between()` allows us to test if the values in a column lie between two specific
+values. 
+
+## Syntax
+
+<hr>
+
+```{r dplyr19-syntax, eval=FALSE, echo=TRUE}
+between(data, lower_value, upper_value)
+```
+
+## Instructions
+
+<hr>
+
+- check how many visits browsed pages between 5 and 15
+
 ```{r dplyr19, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Between'}
-ecom %>%
+
+```
+
+```{r dplyr19-solution}
+ecom_sample %>%
   pull(n_pages) %>%
   between(5, 15) 
 ```
@@ -254,48 +473,44 @@ ecom %>%
 
 <hr>
 
-```{r dplyr20}
-mtcars %>%
-  select(mpg, disp, cyl, gear, carb) %>%
-  mutate(
-    type = case_when(
-      disp > 200 ~ 'High',
-      cyl == 8 ~ 'Eight',
-      TRUE ~ 'True'
-    )
+`case_when()` is an alternative to `if else`. It allows us to lay down the 
+conditions clearly and makes the code more readable. It is used with `mutate()`
+.
+
+## Syntax
+
+<hr>
+
+```{r dplyr20-syntax, eval=FALSE, echo=TRUE}
+mutate(data,
+  new_column = case_when(
+    condition ~ value,
+    condition ~ value,
+    TRUE ~ value
   )
+)
 ```
 
-## Select First Observation
+
+## Instructions
 
 <hr>
 
-```{r dplyr21, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 1'}
-ecom %>%
-  pull(referrer) %>%
-  nth(1)
+- create a new column `repeat_visit` from `n_visit` (the number of previous visits).
 
-ecom %>%
-  pull(referrer) %>%
-  first()
+```{r dplyr20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case When'}
+
 ```
 
-## Select 1000th Observation
 
-<hr>
-
-```{r dplyr22, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 2'}
+```{r dplyr20-solution}
 ecom %>%
-  pull(referrer) %>%
-  nth(1000)
+  mutate(
+    repeat_visit = case_when(
+      n_visit > 0 ~ TRUE,
+      TRUE ~ FALSE
+    )
+  ) %>%
+  select(n_visit, repeat_visit) 
 ```
 
-## Select Last Observation
-
-<hr>
-
-```{r dplyr23, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 3'}
-ecom %>%
-  pull(referrer) %>%
-  last()
-```
