@@ -8,9 +8,12 @@ runtime: shiny_prerendered
 library(learnr)
 library(dplyr)
 library(magrittr)
-library(purrr)
+library(readr)
+library(stringr)
 knitr::opts_chunk$set(echo = FALSE)
 ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom_mini <- sample_n(ecom, size = 10)
+ecom_list <- as.list(ecom_mini)
 ```
 
 ## Introduction
@@ -41,154 +44,361 @@ If you are using [tidyverse](https://www.tidyverse.org/), magrittr will be autom
 
 ## Data
 
-<hr>
+```{r show, message=FALSE}
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      n_pages = col_double(), duration = col_double(), purchase = col_logical()
+    )
+  )
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
 ecom
+```
+
+We will create a smaller data set from the above data to be used in some examples:
+
+```{r show_mini, message=FALSE}
+ecom_mini <- sample_n(ecom, size = 10)
+ecom_mini
 ```
 
 ## Data Dictionary
 
-<hr>
-
-- id: row id
 - referrer: referrer website/search engine
-- os: operating system
-- browser: browser
-- device: device used to visit the website
 - n_pages: number of pages visited
 - duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
 - purchase: whether visitor purchased
-- order_value: order value of visitor (in dollars)
 
-## head
+## First Example
+
+Let us start with a simple example. You must be aware of `head()`. If not,
+do not worry. It returns the first few observations/rows of data. We can
+specify the number of observations it should return as well. Let us use 
+it to view the first 10 rows of our data set.
+
+```{r mag1a, eval=TRUE, collapse=TRUE}
+head(ecom, 10)
+```
+
+### Using Pipe
+
+Now let us do the same but with `%>%`. 
+
+```{r mag2, eval=TRUE, collapse=TRUE}
+ecom %>% head(10)
+```
+
+### Instructions
 
 <hr>
 
-```{r mag1, eval=TRUE, echo=TRUE, collapse=FALSE}
+- use `%>%` and `tail()` to get the last 10 rows of `mtcars`
+
+```{r mag1, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tail'}
 head(ecom, 10)
 
 # using pipe
 ecom %>% head(10)
+
+# tail
+
+```
+
+```{r mag1-solution}
+mtcars %>% tail(10)
 ```
 
 ## Square Root 
 
-<hr>
-
-```{r mag3, eval=TRUE, echo=TRUE, collapse=FALSE}
-y <- ecom$n_pages
-y <- sqrt(y)
-head(y)
-```
-
-## Square Root
-
-<br>
-<center>
-![](/images/pipes_square_root.png){width=100%}
-</center>
-<br>
-
-## Square Root 
+### Introduction
 
 <hr>
 
-```{r mag4, eval=TRUE, echo=TRUE, collapse=FALSE}
-# select n_pages variable and assign it to y
-y <- ecom %$% n_pages
-head(y)
+Time to try a slightly  more challenging example. We want the square root of 
+`n_pages` column from the data set. To ensure the output does not clutter 
+the page, we will view the first few observations using `head()`.
 
-# compute square root of y and assign it to y 
-y %<>% sqrt()
-head(y)
-```
-
-## Square Root
-
-<hr>
-
-```{r mag5, eval=TRUE, echo=TRUE, collapse=FALSE}
-y <- 
-  ecom %$% 
-  n_pages %>% 
-  sqrt() %>%
-  head()
+```{r mag3, eval=TRUE, collapse=TRUE}
+y <- sqrt(ecom_mini$n_pages)
 y
 ```
 
-## Correlation
+Let us break down the above computation into small steps:
+
+- select/expose the `n_pages` column from `ecom` data
+- compute the square root
+- assign the first few observations to `y`
+
+<br>
+
+```{r mag24, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/img/pipes_square_root.png")
+```
+
+## Square Root - Using Pipe 
 
 <hr>
 
-<br>
-<center>
-![](/images/pipes_correlation.png){width=100%}
-</center>
-<br>
+Now let us learn how to compute square root using pipe operators. In the above 
+example, we have done two things:
 
-## Correlation
+- assign `n_pages` to `y` using `$`
+- compuate square root of `y` and assign the result to `y` itself
+
+We can assign expose a column from a data set using the `%$%` operator. For example, `y <- mtcars %$% mpg` will assign `mpg` to `y`.
+Similarly, we can assign the result of an operation performed on a variable to itself using `%<>%` operator. Let us assume you want to  assign the absolute value of a variable to itself. This is how you would do it normally:
+
+`y <- abs(y)`
+
+Using `%<>%` operator, this is how you will achieve it:
+
+`y %<>% abs()`
+
+### Instructions
 
 <hr>
 
-```{r mag6, eval=TRUE, echo=TRUE, collapse=FALSE}
+- use `%$%` to assing `n_pages` from `ecom` to `y`
+- use `%<>%` to compute square root of `y` and assign it to `y`
+
+```{r mag4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Square Root'}
+# select n_pages variable and assign it to y
+
+
+# compute square root of y and assign it to y 
+
+```
+
+```{r mag4-solution}
+# select n_pages variable and assign it to y
+y <-
+    ecom_mini %$%
+    n_pages
+
+# compute square root of y and assign it to y 
+y %<>% sqrt
+```
+
+
+## Square Root - Using Pipe 
+
+<hr>
+
+In the first example, we computed the square root of `y` in two steps while we 
+could have achieved it in a single step like this:
+
+`y <- sqrt(econ$n_pages)`
+
+What we are doing above is:
+
+- select `n_pages` from `econ`
+- pass it on to `sqrt()`
+- assign the result to `y`
+
+### Instructions
+
+<hr>
+
+Let us try to do this using pipes:
+
+- expose `n_pages` from `econ` using `%$%`
+- pass it on to `sqrt()` using `%>%`
+- assign the result to `y`
+
+We have written the first part for you.
+
+```{r mag5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Square Root'}
+
+```
+
+```{r mag5-solution}
+y <- ecom %$% 
+  n_pages %>% 
+  sqrt()
+```
+
+## Correlation
+
+### Introduction
+
+<hr>
+
+Correlation is a statistical measure that indicates the extent to which two or more variables 
+fluctuate together. In R, correlation is computed using `cor()`. Let us look at the 
+correlation between the number of pages browsed and time spent on the site for
+visitors who purchased some product. Below are the steps for computing correlation:
+
+- extract rows where purchase == true
+- select/expose `n_pages` and `duration` columns
+- use `cor()` to compute the correlation
+
+<br>
+
+```{r mag25, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/img/pipes_correlation.png")
+```
+
+```{r mag32, eval=TRUE, echo=TRUE}
 # without pipe
-ecom1 <- subset(ecom, purchase == 'true')
+ecom1 <- subset(ecom, purchase)
 cor(ecom1$n_pages, ecom1$duration)
 ```
 
-```{r mag6a, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+## Correlation - Using pipe
+
+We can chain functions using pipe operators. For example, using `mtcars`, to 
+compute the average miles per gallon for cars with eight cylinders we will 
+write:
+
+```{r mag33, eval=FALSE, echo=TRUE}
+mtcars %>% 
+  subset(cyl == 8) %$% 
+  mean(mpg)
+```
+
+This is how you can read the above code:
+
+- filter data from `mtcars` where `cyl == 8` using `subset()`
+- from the filtered data set expose `mpg` using `%$%` and pass it into `mean()`
+
+### Instructions
+
+Let us use pipe operators to compute the correlation between `n_pages` and `duration`:
+
+- filter data for those who have purchased using `subset()` and `%>%`
+- expose `n_pages` and `duration` using `%$%` and pass them onto `cor()`
+
+
+```{r mag6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Correlation'}
 # with pipe
 ecom %>%
-  subset(purchase == 'true') %$% 
+  subset(purchase == 'true') 
+```
+
+```{r mag6-solution}
+# with pipe
+ecom %>%
+  subset(purchase) %$% 
+  cor(n_pages, duration)
+
+# with pipe
+ecom %>%
+  filter(purchase) %$% 
   cor(n_pages, duration)
 ```
 
 ## Visualization
 
+### Introduction
+
 <hr>
 
-```{r mag21, eval=TRUE, echo=TRUE, collapse=FALSE, fig.align='center', fig.height=4, fig.width=6}
+Let us look at a data visualization example. We will create a bar plot to
+visualize the frequency of different referrer types that drove purchasers
+to the website. Let us look at the steps involved in creating the bar plot:
+
+- extract rows where purchase == true
+- select/expose `referrer` column
+- tabulate referrer data using `table()`
+- use the tabulated data to create bar plot using `barplot()`
+
+```{r mag21, eval=TRUE, echo=TRUE}
 barplot(table(subset(ecom, purchase == 'true')$referrer))
 ```
 
-## Visualization
+## Visualization - Using Pipe
 
 <hr>
 
-<br>
-<center>
-![](/images/pipes_viz_canva.png){width=100%}
-</center>
+```{r mag26, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("/img/pipes_data_visualization.png")
+```
+
 <br>
 
-## Visualization - Using pipe
+Let us build a barplot from `mtcars` data.
+
+```{r mag30, eval=FALSE, echo=TRUE}
+# without pipe
+barplot(table(subset(mtcars, cyl == 8)$am))
+
+# with pipe
+mtcars %>%`
+  subset(cyl == 8) %$%
+  am %>%
+  table() %>%
+  barplot()
+```
+## Visualization - Practice
+
+### Instructions
 
 <hr>
 
-```{r mag7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data', fig.align='center', fig.height=4, fig.width=6}
+Let us now use pipes to build the same plot. We have written the partial code for you:
+
+- pass on the referrer data to `table()` using `%>%`
+- pass on the result from the previous step to `barplot()` using `%>%`
+
+```{r mag7, fig.align='center', fig.height=4, fig.width=6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Visualize - Using Pipe'}
+
+
+
+```
+
+```{r mag7-solution}
 ecom %>%
-  subset(purchase == 'true') %>%
-  extract('referrer') %>%
+  subset(purchase) %$%
+  referrer %>%
   table() %>%
   barplot()
 ```
 
 ## Regression
 
-<hr>
+Let us look at a regression example. We regress time spent on the site on 
+number of pages visited. Below are the steps involved in running the regression:
 
-```{r mag8, eval=TRUE, echo=TRUE, collapse=FALSE}
+- use `duration` and `n_pages` columns from econ data
+- pass the above data to `lm()`
+- pass the output from `lm()` to `summary()` 
+
+
+```{r mag8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Regression'}
 summary(lm(duration ~ n_pages, data = ecom))
 ```
 
-## Regression - Using pipe
+## Regression - Using Pipe
 
 <hr>
 
-```{r mag22, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'View Data'}
+```{r mag31, eval=FALSE, echo=TRUE}
+# without pipe
+summary(lm(disp ~ mpg, data = mtcars))
+
+# with pipe
+mtcars %$%`
+  lm(disp ~ mpg) %>%
+  summary()
+```
+
+## Regression - Practice
+
+### Instructions
+
+<hr>
+
+- expose `duration` and `n_pages` from `ecom` using `%$%` 
+- pass them onto `lm()` 
+- pass the result from `lm()` to `summary()` using `%>%`
+
+```{r mag22, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Regression - Using Pipe'}
+
+  
+```
+
+```{r mag22-solution}
 ecom %$%
   lm(duration ~ n_pages) %>%
   summary()
@@ -196,54 +406,54 @@ ecom %$%
 
 ## String Manipulation
 
-<hr>
+
+```{r mag27, echo=FALSE, out.width="70%", fig.align="center"}
+knitr::include_graphics("/img/pipes_string.png")
+```
 
 <br>
-<center>
-![](/images/pipes_string.png){width=60%}
-</center>
-<br>
 
-## String Manipulation
+We want to extract the first name (jovial) from the below email id and
+convert it to upper case. Below are the steps to achieve this:
 
-<hr>
+- split the email id using the pattern `@` using `str_split()`
+- extract the first element from the resulting list using `extract2()`
+- extract the first element from the character vector using `extract()`
+- extract the first six characters using `str_sub()`
+- convert to upper case using `str_to_upper()`
 
-```{r mag9, eval=TRUE, echo=TRUE, collapse=FALSE}
+
+```{r mag9, eval=TRUE, collapse=TRUE}
 email <- 'jovialcann@anymail.com'
 
 # without pipe
-toupper(strtrim(strsplit(email, '@')[[1]][1], 6))
+str_to_upper(str_sub(str_split(email, '@')[[1]][1], start = 1, end = 6))
 ```
 
-## String Manipulation
+## String Manipulation - With Pipe
 
-<hr>
+### Instructions
 
-```{r mag9a, eval=TRUE, echo=TRUE, collapse=FALSE}
-# with pipe
+```{r mag99, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'String Manipulation'}
+
+
+
+
+```
+
+```{r mag99-solution}
 email %>%
-  strsplit(split = '@') %>%
+  str_split(pattern = '@') %>%
   extract2(1) %>%
   extract(1) %>%
-  strtrim(width = 6) %>%
-  toupper()
-```
-
-## String Manipulation
-
-<hr>
-
-```{r map39, eval=TRUE, echo=TRUE, collapse=FALSE}
-email %>%
-  strsplit(split = '@') %>%
-  map_chr(1) %>%
-  strtrim(width = 6) %>%
-  toupper()
+  str_sub(start = 1, end = 6) %>%
+  str_to_upper()
 ```
 
 ## Data Extraction
 
-<hr>
+Let us turn our attention towards data extraction. magrittr provides
+alternatives to `$`, `[` and `[[`.
 
 - `extract()`
 - `extract2()`
@@ -251,71 +461,96 @@ email %>%
 
 ## Extract Column By Name
 
-<hr>
+To extract a specific column using the column name, we mention the name 
+of the column in single/double quotes within `[` or `[[`. In case of `$`,
+we do not use quotes.
 
-```{r mag10, eval=TRUE, echo=TRUE, collapse=FALSE}
-ecom['n_pages']
+Let us extract the first 3 observations of `n_pages` column.
 
-extract(ecom, 'n_pages') 
+```{r mag10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column'}
+# base 
+ecom_mini['n_pages']
+
+# magrittr
+extract(ecom_mini, 'n_pages') 
 ```
 
 ## Extract Column By Position
 
-<hr>
+We can extract columns using their index position. Keep in mind that index 
+position starts from **1** in R. In the below example, we show how to 
+extract `n_pages` column but instead of using the column name, we use the 
+column position.
 
-```{r mag23, eval=TRUE, echo=TRUE, collapse=FALSE}
-ecom[6]
+```{r mag23, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column'}
+# base 
+ecom_mini[2]
 
-extract(ecom, 6) 
+# magrittr
+extract(ecom_mini, 2) 
 ```
 
-## Extract Column (as vector)
+## Extract Column 
 
-<hr>
+One important differentiator between `[` and `[[` is that `[[` will
+return a atomic vector and not a `data.frame`. `$` will also return
+a atomic vector. In magrittr, we can use `use_series()` in place of
+`$`.
 
-```{r mag11, eval=TRUE, echo=TRUE, collapse=FALSE}
-ecom$n_pages
+```{r mag11, , exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column'}
+# base 
+ecom_mini$n_pages
 
-use_series(ecom, 'n_pages')   
+# magrittr
+use_series(ecom_mini, 'n_pages') 
 ```
 
-## Extract List Element By Name
+## Extract List Element 
 
-<hr>
+Let us convert `ecom_mini` into a list using as.list() as shown below:
 
-```{r mag12, eval=TRUE, echo=TRUE, collapse=FALSE}
-mt <- as.list(mtcars)
-
-mt[['mpg']]
-
-extract2(mt, 'mpg')
+```{r mag12a, eval=TRUE, echo=TRUE}
+ecom_list <- as.list(ecom_mini)
 ```
 
-## Extract List Element By Position
+To extract elements of a list, we can use `extract2()`. It is an
+alternative for `[[`.
 
-<hr>
+```{r mag12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract List Element'}
+# base 
+ecom_list[['n_pages']]
 
-```{r mag13, eval=TRUE, echo=TRUE, collapse=FALSE}
-mt <- as.list(mtcars)
-
-mt[[1]]
-
-extract2(mt, 1)
+# magrittr
+extract2(ecom_list, 'n_pages')
 ```
 
-## Extract List Element (as vector)
+## Extract List Element 
 
 <hr>
 
-```{r mag14, eval=TRUE, echo=TRUE, collapse=FALSE}
-mt <- as.list(mtcars)
+```{r mag13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract List Element'}
+# base 
+ecom_list[[1]]
 
-mt$mpg
+# magrittr
+extract2(ecom_list, 1)
+```
 
-use_series(mt, mpg)
+## Extract List Element 
+
+We can extract the elements of a list using `use_series()` as well.
+
+```{r mag14, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract List Element'}
+# base 
+ecom_list$n_pages
+
+# magrittr
+use_series(ecom_list, n_pages)
 ```
 
 ## Arithmetic Operations
+
+### Introduction
 
 <hr>
 
@@ -333,43 +568,53 @@ use_series(mt, mpg)
 
 <hr>
 
-```{r mag15, eval=TRUE, echo=TRUE, collapse=FALSE}
+```{r mag15, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Addition'}
 1:10 + 1
 
 add(1:10, 1)
+
+`+`(1:10, 1)
 ```
 
 ## Multiplication
 
 <hr>
 
-```{r mag16, eval=TRUE, echo=TRUE, collapse=FALSE}
+```{r mag16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Multiplication'}
 1:10 * 3
 
 multiply_by(1:10, 3)
+
+`*`(1:10, 3)
 ```
 
 ## Division
 
 <hr>
 
-```{r mag17, eval=TRUE, echo=TRUE, collapse=FALSE}
+```{r mag17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Division'}
 1:10 / 2
 
 divide_by(1:10, 2)
+
+`/`(1:10, 2)
 ```
 
 ## Power
 
 <hr>
 
-```{r mag18, eval=TRUE, echo=TRUE, collapse=FALSE}
+```{r mag18, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Power'}
 1:10 ^ 2
 
 raise_to_power(1:10, 2)
+
+`^`(1:10, 2)
 ```
 
 ## Logical Operators
+
+### Introduction
 
 <hr>
 
@@ -386,19 +631,29 @@ raise_to_power(1:10, 2)
 
 <hr>
 
-```{r mag19, eval=TRUE, echo=TRUE, collapse=FALSE}
+```{r mag19, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Greater Than'}
 1:10 > 5
 
 is_greater_than(1:10, 5)
+
+`>`(1:10, 5)
 ```
 
 ## Weakly Greater Than
 
 <hr>
 
-```{r mag20, eval=TRUE, echo=TRUE, collapse=FALSE}
-1:10 %>%
-  `>=`(5)
+```{r mag20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Weakly Greater Than'}
+1:10 >= 5
 
 is_weakly_greater_than(1:10, 5)
+
+`>=`(1:10, 5)
 ```
+
+## References
+
+<hr>
+
+- https://magrittr.tidyverse.org/
+- http://r4ds.had.co.nz/pipes.html
