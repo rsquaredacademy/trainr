@@ -100,7 +100,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p>We will create a smaller data set from the above data to be used in some examples:</p>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["referrer"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n_pages"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["duration"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["purchase"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"social","2":"1","3":"432","4":"FALSE"},{"1":"yahoo","2":"15","3":"255","4":"FALSE"},{"1":"direct","2":"19","3":"304","4":"TRUE"},{"1":"google","2":"1","3":"406","4":"FALSE"},{"1":"yahoo","2":"1","3":"530","4":"FALSE"},{"1":"bing","2":"1","3":"646","4":"FALSE"},{"1":"google","2":"1","3":"369","4":"FALSE"},{"1":"yahoo","2":"13","3":"364","4":"TRUE"},{"1":"bing","2":"1","3":"585","4":"FALSE"},{"1":"bing","2":"15","3":"405","4":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["referrer"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n_pages"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["duration"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["purchase"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"google","2":"1","3":"132","4":"FALSE"},{"1":"google","2":"1","3":"934","4":"FALSE"},{"1":"google","2":"4","3":"76","4":"FALSE"},{"1":"google","2":"2","3":"44","4":"FALSE"},{"1":"direct","2":"13","3":"390","4":"TRUE"},{"1":"yahoo","2":"1","3":"123","4":"FALSE"},{"1":"bing","2":"14","3":"140","4":"FALSE"},{"1":"direct","2":"15","3":"255","4":"FALSE"},{"1":"bing","2":"2","3":"46","4":"FALSE"},{"1":"yahoo","2":"7","3":"77","4":"FALSE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -156,16 +156,18 @@ ecom %&gt;% head(10)
 <h3>Introduction</h3>
 <hr>
 <p>Time to try a slightly more challenging example. We want the square root of <code>n_pages</code> column from the data set. To ensure the output does not clutter the page, we will view the first few observations using <code>head()</code>.</p>
-<pre><code>##  [1] 1.000000 3.872983 4.358899 1.000000 1.000000 1.000000 1.000000
-##  [8] 3.605551 1.000000 3.872983</code></pre>
+<pre><code>##  [1] 1.000000 1.000000 2.000000 1.414214 3.605551 1.000000 3.741657
+##  [8] 3.872983 1.414214 2.645751</code></pre>
 <p>Let us break down the above computation into small steps:</p>
 <ul>
 <li>select/expose the <code>n_pages</code> column from <code>ecom</code> data</li>
 <li>compute the square root</li>
 <li>assign the first few observations to <code>y</code></li>
 </ul>
-<p><br></p>
-<p><img src="/img/pipes_square_root.png" width="100%" style="display: block; margin: auto;" /></p>
+<br>
+<center>
+<img src="/images/pipes_square_root.png" style="width:80.0%" />
+</center>
 </div>
 </div>
 <div id="section-square-root---using-pipe" class="section level2">
@@ -212,7 +214,7 @@ y %&lt;&gt;% sqrt</code></pre>
 <p><code>y &lt;- sqrt(econ$n_pages)</code></p>
 <p>What we are doing above is:</p>
 <ul>
-<li>select <code>n_pages</code> from <code>econ</code></li>
+<li>select <code>n_pages</code> from <code>ecom</code></li>
 <li>pass it on to <code>sqrt()</code></li>
 <li>assign the result to <code>y</code></li>
 </ul>
@@ -247,8 +249,10 @@ y %&lt;&gt;% sqrt</code></pre>
 <li>select/expose <code>n_pages</code> and <code>duration</code> columns</li>
 <li>use <code>cor()</code> to compute the correlation</li>
 </ul>
-<p><br></p>
-<p><img src="/img/pipes_correlation.png" width="100%" style="display: block; margin: auto;" /></p>
+<br>
+<center>
+<img src="/images/pipes_correlation.png" style="width:80.0%" />
+</center>
 <pre class="r"><code># without pipe
 ecom1 &lt;- subset(ecom, purchase)
 cor(ecom1$n_pages, ecom1$duration)</code></pre>
@@ -276,7 +280,7 @@ cor(ecom1$n_pages, ecom1$duration)</code></pre>
 <div class="tutorial-exercise" data-label="mag6" data-caption="Correlation" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># with pipe
 ecom %&gt;%
-  subset(purchase == &#39;true&#39;) </code></pre>
+  subset(purchase) </code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="mag6-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
@@ -299,19 +303,20 @@ ecom %&gt;%
 <hr>
 <p>Let us look at a data visualization example. We will create a bar plot to visualize the frequency of different referrer types that drove purchasers to the website. Let us look at the steps involved in creating the bar plot:</p>
 <ul>
-<li>extract rows where purchase == true</li>
+<li>extract rows where purchase is <code>TRUE</code></li>
 <li>select/expose <code>referrer</code> column</li>
 <li>tabulate referrer data using <code>table()</code></li>
 <li>use the tabulated data to create bar plot using <code>barplot()</code></li>
 </ul>
-<pre class="r"><code>barplot(table(subset(ecom, purchase == &#39;true&#39;)$referrer))</code></pre>
+<pre class="r"><code>barplot(table(subset(ecom, purchase)$referrer))</code></pre>
 <p><img src="readable_code_with_pipes_files/figure-html/mag21-1.png" width="624" /></p>
 </div>
 </div>
 <div id="section-visualization---using-pipe" class="section level2">
 <h2>Visualization - Using Pipe</h2>
-<hr>
-<p><img src="/img/pipes_data_visualization.png" width="100%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="/images/pipes_data_visualization.png" style="width:60.0%" />
+</center>
 <p><br></p>
 <p>Let us build a barplot from <code>mtcars</code> data.</p>
 <pre class="r"><code># without pipe
@@ -392,7 +397,9 @@ mtcars %$%`
 </div>
 <div id="section-string-manipulation" class="section level2">
 <h2>String Manipulation</h2>
-<p><img src="/img/pipes_string.png" width="70%" style="display: block; margin: auto;" /></p>
+<center>
+<img src="/images/pipes_string.png" style="width:80.0%" />
+</center>
 <p><br></p>
 <p>We want to extract the first name (jovial) from the below email id and convert it to upper case. Below are the steps to achieve this:</p>
 <ul>
@@ -624,7 +631,13 @@ library(magrittr)
 library(readr)
 library(stringr)
 knitr::opts_chunk$set(echo = FALSE)
-ecom <- readr::read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      n_pages = col_double(), duration = col_double(), purchase = col_logical()
+    )
+  )
 ecom_mini <- sample_n(ecom, size = 10)
 ecom_list <- as.list(ecom_mini)
 </script>
