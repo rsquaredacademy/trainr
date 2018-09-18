@@ -46,13 +46,13 @@ tr_launch_tutorial <- function() {
 #' @export
 #'
 tr_dplyr_part_1 <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'data-wrangling-with-dplyr-part-1', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'data-wrangling-with-dplyr-part-1', package = 'trainr')
-
+  
 }
 
 #' @title Learn dplyr
@@ -60,12 +60,12 @@ tr_dplyr_part_1 <- function() {
 #' @export
 #'
 tr_dplyr_part_2 <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'data-wrangling-with-dplyr-part-2', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'data-wrangling-with-dplyr-part-2', package = 'trainr')
 
 }
 
@@ -75,13 +75,13 @@ tr_dplyr_part_2 <- function() {
 #' @export
 #'
 tr_dplyr_part_3 <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'data-wrangling-with-dplyr-part-3', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'data-wrangling-with-dplyr-part-3', package = 'trainr')
-
+  
 }
 
 #' @title Import Data
@@ -89,13 +89,13 @@ tr_dplyr_part_3 <- function() {
 #' @export
 #'
 tr_import_part_1 <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'import-data-in-r-part-1', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'import-data-in-r-part-1', package = 'trainr')
-
+  
 }
 
 #' @title Import Data
@@ -103,13 +103,13 @@ tr_import_part_1 <- function() {
 #' @export
 #'
 tr_import_part_2 <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'import-data-in-r-part-2', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'import-data-in-r-part-2', package = 'trainr')
-
+  
 }
 
 #' @title tibbles
@@ -117,13 +117,13 @@ tr_import_part_2 <- function() {
 #' @export
 #'
 tr_intro_tibbles <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'introduction-to-tibbles', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'introduction-to-tibbles', package = 'trainr')
-
+  
 }
 
 #' @title Pipes
@@ -131,13 +131,13 @@ tr_intro_tibbles <- function() {
 #' @export
 #'
 tr_intro_pipes <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'readable-code-with-pipes', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'readable-code-with-pipes', package = 'trainr')
-
+  
 }
 
 #' @title String manipulation
@@ -145,13 +145,13 @@ tr_intro_pipes <- function() {
 #' @export
 #'
 tr_string_manipulation <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'hacking-strings-with-stringr', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'hacking-strings-with-stringr', package = 'trainr')
-
+  
 }
 
 #' @title Date manipulation
@@ -159,12 +159,12 @@ tr_string_manipulation <- function() {
 #' @export
 #'
 tr_date_manipulation <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'work-with-date-and-time-in-R', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'work-with-date-and-time-in-R', package = 'trainr')
 
 }
 
@@ -173,12 +173,12 @@ tr_date_manipulation <- function() {
 #' @export
 #'
 tr_categorical_analysis <- function() {
-  
-  if (is.na(ping('www.google.com', count = 1))) {
+
+  if (is_online()) {
+    run_tutorial(name = 'working-with-categorical-data', package = 'trainr')
+  } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
-
-  run_tutorial(name = 'working-with-categorical-data', package = 'trainr')
-
+  
 }
 
