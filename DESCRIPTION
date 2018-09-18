@@ -9,6 +9,7 @@ Depends:
 Imports:
     clisymbols,
     crayon,
+    fs,
     learnr,
     pingr,
     rstudioapi,
