@@ -11,7 +11,18 @@ library(haven)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Agenda
+## Introduction
+
+<hr>
+
+Importing or reading data from different sources and file formats is one of the
+basic and crucial stages of any data analysis project. In this tutorial, you 
+will learn to read data into R, examine the different challenges and address
+them using the appropriate methods.
+
+### What will I learn?
+
+<hr>
 
 In this module, we will learn to read data from:
 
@@ -36,8 +47,12 @@ the sheets in order to read the data. `excel_sheets()` will return the names
 of all the sheet in the workbook. For example, the below code will return the 
 names of all the sheets in the file `xyx.xls`.
 
+### Syntax
+
+<hr>
+
 ```{r import55-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
-excel_sheets('xyz.xls')
+excel_sheets('folder_path/xyz.xls')
 ```
 
 <br>
@@ -47,7 +62,7 @@ excel_sheets('xyz.xls')
 <hr>
 
 - list the sheets in the workbook `sample.xls`
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 
 ```{r import55, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'List Sheets', exercise.lines=5}
 # list the sheets in sample.xls
@@ -55,7 +70,7 @@ excel_sheets('xyz.xls')
 ```
 
 ```{r import55-solution}
-excel_sheets('//home//hebbali_aravind//datasets//sample.xls')
+excel_sheets('/datasets/sample.xls')
 ```
 
 ## Read Sheet
@@ -66,15 +81,18 @@ Great! Now that we know how many sheets are present in the `sample.xls` file
 and their respective names, it is time to read in some data. `read_excel()` 
 reads data from `.xls` and `.xlsx` files. You may ask how does it know which 
 sheet to read the data from. That's rigt! In addition to the file name, we 
-have to specify the sheet name or position in the workbook. Below example 
-shows the different ways to specify the sheets in a workbook. 
+have to specify the sheet name or position in the workbook. 
+
+### Syntax
+
+<hr> 
 
 ```{r import56-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
 # specify sheet name
-read_excel('xyz.xls', sheet = 'first')
+read_excel('folder_path/xyz.xls', sheet = 'first')
 
 # specify sheet position
-read_excel('xyz.xls', sheet = 1)
+read_excel(folder_path/'xyz.xls', sheet = 1)
 ```
 
 <br>
@@ -82,7 +100,7 @@ read_excel('xyz.xls', sheet = 1)
 #### Instructions
 
 - read the first sheet in the `sample.xls` file
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 
 <hr>
 
@@ -93,10 +111,10 @@ read_excel('xyz.xls', sheet = 1)
 ```
 
 ```{r import56-solution}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1)
+read_excel('/datasets/sample.xls', sheet = 1)
 ```
 
-## Read Specific Cells - Part 1
+## Read Specific Cells
 
 <hr>
 
@@ -115,7 +133,7 @@ in single/double quotes.
 <br>
 
 ```{r import59-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
-read_excel('xyz.xls', sheet = 1, range = "B1:C4")
+read_excel('folder_path/xyz.xls', sheet = 1, range = "B1:C4")
 ```
 
 <br>
@@ -125,7 +143,7 @@ read_excel('xyz.xls', sheet = 1, range = "B1:C4")
 <hr>
 
 - read data from the file `sample.xls`
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 - read the first 5 rows of columns **A**, **B** and **C**
 
 ```{r import59, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read Specific Cells', exercise.lines=5}
@@ -133,10 +151,10 @@ read_excel('xyz.xls', sheet = 1, range = "B1:C4")
 ```
 
 ```{r import59-solution}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = "A1:C5")
+read_excel('/datasets/sample.xls', sheet = 1, range = "A1:C5")
 ```
 
-## Read Specific Cells - Part 2
+## Read Specific Cells
 
 <hr>
 
@@ -160,21 +178,25 @@ cell and the number of rows and columns to read. It takes two arguments:
 </center>
 <br>
 
-```{r import61-eg, echo=TRUE, eval=FALSE,  collapse=FALSE}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, col_names = FALSE,
-  range = anchored("A4", dim = c(3, 2)))
-```
-
-## Read Specific Cells - Part 3
+## Read Specific Cells
 
 <hr>
+
+### Syntax
+
+<hr>
+
+```{r import61-eg, echo=TRUE, eval=FALSE,  collapse=FALSE}
+read_excel('/datasets/sample.xls', sheet = 1, col_names = FALSE,
+  range = anchored("A3", dim = c(3, 2)))
+```
 
 #### Instructions
 
 <hr>
 
 - read data from the file `sample.xls`
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 - read data from 4th to 7th row of columns A & B
 
 ```{r import61, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read Specific Cells',  exercise.lines=5}
@@ -184,11 +206,11 @@ read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, col_names
 ```
 
 ```{r import61-solution}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, col_names = FALSE,
+read_excel('/datasets/sample.xls', sheet = 1, col_names = FALSE,
   range = anchored("A4", dim = c(3, 2)))
 ```
 
-## Read Specific Cells - Part 4
+## Read Specific Cells 
 
 <hr>
 
@@ -209,21 +231,25 @@ initial cell and the number of rows and columns to read. It takes two arguments:
 </center>
 <br>
 
-```{r import74-eg, echo=TRUE, eval=FALSE,  collapse=FALSE}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1,
-  range = cell_limits(c(1, 1), c(6, 4)))
-```
-
-## Read Specific Cells - Part 5
+## Read Specific Cells 
 
 <hr>
+
+### Syntax
+
+<hr>
+
+```{r import74-eg, echo=TRUE, eval=FALSE,  collapse=FALSE}
+read_excel('/datasets/sample.xls', sheet = 1,
+  range = cell_limits(c(1, 1), c(6, 4)))
+```
 
 #### Instructions
 
 <hr>
 
 - read data from the file `sample.xls`
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 - read data from rows 1 to 4 and columns 2 to 4
 
 ```{r import74, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read Specific Cells',  exercise.lines=5}
@@ -233,7 +259,7 @@ read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1,
 ```
 
 ```{r import74-solution}
-read_excel('sample.xls', sheet = 1,
+read_excel('/datasets/sample.xls', sheet = 1,
   range = cell_limits(c(1, 2), c(4, 4)))
 ```
 
@@ -248,7 +274,7 @@ specify the rows from which to read the data. In the below example, we read
 data from the first 4 rows.
 
 ```{r import62-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = cell_rows(1:4))
+read_excel('/datasets/sample.xls', sheet = 1, range = cell_rows(1:4))
 ```
 
 <br>
@@ -258,7 +284,7 @@ read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = c
 <hr>
 
 - read data from the file `sample.xls`
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 - read data from rows 3 to 5
 
 ```{r import62, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Rows',  exercise.lines=5}
@@ -266,7 +292,7 @@ read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = c
 ```
 
 ```{r import62-solution}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = cell_rows(3:5))
+read_excel('/datasets/sample.xls', sheet = 1, range = cell_rows(3:5))
 ```
 
 ## Read Specific Columns
@@ -279,7 +305,7 @@ data must be read. In the below example, we use `cell_cols()` to read data from
 columns 2 and 3. 
 
 ```{r import63-eg, echo=TRUE, eval=FALSE, collapse=FALSE}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = cell_cols(2:3))
+read_excel('/datasets/sample.xls', sheet = 1, range = cell_cols(2:3))
 ```
 
 <br>
@@ -289,7 +315,7 @@ read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = c
 <hr>
 
 - read data from the file `sample.xls`
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 - read data from columns 1 to 4
 
 ```{r import63, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Specify Columns',  exercise.lines=5}
@@ -299,14 +325,14 @@ read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = c
 ```
 
 ```{r import63-solution}
-read_excel('//home//hebbali_aravind//datasets//sample.xls', sheet = 1, range = cell_cols(1:4))
+read_excel('/datasets/sample.xls', sheet = 1, range = cell_cols(1:4))
 ```
 
 ## Other Softwares
 
 <hr>
 
-Sometimes, we might have to read data from files of other statistical packages 
+Sometimes, we might have to read data from files of other statistical softwares 
 such as:
 
 - SAS (.sas7bdat)
@@ -315,11 +341,11 @@ such as:
 
 In R, the following packages allow us to read data from the above file formats:
 
-- [haven](http://haven.tidyverse.org/)
+- [haven](https://haven.tidyverse.org/)
 - [foreign](https://cran.r-project.org/package=foreign)
 - [sas7bdat](https://cran.r-project.org/package=sas7bdat)
 
-We will use the [haven](http://haven.tidyverse.org/) package in this tutorial.
+We will use the [haven](https://haven.tidyverse.org/) package in this tutorial.
 
 ## Stata
 
@@ -335,7 +361,7 @@ or `read_stata()`.
 <hr>
 
 - read data from `airline.dta` file
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 
 ```{r import68, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read STATA File',  exercise.lines=5}
 # read airline.dta file
@@ -344,7 +370,7 @@ or `read_stata()`.
 ```
 
 ```{r import68-solution}
-read_stata('//home//hebbali_aravind//datasets//airline.dta')  
+read_stata('/datasets/airline.dta')  
 ```
 
 ## SPSS
@@ -361,7 +387,7 @@ or `read_spss()`.
 <hr>
 
 - read data from `employee.sav` file
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 
 ```{r import71, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read SPSS File',  exercise.lines=5}
 # read employee.sav file
@@ -370,7 +396,7 @@ or `read_spss()`.
 ```
 
 ```{r import71-solution}
-read_spss('//home//hebbali_aravind//datasets//employee.sav')  
+read_spss('/datasets/employee.sav')  
 ```
 
 ## SAS
@@ -386,7 +412,7 @@ SAS files have the extension `.sas7bdat` and can be read using `read_sas()`.
 <hr>
 
 - read data from `airline.sas7bdat` file
-- the path of the directory is `//home//hebbali_aravind//datasets//`
+- the path of the directory is `/datasets/`
 
 ```{r import73, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Read SAS File',  exercise.lines=5}
 # read airline.sas7bdat file
@@ -395,5 +421,5 @@ SAS files have the extension `.sas7bdat` and can be read using `read_sas()`.
 ```
 
 ```{r import73-solution}
-read_sas('//home//hebbali_aravind//datasets//airline.sas7bdat')
+read_sas('/datasets/airline.sas7bdat')
 ```

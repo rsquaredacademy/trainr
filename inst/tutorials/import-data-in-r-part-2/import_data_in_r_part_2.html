@@ -44,8 +44,13 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div class="topics">
 
-<div id="section-agenda" class="section level2">
-<h2>Agenda</h2>
+<div id="section-introduction" class="section level2">
+<h2>Introduction</h2>
+<hr>
+<p>Importing or reading data from different sources and file formats is one of the basic and crucial stages of any data analysis project. In this tutorial, you will learn to read data into R, examine the different challenges and address them using the appropriate methods.</p>
+<div id="section-what-will-i-learn" class="section level3">
+<h3>What will I learn?</h3>
+<hr>
 <p>In this module, we will learn to read data from:</p>
 <ul>
 <li>xls
@@ -64,43 +69,51 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </ul></li>
 </ul>
 </div>
+</div>
 <div id="section-list-sheets" class="section level2">
 <h2>List Sheets</h2>
 <hr>
 <p>An excel workbook may contain more than 1 sheet. We need to know the name of the sheets in order to read the data. <code>excel_sheets()</code> will return the names of all the sheet in the workbook. For example, the below code will return the names of all the sheets in the file <code>xyx.xls</code>.</p>
-<pre class="r"><code>excel_sheets(&#39;xyz.xls&#39;)</code></pre>
+<div id="section-syntax" class="section level3">
+<h3>Syntax</h3>
+<hr>
+<pre class="r"><code>excel_sheets(&#39;folder_path/xyz.xls&#39;)</code></pre>
 <p><br></p>
 <div id="section-instructions" class="section level4">
 <h4>Instructions</h4>
 <hr>
 <ul>
 <li>list the sheets in the workbook <code>sample.xls</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import55" data-caption="List Sheets" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code># list the sheets in sample.xls</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import55-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>excel_sheets(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;)</code></pre>
+<pre class="text"><code>excel_sheets(&#39;/datasets/sample.xls&#39;)</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div id="section-read-sheet" class="section level2">
 <h2>Read Sheet</h2>
 <hr>
-<p>Great! Now that we know how many sheets are present in the <code>sample.xls</code> file and their respective names, it is time to read in some data. <code>read_excel()</code> reads data from <code>.xls</code> and <code>.xlsx</code> files. You may ask how does it know which sheet to read the data from. That’s rigt! In addition to the file name, we have to specify the sheet name or position in the workbook. Below example shows the different ways to specify the sheets in a workbook.</p>
+<p>Great! Now that we know how many sheets are present in the <code>sample.xls</code> file and their respective names, it is time to read in some data. <code>read_excel()</code> reads data from <code>.xls</code> and <code>.xlsx</code> files. You may ask how does it know which sheet to read the data from. That’s rigt! In addition to the file name, we have to specify the sheet name or position in the workbook.</p>
+<div id="section-syntax-1" class="section level3">
+<h3>Syntax</h3>
+<hr>
 <pre class="r"><code># specify sheet name
-read_excel(&#39;xyz.xls&#39;, sheet = &#39;first&#39;)
+read_excel(&#39;folder_path/xyz.xls&#39;, sheet = &#39;first&#39;)
 
 # specify sheet position
-read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
+read_excel(folder_path/&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <p><br></p>
 <div id="section-instructions-1" class="section level4">
 <h4>Instructions</h4>
 <ul>
 <li>read the first sheet in the <code>sample.xls</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 </ul>
 <hr>
 <div class="tutorial-exercise" data-label="import56" data-caption="Read Sheets" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
@@ -108,12 +121,13 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import56-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1)</code></pre>
+<pre class="text"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-read-specific-cells---part-1" class="section level2">
-<h2>Read Specific Cells - Part 1</h2>
+</div>
+<div id="section-read-specific-cells" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
 <p>Alright! We now know how to read data from an excel sheet but we may not want to read all the data present in the sheet i.e. sometimes we might want to read a subset of the data (few rows of specific colums). In order to read a subset of data, we need to specify the associated rows and columns. For example, to read data from first 4 rows of columns <strong>B</strong> and <strong>C</strong>, we will specify <code>&quot;B1:C4&quot;</code> using the <code>range</code> argument. The input for the range must be enclosed in single/double quotes.</p>
 <br>
@@ -121,26 +135,26 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <img src="/images/readxl_range.png" style="width:80.0%" />
 </center>
 <p><br></p>
-<pre class="r"><code>read_excel(&#39;xyz.xls&#39;, sheet = 1, range = &quot;B1:C4&quot;)</code></pre>
+<pre class="r"><code>read_excel(&#39;folder_path/xyz.xls&#39;, sheet = 1, range = &quot;B1:C4&quot;)</code></pre>
 <p><br></p>
 <div id="section-instructions-2" class="section level4">
 <h4>Instructions</h4>
 <hr>
 <ul>
 <li>read data from the file <code>sample.xls</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>read the first 5 rows of columns <strong>A</strong>, <strong>B</strong> and <strong>C</strong></li>
 </ul>
 <div class="tutorial-exercise" data-label="import59" data-caption="Read Specific Cells" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import59-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, range = &quot;A1:C5&quot;)</code></pre>
+<pre class="text"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, range = &quot;A1:C5&quot;)</code></pre>
 </div>
 </div>
 </div>
-<div id="section-read-specific-cells---part-2" class="section level2">
-<h2>Read Specific Cells - Part 2</h2>
+<div id="section-read-specific-cells-1" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
 <p>There is another way to specify the subset of data that we might want to read. This approach includes specifying the following:</p>
 <ul>
@@ -158,31 +172,35 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <img src="/images/readxl_anchored_lucid.png" style="width:80.0%" />
 </center>
 <p><br></p>
-<pre class="r"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, col_names = FALSE,
-  range = anchored(&quot;A4&quot;, dim = c(3, 2)))</code></pre>
 </div>
-<div id="section-read-specific-cells---part-3" class="section level2">
-<h2>Read Specific Cells - Part 3</h2>
+<div id="section-read-specific-cells-2" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
+<div id="section-syntax-2" class="section level3">
+<h3>Syntax</h3>
+<hr>
+<pre class="r"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, col_names = FALSE,
+  range = anchored(&quot;A3&quot;, dim = c(3, 2)))</code></pre>
 <div id="section-instructions-3" class="section level4">
 <h4>Instructions</h4>
 <hr>
 <ul>
 <li>read data from the file <code>sample.xls</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>read data from 4th to 7th row of columns A &amp; B</li>
 </ul>
 <div class="tutorial-exercise" data-label="import61" data-caption="Read Specific Cells" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import61-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, col_names = FALSE,
+<pre class="text"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, col_names = FALSE,
   range = anchored(&quot;A4&quot;, dim = c(3, 2)))</code></pre>
 </div>
 </div>
 </div>
-<div id="section-read-specific-cells---part-4" class="section level2">
-<h2>Read Specific Cells - Part 4</h2>
+</div>
+<div id="section-read-specific-cells-3" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
 <p>There is another way to specify the subset of data that we might want to read. This approach includes specifying the following:</p>
 <ul>
@@ -196,26 +214,30 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <img src="/images/readxl_cell_limits_lucid.png" style="width:80.0%" />
 </center>
 <p><br></p>
-<pre class="r"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1,
-  range = cell_limits(c(1, 1), c(6, 4)))</code></pre>
 </div>
-<div id="section-read-specific-cells---part-5" class="section level2">
-<h2>Read Specific Cells - Part 5</h2>
+<div id="section-read-specific-cells-4" class="section level2">
+<h2>Read Specific Cells</h2>
 <hr>
+<div id="section-syntax-3" class="section level3">
+<h3>Syntax</h3>
+<hr>
+<pre class="r"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1,
+  range = cell_limits(c(1, 1), c(6, 4)))</code></pre>
 <div id="section-instructions-4" class="section level4">
 <h4>Instructions</h4>
 <hr>
 <ul>
 <li>read data from the file <code>sample.xls</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>read data from rows 1 to 4 and columns 2 to 4</li>
 </ul>
 <div class="tutorial-exercise" data-label="import74" data-caption="Read Specific Cells" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import74-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_excel(&#39;sample.xls&#39;, sheet = 1,
+<pre class="text"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1,
   range = cell_limits(c(1, 2), c(4, 4)))</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -223,21 +245,21 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <h2>Read Specific Rows</h2>
 <hr>
 <p>So far we have explored reading a subset of data i.e. certain rows and columns. In this section, we will read specific rows of all the columns form the excel sheet. We will continue to use the <code>range</code> argument and use <code>cell_rows()</code> to specify the rows from which to read the data. In the below example, we read data from the first 4 rows.</p>
-<pre class="r"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, range = cell_rows(1:4))</code></pre>
+<pre class="r"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, range = cell_rows(1:4))</code></pre>
 <p><br></p>
 <div id="section-instructions-5" class="section level4">
 <h4>Instructions</h4>
 <hr>
 <ul>
 <li>read data from the file <code>sample.xls</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>read data from rows 3 to 5</li>
 </ul>
 <div class="tutorial-exercise" data-label="import62" data-caption="Specify Rows" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import62-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, range = cell_rows(3:5))</code></pre>
+<pre class="text"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, range = cell_rows(3:5))</code></pre>
 </div>
 </div>
 </div>
@@ -245,28 +267,28 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <h2>Read Specific Columns</h2>
 <hr>
 <p>Let us look at another scenario where we want to read data all the rows but only specific columns. Use <code>cell_cols()</code> to specify the columns from which the data must be read. In the below example, we use <code>cell_cols()</code> to read data from columns 2 and 3.</p>
-<pre class="r"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, range = cell_cols(2:3))</code></pre>
+<pre class="r"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, range = cell_cols(2:3))</code></pre>
 <p><br></p>
 <div id="section-instructions-6" class="section level4">
 <h4>Instructions</h4>
 <hr>
 <ul>
 <li>read data from the file <code>sample.xls</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>read data from columns 1 to 4</li>
 </ul>
 <div class="tutorial-exercise" data-label="import63" data-caption="Specify Columns" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import63-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_excel(&#39;//home//hebbali_aravind//datasets//sample.xls&#39;, sheet = 1, range = cell_cols(1:4))</code></pre>
+<pre class="text"><code>read_excel(&#39;/datasets/sample.xls&#39;, sheet = 1, range = cell_cols(1:4))</code></pre>
 </div>
 </div>
 </div>
 <div id="section-other-softwares" class="section level2">
 <h2>Other Softwares</h2>
 <hr>
-<p>Sometimes, we might have to read data from files of other statistical packages such as:</p>
+<p>Sometimes, we might have to read data from files of other statistical softwares such as:</p>
 <ul>
 <li>SAS (.sas7bdat)</li>
 <li>SPSS (.sav)</li>
@@ -274,11 +296,11 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 </ul>
 <p>In R, the following packages allow us to read data from the above file formats:</p>
 <ul>
-<li><a href="http://haven.tidyverse.org/">haven</a></li>
+<li><a href="https://haven.tidyverse.org/">haven</a></li>
 <li><a href="https://cran.r-project.org/package=foreign">foreign</a></li>
 <li><a href="https://cran.r-project.org/package=sas7bdat">sas7bdat</a></li>
 </ul>
-<p>We will use the <a href="http://haven.tidyverse.org/">haven</a> package in this tutorial.</p>
+<p>We will use the <a href="https://haven.tidyverse.org/">haven</a> package in this tutorial.</p>
 </div>
 <div id="section-stata" class="section level2">
 <h2>Stata</h2>
@@ -290,14 +312,14 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <hr>
 <ul>
 <li>read data from <code>airline.dta</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import68" data-caption="Read STATA File" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code># read airline.dta file</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import68-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_stata(&#39;//home//hebbali_aravind//datasets//airline.dta&#39;)  </code></pre>
+<pre class="text"><code>read_stata(&#39;/datasets/airline.dta&#39;)  </code></pre>
 </div>
 </div>
 </div>
@@ -311,14 +333,14 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <hr>
 <ul>
 <li>read data from <code>employee.sav</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import71" data-caption="Read SPSS File" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code># read employee.sav file</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import71-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_spss(&#39;//home//hebbali_aravind//datasets//employee.sav&#39;)  </code></pre>
+<pre class="text"><code>read_spss(&#39;/datasets/employee.sav&#39;)  </code></pre>
 </div>
 </div>
 </div>
@@ -332,14 +354,14 @@ read_excel(&#39;xyz.xls&#39;, sheet = 1)</code></pre>
 <hr>
 <ul>
 <li>read data from <code>airline.sas7bdat</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import73" data-caption="Read SAS File" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code># read airline.sas7bdat file</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import73-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_sas(&#39;//home//hebbali_aravind//datasets//airline.sas7bdat&#39;)</code></pre>
+<pre class="text"><code>read_sas(&#39;/datasets/airline.sas7bdat&#39;)</code></pre>
 </div>
 
 <script type="application/shiny-prerendered" data-context="server-start">
