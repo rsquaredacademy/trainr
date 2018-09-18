@@ -44,8 +44,12 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div class="topics">
 
-<div id="section-agenda" class="section level2">
-<h2>Agenda</h2>
+<div id="section-introduction" class="section level2">
+<h2>Introduction</h2>
+<hr>
+<p>Importing or reading data from different sources and file formats is one of the basic and crucial stages of any data analysis project. In this tutorial, you will learn to read data into R, examine the different challenges and address them using the appropriate methods.</p>
+<div id="section-what-will-i-learn" class="section level3">
+<h3>What will I learn?</h3>
 <hr>
 <ul>
 <li>read data from flat/delimited files</li>
@@ -55,9 +59,11 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>read subset of columns/variables</li>
 </ul>
 </div>
+</div>
 <div id="section-file-types" class="section level2">
 <h2>File Types</h2>
 <hr>
+<p>Before we start reading data from different files, let us take a quick look at the different types of delimiters we have to deal with while reading or importing data.</p>
 <p><br></p>
 <div id="section-comma-separated-values" class="section level4">
 <h4>Comma Separated Values</h4>
@@ -90,25 +96,29 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <ul>
 <li>read the file <code>hsb2.csv</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>specify the path of the directory as <code>/datasets/</code></li>
+<li>the directory path and the file name must be separated by <code>/</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import2" data-caption="Introduction" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code># read data</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;//home//hebbali_aravind//datasets//hsb2.csv&#39;)</code></pre>
+<pre class="text"><code>read_csv(&#39;/datasets/hsb2.csv&#39;)</code></pre>
 </div>
-<p>Sometimes you may get an error while reading data from a file. In such case try the following:</p>
+<p>Sometimes you may get an error while reading data from a file(which most of us see when we are trying to read data for the first time), follow the below instructions:</p>
 <ul>
 <li>check the separator in the file and ensure it is a <code>comma</code></li>
-<li>check the path to the directory where the file resides</li>
+<li>check the file name</li>
+<li>check the file path i.e. location of the file</li>
+<li>ensure that the file name or path is enclosed in single or double quotes</li>
 </ul>
 </div>
 </div>
 <div id="section-column-names" class="section level2">
 <h2>Column Names</h2>
 <hr>
+<p>In some cases, files do not include column names or headers. If we do not indicate the absence of column names, <code>readr</code> will treat the first row from th data as the column name. Like we said before, it is a good practice to take a quick look at the data to check for the presence/absence of column names.</p>
 <div id="section-column-names-are-present" class="section level4">
 <h4>Column names are present</h4>
 <p><br> <img src="/images/mtcars_comma.png" style="width:60.0%" /> <br> <br></p>
@@ -129,7 +139,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <ul>
 <li>read data from <code>hsb3.csv</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li><a href="https://github.com/rsquaredacademy/datasets/blob/master/hsb2.csv" target="_blank">click here</a> to check if the file has column names</li>
 <li>if column names are absent, indicate it while reading data</li>
 </ul>
@@ -138,7 +148,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = FALSE)</code></pre>
+<pre class="text"><code>read_csv(&#39;/datasets/hsb3.csv&#39;, col_names = FALSE)</code></pre>
 </div>
 </div>
 </div>
@@ -154,7 +164,7 @@ read_csv(&#39;directory_path/file_name.csv&#39;, col_names = column_names)</code
 <hr>
 <ul>
 <li>read data from <code>hsb3.csv</code></li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>use <code>cnames</code> provided below to specify the column names</li>
 </ul>
 <div class="tutorial-exercise" data-label="import4" data-caption="Column Names" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
@@ -173,6 +183,14 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <div id="section-skip-lines" class="section level2">
 <h2>Skip Lines</h2>
 <hr>
+<p>In certain files, you will find information related to the data such as:</p>
+<ul>
+<li>the data source</li>
+<li>column names</li>
+<li>column description</li>
+<li>copyright etc.</li>
+</ul>
+<p>The data will appear after/below such text/information. While reading data from such files, we need to skip all the rows where the text is present. If we do not skip them, <code>readr</code> will consider them as part of the data.</p>
 <p><br> <img src="/images/mtcars_skip.png" style="width:80.0%" /> <br></p>
 </div>
 <div id="section-skip-lines-1" class="section level2">
@@ -203,7 +221,7 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <div id="section-maximum-lines" class="section level2">
 <h2>Maximum Lines</h2>
 <hr>
-<p>Suppose we want to read only 100 rows of data from a file, we can use <code>n_max</code> to specify the maximum number of lines to read and set it equal to 100.</p>
+<p>Suppose the data file contains several thousands of rows of data and we do not want to read all of it. What can we do in such cases? <code>readr</code> allows us to specify the maximum number of rows to be read using the <code>n_max</code> argument. Suppose we want to read only 100 rows of data from a file, we can set <code>n_max</code> equal to 100.</p>
 <pre class="r"><code>read_csv(&#39;directory_path/file_name.csv&#39;, n_max = 100)</code></pre>
 <p><br></p>
 <div id="section-instructions-4" class="section level3">
@@ -212,7 +230,7 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <ul>
 <li>read the first 120 rows from the <code>hsb2.csv</code> file</li>
 <li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
-<li>observe the last row in the output and check if it says <code># ... with 110 more rows</code></li>
+<li>observe the last row in the output and check if it says <code># ... with 110 more  rows</code></li>
 </ul>
 <div class="tutorial-exercise" data-label="import5" data-caption="Maximum Lines" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <pre class="text"><code># read the first 120 rows of data</code></pre>
@@ -235,7 +253,7 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <li>run the below code and observe the output</li>
 </ul>
 <div class="tutorial-exercise" data-label="import3" data-caption="Introduction" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>spec_csv(&#39;//home//hebbali_aravind//datasets//hsb2.csv&#39;)</code></pre>
+<pre class="text"><code>spec_csv(&#39;/datasets/hsb2.csv&#39;)</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 </div>
@@ -243,7 +261,15 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <div id="section-column-types" class="section level2">
 <h2>Column Types</h2>
 <hr>
-<p>In certain cases, we need to specify the data type of the columns. It might be related to dates or categorical variables. readr allows us to specify the data types using <code>col_xxx</code> functions which include:</p>
+<p>If you have observed carefully, when you read data using <code>readr</code>, it displays the column names and column types followed by the first 10 rows of data. <code>readr</code> determines the data type for each column based on the first 1000 rows of data. The data can be of the following types:</p>
+<ul>
+<li>integer</li>
+<li>double (decimal point)</li>
+<li>logical (TRUE/FALSE)</li>
+<li>character (text/string)</li>
+<li>factor (categorical/qualitative)</li>
+<li>date/time</li>
+</ul>
 <br>
 <center>
 <img src="/images/column_types_list_canva.png" style="width:80.0%" />
@@ -258,21 +284,41 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <img src="/images/column_objective_function_map.png" style="width:60.0%" />
 </center>
 <p><br></p>
-<p>To specify the data types, we will use <code>col_types</code> argument and supply to it a list indicating the data type (using <code>col_xxx</code>) of each column in the data set.</p>
+<p>If you have observed carefully, when you read data using <code>readr</code>, it displays the column names and column types followed by the first 10 rows of data. <code>readr</code> determines the data type for each column based on the first 1000 rows of data. The data can be of the following types:</p>
+<ul>
+<li>integer</li>
+<li>double (decimal point)</li>
+<li>logical (TRUE/FALSE)</li>
+<li>character (text/string)</li>
+<li>factor (categorical/qualitative)</li>
+<li>date/time</li>
+</ul>
 </div>
 <div id="section-column-types-2" class="section level2">
 <h2>Column Types</h2>
 <hr>
-<p>In the below example, we read data from <code>mtcars5.csv</code> file while specifying the data types. Keep in mind that we need to specify the data type for each column.</p>
-<pre class="r"><code>read_csv(&#39;//home//hebbali_aravind//datasets//mtcars5.csv&#39;, 
-         col_types = list(col_double(), col_factor(levels = c(4, 6, 8)),
-                          col_double(), col_integer()))</code></pre>
+<p>Before you read data from a file, use <code>spec_csv()</code> to see the data types as determined by <code>readr</code>. If it determines the data types correctly, you can go ahead and read the data else we will have to specify the data types and we will have to do that for all the columns we want to read and not just for those columns whose data type was wrongly determined by <code>readr</code>.</p>
+<p>To specify the data types, we will use the <code>col_types</code> argument and supply it a list of data types. The data types can be specified using:</p>
+<ul>
+<li><code>col_integer()</code></li>
+<li><code>col_double()</code></li>
+<li><code>col_factor()</code></li>
+<li><code>col_logical()</code></li>
+<li><code>col_character()</code></li>
+<li><code>col_date()</code></li>
+<li><code>col_time()</code></li>
+<li><code>col_datetime()</code></li>
+</ul>
+<p>While specifying the data types we also need to specify the categories of the categorical/qualitative variable. To do that, we use the <code>levels</code> argument within <code>col_factor()</code>. Let us read data from the <code>mtcars5.csv</code> file to understand data type specification.</p>
+<pre class="r"><code>read_csv(&#39;/datasets/mtcars5.csv&#39;, col_types = list(
+        col_double(), col_factor(levels = c(4, 6, 8)),
+        col_double(), col_integer()))</code></pre>
 <div id="section-instructions-6" class="section level3">
 <h3>Instructions</h3>
 <hr>
 <ul>
-<li>read data from <code>hsb5.csv</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>read data from <code>hsb2.csv</code> file</li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>specify the column types for each column in the file</li>
 </ul>
 <div class="tutorial-exercise" data-label="import6" data-caption="Column Types" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
@@ -280,7 +326,7 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import6-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;//home//hebbali_aravind//datasets//hsb2.csv&#39;, col_types = list(
+<pre class="text"><code>read_csv(&#39;/datasets/hsb2.csv&#39;, col_types = list(
   col_integer(), col_factor(levels = c(0, 1)), 
   col_factor(levels = c(1, 2, 3, 4)), col_factor(levels = c(1, 2, 3)), 
   col_factor(levels = c(1, 2)), col_factor(levels = c(1, 2, 3)),
@@ -294,16 +340,15 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <h2>Specific Columns</h2>
 <hr>
 <p>We may not always want to read all the columns from a file. In such cases, we can specify the columns to be read using <code>col_types</code> argument and supplying to it the names of the columns to be read. We will use <code>cols_only()</code> to specify the column names and their respective data types.</p>
-<pre class="r"><code>read_csv(&#39;//home//hebbali_aravind//datasets//mtcars5.csv&#39;, 
-         col_types = cols_only(mpg = col_double(), 
-                               cyl = col_factor(levels = c(4, 6, 8))))</code></pre>
+<pre class="r"><code>read_csv(&#39;/datasets/mtcars5.csv&#39;, col_types = cols_only(
+        mpg = col_double(), cyl = col_factor(levels = c(4, 6, 8))))</code></pre>
 <p><br></p>
 <div id="section-instructions-7" class="section level3">
 <h3>Instructions</h3>
 <hr>
 <ul>
 <li>read data from <code>hsb2.csv</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>read the following columns only
 <ul>
 <li>id</li>
@@ -316,7 +361,7 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import7-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;//home//hebbali_aravind//datasets//hsb2.csv&#39;, col_types = cols_only(id = col_integer(),
+<pre class="text"><code>read_csv(&#39;/datasets/hsb2.csv&#39;, col_types = cols_only(id = col_integer(),
   prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )</code></pre>
 </div>
@@ -325,17 +370,17 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <div id="section-skip-columns" class="section level2">
 <h2>Skip Columns</h2>
 <hr>
-<p>Sometimes we may want to skip some columns while reading data i.e. uppose we have 10 columns and we want to read only 8 columns. In such cases, we can use <code>cols_skip()</code> to specify the columns that must be skipped while reading the data.</p>
-<pre class="r"><code>read_csv(&#39;//home//hebbali_aravind//datasets//mtcars5.csv&#39;, 
-         col_types = list(col_double(), col_factor(levels = c(4, 6, 8)),
-                          col_skip(), col_integer()))</code></pre>
+<p>Sometimes we may want to skip some columns while reading data i.e. suppose we have 10 columns and we want to read only 8 columns. In such cases, we can use <code>cols_skip()</code> to specify the columns that must be skipped while reading the data.</p>
+<pre class="r"><code>read_csv(&#39;/datasets/mtcars5.csv&#39;, col_types = list(
+        col_double(), col_factor(levels = c(4, 6, 8)),
+        col_skip(), col_integer()))</code></pre>
 <p><br></p>
 <div id="section-instructions-8" class="section level3">
 <h3>Instructions</h3>
 <hr>
 <ul>
 <li>read data from <code>hsb5.csv</code> file</li>
-<li>the path of the directory is <code>//home//hebbali_aravind//datasets//</code></li>
+<li>the path of the directory is <code>/datasets/</code></li>
 <li>skip the following columns
 <ul>
 <li>id</li>
@@ -348,7 +393,7 @@ read_csv(&#39;//home//hebbali_aravind//datasets//hsb3.csv&#39;, col_names = cnam
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="import9-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>read_csv(&#39;//home//hebbali_aravind//datasets//hsb2.csv&#39;, col_types = cols_only(id = col_integer(),
+<pre class="text"><code>read_csv(&#39;/datasets/hsb2.csv&#39;, col_types = cols_only(id = col_integer(),
   prog = col_factor(levels = c(1, 2, 3)), read = col_integer())
 )</code></pre>
 </div>
