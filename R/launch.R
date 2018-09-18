@@ -86,11 +86,15 @@ tr_dplyr_part_3 <- function() {
 
 #' @title Import Data
 #' @description Read data from flat and delimited files.
+#' @importFrom fs dir_exists
 #' @export
 #'
 tr_import_part_1 <- function() {
 
   if (is_online()) {
+    if (!dir_exists("datasets")) {
+      tr_download_data()
+    }
     run_tutorial(name = 'import-data-in-r-part-1', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
@@ -105,6 +109,9 @@ tr_import_part_1 <- function() {
 tr_import_part_2 <- function() {
 
   if (is_online()) {
+    if (!dir_exists("datasets")) {
+      tr_download_data()
+    }
     run_tutorial(name = 'import-data-in-r-part-2', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)

@@ -43,7 +43,6 @@ tr_tutorials_list <- function() {
       "Yes", "No")
     
     if (launch_tutorial) {
-      tr_download_data()
       tr_import_part_1()
     }
 
@@ -69,7 +68,6 @@ tr_tutorials_list <- function() {
       "Yes", "No")
     
     if (launch_tutorial) {
-      tr_download_data()
       tr_import_part_2()
     }
 
