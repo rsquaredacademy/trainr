@@ -9,7 +9,13 @@ library(learnr)
 library(dplyr)
 library(readr)
 knitr::opts_chunk$set(echo = FALSE)
-ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
+ecom <- 
+  read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
+    col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
+      referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
+      purchase = col_logical(), n_pages = col_double(), order_value = col_double()
+    )
+  )
 ```
 
 
@@ -66,15 +72,9 @@ ecom
 
 Below is the description of the data set:
 
-- id: row id
 - referrer: referrer website/search engine
-- os: operating system
-- browser: browser
 - device: device used to visit the website
 - n_pages: number of pages visited
-- duration: time spent on the website (in seconds)
-- repeat: frequency of visits
-- country: country of origin
 - purchase: whether visitor purchased
 - order_value: order value of visitor (in dollars)
 
@@ -152,7 +152,7 @@ filter(ecom, device == "mobile",      ==     )
 ```
 
 ```{r dplyr3-solution}
-filter(ecom, device == "mobile", purchase == "true")
+filter(ecom, device == "mobile", purchase)
 ```
 
 ### Practice
@@ -176,7 +176,7 @@ filter(ecom,            )
 ```
 
 ```{r dplyr5-solution}
-filter(ecom, purchase == "true")
+filter(ecom, purchase)
 ```
 
 ## Select 
@@ -236,7 +236,7 @@ select(ecom,    ,     )
 ```
 
 ```{r dplyr8-solution}
-select(ecom, -id, -country)
+select(ecom, -device, -n_pages)
 ```
 
 ### Case Study
@@ -253,7 +253,7 @@ computing the AOV for different devices.
 ```
 
 ```{r dplyr9-solution}
-select(ecom, device, order_value, order_items)
+select(ecom, device, order_value)
 ```
 
 But we want the above data only for purchasers. We will combine `filter()` and 
@@ -270,8 +270,8 @@ ecom2
 ```
 
 ```{r dplyr10-solution}
-ecom1 <- filter(ecom, purchase == "true")
-ecom2 <- select(ecom1, device, order_value, order_items)
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
 ecom2
 ```
 
@@ -345,8 +345,8 @@ of the values and hence we will use it inside the `summarise()` function.
 Remember, we need to provide a name to the summary being generated. 
 
 ```{r dplyr13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Summarize - Part 1'}
-ecom4 <- summarise(ecom3, total_value = sum(order_value),
-          total_items = sum(order_items))
+ecom4 <- summarise(ecom3, revenue = sum(order_value),
+          orders = n())
 ecom4
 ```
 
@@ -402,7 +402,7 @@ ecom5
 ```
 
 ```{r dplyr15-solution}
-ecom5 <- mutate(ecom4, aov = order_value / order_items)
+ecom5 <- mutate(ecom4, aov = revenue / orders)
 ecom5
 ```
 
@@ -413,11 +413,11 @@ ecom5
 Let us combine all the code from the previous steps:
 
 ```{r dplyr17, eval=TRUE, echo=TRUE}
-ecom1 <- filter(ecom, purchase == "true")
-ecom2 <- select(ecom1, device, order_value, order_items)
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
 ecom3 <- group_by(ecom2, device)
-ecom4 <- summarise_all(ecom3, funs(sum))
-ecom5 <- mutate(ecom4, aov = order_value / order_items)
+ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
+ecom5 <- mutate(ecom4, aov = revenue / orders)
 ecom6 <- select(ecom5, device, aov)
 ecom6
 ```
@@ -437,12 +437,12 @@ creating the intermediate data frames. Let us see how to do that.
 
 ```{r dplyr18, eval=TRUE, echo=TRUE}
 ecom %>%
-  filter(purchase == 'true') %>%
-  select(device, order_value, order_items) %>%
+  filter(purchase) %>%
+  select(device, order_value) %>%
   group_by(device) %>%
-  summarise_all(funs(sum)) %>%
+  summarise_all(funs(revenue = sum, orders = n())) %>%
   mutate(
-    aov = order_value / order_items
+    aov = revenue / orders
   ) %>%
   select(device, aov)
 ```
