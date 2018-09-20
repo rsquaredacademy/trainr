@@ -15,10 +15,10 @@ library(ggplot2)
 library(readr)
 knitr::opts_chunk$set(echo = FALSE)
 ecom <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv')
-traffic <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
+web_data <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web_traffic.csv',
   col_types = list(col_factor(levels = c("google", "facebook", "affiliates", 
     "bing", "yahoo", "twitter", "instagram", "unknown", "direct"))))
-traffics <- use_series(traffic, traffics)
+referrer <- use_series(web_data, traffics)
 response <- read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/response.csv',
   col_types = list(col_factor(levels = c("like", "like somewhat", "neutral", 
     "dislike somewhat", "dislike"), ordered = TRUE)))
@@ -29,7 +29,9 @@ responses <- use_series(response, response)
 
 <hr>
 
-In this module, we will learn to: 
+### What will I learn?
+
+<hr>
 
 - tabulate levels
 - reorder levels
@@ -43,7 +45,7 @@ In this module, we will learn to:
 
 <hr>
 
-We will use a case study to explore the various features of the forcats package. You can download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv) or directly import the data using the readr package. In this case study, we will:
+We will use a case study to explore the various features of the forcats package. 
 
 - compute the frequency of different referrers
 - collapse referrers with low sample size into a single group
@@ -57,41 +59,57 @@ We will use a case study to explore the various features of the forcats package.
 The data set we will use has just one column `traffics` i.e. the source of 
 traffic for a imaginary website.
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-traffic
+```{r show, eval=TRUE, echo=TRUE}
+web_data
 ```
 
 ## Data
 
 <hr>
 
-Let us extract the `traffics` column from the above data using and save it in a 
-new variable `traffics`. Instead of using `traffic` which is a tibble, we will 
-use `traffics` which is a vector. We do this to avoid extracting the `traffics` 
+Let us extract the `traffics` column from the above data and save it in a 
+new variable `referrer`. Instead of using `web_data` which is a tibble, we will 
+use `referrer` which is a vector. We do this to avoid extracting the `traffics` 
 column from the main data repeatedly.
 
-```{r import2a, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
-traffics
+```{r import2a, eval=FALSE, echo=TRUE}
+referrer
+```
+
+```{r import2ab, eval=TRUE, echo=FALSE}
+head(referrer, 10)
 ```
  
 ## Count 
 
 <hr>
 
-![](/images/fct_count.png){width=90%}
+Let us compute the traffic driven by different referrers using `fct_count`.
 
-## Count
+<br>
+<center>
+![](/images/fct_count.png){width=90%}
+</center>
+</br>
+
+### Syntax
 
 <hr>
 
-Let us compute the traffic driven by different referrers using `fct_count`.
+```{r cat2-syntax, eval=FALSE, echo=TRUE}
+fct_count(data)
+```
+
+### Instructions
+
+<hr>
 
 ```{r cat2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate Referrers'}
 
 ```
 
 ```{r cat2-solution}
-fct_count(traffics)
+fct_count(referrer)
 ```
 
 
@@ -101,20 +119,26 @@ fct_count(traffics)
 
 Use `levels()` to display the categories/levels.
 
+### Syntax
+
+<hr>
+
+```{r cat2b-syntax, eval=FALSE, echo=TRUE}
+levels(data)
+```
+
+### Instructions
+
+<hr>
+
 ```{r cat2b, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Levels'}
 
 ```
 
 ```{r cat2b-solution}
-levels(traffics)
+levels(referrer)
 ```
 
-
-## Reorder 
-
-<hr>
-
-![](/images/fct_infreq.png){width=90%}
 
 ## Reorder 
 
@@ -122,12 +146,30 @@ levels(traffics)
 
 The levels can be reordered based on their frequency using `fct_infreq()`.
 
+<br>
+<center>
+![](/images/fct_infreq.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r cat11-syntax, eval=FALSE, echo=TRUE}
+fct_infreq(data)
+```
+
+### Instructions
+
+<hr>
+
 ```{r cat11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Reorder Referrers'}
 
 ```
 
 ```{r cat11-solution}
-freq_traffic <- fct_infreq(traffics)
+freq_traffic <- fct_infreq(referrer)
 levels(freq_traffic)
 ```
 
@@ -135,13 +177,26 @@ levels(freq_traffic)
 
 <hr>
 
-![](/images/fct_inorder.png){width=90%}
+The levels can be reordered based on the order of appearance using `fct_inorder()`.
 
-## Reorder
+<br>
+<center>
+![](/images/fct_inorder.png){width=90%}
+</center>
+</br>
+
+### Syntax
 
 <hr>
 
-The levels can be reordered based on the order of appearance using `fct_inorder()`.
+```{r cat4-syntax, eval=FALSE, echo=TRUE}
+fct_inorder(data)
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r cat4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Reorder Referrers'}
 
@@ -150,7 +205,7 @@ The levels can be reordered based on the order of appearance using `fct_inorder(
 ```
 
 ```{r cat4-solution}
-order_traffic <- fct_inorder(traffics)
+order_traffic <- fct_inorder(referrer)
 levels(order_traffic)
 ```
 
@@ -158,13 +213,26 @@ levels(order_traffic)
 
 <hr>
 
-![](/images/fct_rev.png){width=90%}
+The levels can be reversed using `fct_rev()`. 
 
-## Reverse Levels
+<br>
+<center>
+![](/images/fct_rev.png){width=90%}
+</center>
+</br>
+
+### Syntax
 
 <hr>
 
-The levels can be reversed using `fct_rev()`. 
+```{r cat25-syntax, eval=FALSE, echo=TRUE}
+fct_rev(data)
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r cat25, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 reversed <- 
@@ -173,15 +241,9 @@ reversed <-
 ```
 
 ```{r cat25-solution}
-reversed <- fct_rev(traffics)
+reversed <- fct_rev(referrer)
 levels(reversed)
 ```
-
-## Collapse Categories
-
-<hr>
-
-![](/images/fct_collapse.png){width=90%}
 
 ## Collapse Categories
 
@@ -194,6 +256,25 @@ We want to group some of the referrers into 2 categories:
 
 To group categories/levels, we will use `fct_collapse()`.
 
+<br>
+<center>
+![](/images/fct_collapse.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r cat7-syntax, eval=FALSE, echo=TRUE}
+fct_collapse(data, 
+  new_category = c('category_1', 'category_1')) 
+```
+
+### Instructions
+
+<hr>
+
 ```{r cat7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 
 
@@ -201,7 +282,7 @@ To group categories/levels, we will use `fct_collapse()`.
 ```
 
 ```{r cat7-solution}
-traffics %>% 
+referrer %>% 
   fct_collapse(
   social = c("facebook", "twitter", "instagram"),
   search = c("google", "bing", "yahoo")) %>% 
@@ -212,13 +293,28 @@ traffics %>%
 
 <hr>
 
-![](/images/fct_recode.png){width=90%}
+Categories/levels can be grouped using `fct_recode()` as well:
 
-## Recode Levels
+<br>
+<center>
+![](/images/fct_recode.png){width=90%}
+</center>
+</br>
+
+### Syntax
 
 <hr>
 
-Categories/levels can be grouped using `fct_recode()` as well:
+```{r recode-syntax, eval=FALSE, echo=TRUE}
+fct_recode(data, 
+          new_category = "category_1", 
+          new_category = "category_2", 
+          new_category = "category_3")
+```
+
+### Instructions
+
+<hr>
 
 ```{r recode, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 
@@ -226,7 +322,7 @@ Categories/levels can be grouped using `fct_recode()` as well:
 ```
 
 ```{r recode-solution}
-fct_recode(traffics, search = "bing", search = "yahoo", search = "google",
+fct_recode(referrer, search = "bing", search = "yahoo", search = "google",
   social = "facebook", social = "twitter", social = "instagram") %>%
   levels()
 ```
@@ -236,17 +332,30 @@ fct_recode(traffics, search = "bing", search = "yahoo", search = "google",
 
 <hr>
 
-![](/images/fct_lump_1.png){width=90%}
-
-## Lump Categories
-
-<hr>
-
 Let us group together referrer types that drive low traffic to the website. Use 
 `fct_lump()` to lump together categories.
 
+<br>
+<center>
+![](/images/fct_lump_1.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r cat8b-syntax, eval=FALSE, echo=TRUE}
+fct_lump(data) 
+```
+
+### Instructions
+
+<hr>
+
+
 ```{r cat8, echo=FALSE, eval=TRUE, collapse=FALSE}
-fct_count(traffics)
+fct_count(referrer)
 ```
 
 ```{r cat8b, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
@@ -256,7 +365,7 @@ fct_count(traffics)
 ```
 
 ```{r cat8b-solution}
-traffics %>% 
+referrer %>% 
   fct_lump() %>% 
   table()
 ```
@@ -270,10 +379,23 @@ single category. Use `fct_lump()` and set the argument `n` to 3 indicating we
 want to retain top 3 categories and combine the rest.
 
 ```{r cat9, echo=FALSE, eval=TRUE, collapse=FALSE}
-traffics %>% 
+referrer %>% 
   fct_count() %>% 
   arrange(desc(n))
 ```
+
+### Syntax
+
+<hr>
+
+```{r cat17-syntax, eval=FALSE, echo=TRUE}
+fct_lump(prop = positive_number) 
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r cat17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 
@@ -282,16 +404,10 @@ traffics %>%
 ```
 
 ```{r cat17-solution}
-traffics %>% 
+referrer %>% 
   fct_lump(n = 3) %>% 
   table()
 ```
-
-## Lump Categories
-
-<hr>
-
-![](/images/fct_lump_2.png){width=90%}
 
 ## Lump Categories
 
@@ -303,8 +419,27 @@ actual numbers, we use the prop argument and set it to 0.1, indicating that we
 want to retain only those categories which have a proportion of more than 10% 
 and combine the rest.
 
+<br>
+<center>
+![](/images/fct_lump_2.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r cat18-syntax, eval=FALSE, echo=TRUE}
+fct_lump(prop = positive_proportion) 
+```
+
+### Instructions
+
+<hr>
+
+
 ```{r cat13, echo=FALSE, eval=TRUE, collapse=FALSE}
-traffics %>% 
+referrer %>% 
   fct_count() %>%
   mutate(
     percent = round((n / sum(n)) * 100, 2)
@@ -318,7 +453,7 @@ traffics %>%
 ```
 
 ```{r cat18-solution}
-traffics %>% 
+referrer %>% 
   fct_lump(prop = 0.10) %>% 
   table()
 ```
@@ -332,17 +467,30 @@ website and combine the rest? We will still use the n argument but instead of
 specifying 3, we now specify -3.
 
 ```{r cat14, echo=FALSE, eval=TRUE, collapse=FALSE}
-traffics %>% 
+referrer %>% 
   fct_count() %>% 
   arrange(n)
 ```
+
+### Syntax
+
+<hr>
+
+```{r cat19-syntax, eval=FALSE, echo=TRUE}
+fct_lump(prop = negative_number) 
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r cat19, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Lump Categories'}
 
 ```
 
 ```{r cat19-solution}
-traffics %>% 
+referrer %>% 
   fct_lump(n = -3) %>% 
   table()
 ```
@@ -355,12 +503,25 @@ Let us see how to retain referrers that drive less than 10 % traffic to the
 website and combine the rest into a single group.
 
 ```{r cat15, echo=FALSE, eval=TRUE, collapse=FALSE}
-traffics %>% 
+referrer %>% 
   fct_count() %>%
   mutate(
     percent = round((n / sum(n)) * 100, 2)
   )
 ```
+
+### Syntax
+
+<hr>
+
+```{r cat20-syntax, eval=FALSE, echo=TRUE}
+fct_lump(prop = negative_proportion) 
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r cat20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Lump Categories'}
 
@@ -368,7 +529,7 @@ traffics %>%
 ```
 
 ```{r cat20-solution}
-traffics %>% 
+referrer %>% 
   fct_lump(prop = -0.1) %>% 
   table()
 ```
@@ -382,11 +543,24 @@ Let us assume we want to retain a couple of important categories and group the
 rest into a single category. In the below example, we retain google and yahoo 
 while grouping the rest as others using `fct_other()`.
 
+<br>
+<center>
 ![](/images/fct_others_1.png){width=90%}
+</center>
+</br>
 
-## Replace Levels with Other
+### Syntax
 
 <hr>
+
+```{r other_1-syntax, eval=FALSE, echo=TRUE}
+fct_other(data, keep = c("category_1", "category_2"))
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r other_1, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 keep_gy <- 
@@ -395,7 +569,7 @@ keep_gy <-
 ```
 
 ```{r other_1-solution}
-keep_gy <- fct_other(traffics, keep = c("google", "yahoo"))
+keep_gy <- fct_other(referrer, keep = c("google", "yahoo"))
 levels(keep_gy)
 ```
 
@@ -411,11 +585,24 @@ In the below example, we drop the following referrer categories:
 - instagram
 - twitter
 
+<br>
+<center>
 ![](/images/fct_others_2.png){width=90%}
+</center>
+</br>
 
-## Replace Levels with Other
+### Syntax
 
 <hr>
+
+```{r other_2-syntax, eval=FALSE, echo=TRUE}
+fct_other(data, drop = c("category_1", "category_2")) 
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r other_2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
 drop_it <- 
@@ -424,7 +611,7 @@ drop_it <-
 ```
 
 ```{r other_2-solution}
-drop_it <- fct_other(traffics, drop = c("instagram", "twitter")) 
+drop_it <- fct_other(referrer, drop = c("instagram", "twitter")) 
 levels(drop_it)
 ```
 
@@ -436,11 +623,24 @@ levels(drop_it)
 The categories can be reordered using `fct_relevel()`. In the below example, 
 we reorder the categories to ensure google appears first. 
 
+<br>
+<center>
 ![](/images/fct_relevel_1.png){width=90%}
+</center>
+</br>
 
-## Reorder Levels
+### Syntax
 
 <hr>
+
+```{r relevel_1-syntax, eval=FALSE, echo=TRUE}
+fct_relevel(data, "category_name") 
+```
+
+### Instructions
+
+<hr>
+
 
 Similarly, in the below example, we reorder the levels to ensure twitter 
 appears first irrespective of its frequency or order of appearance in the data.
@@ -453,7 +653,7 @@ move_twitter <-
 ```
 
 ```{r relevel_1-solution}
-move_twitter <- fct_relevel(traffics, "twitter") 
+move_twitter <- fct_relevel(referrer, "twitter") 
 levels(move_twitter)
 ```
 
@@ -466,9 +666,21 @@ argument and specify the position after which it should appear. For example,
 if google should be the third category, we would specify `after = 2` i.e. 
 google should come after the 2nd position (i.e. third position).
 
+<br>
+<center>
 ![](/images/fct_relevel_2.png){width=90%}
+</center>
+</br>
 
-## Reorder Levels
+### Syntax
+
+<hr>
+
+```{r relevel_2-syntax, eval=FALSE, echo=TRUE}
+fct_relevel(data, "category_name", after = position) 
+```
+
+### Instructions
 
 <hr>
 
@@ -479,7 +691,7 @@ appear_2 <-
 ```
 
 ```{r relevel_2-solution}
-appear_2 <- fct_relevel(traffics, "google", after = 2)
+appear_2 <- fct_relevel(referrer, "google", after = 2)
 levels(appear_2)
 ```
 
@@ -490,11 +702,24 @@ levels(appear_2)
 If the category should appear last, supply the value `Inf` (infinity) to the 
 `after` argument as shown below.
 
+<br>
+<center>
 ![](/images/fct_relevel_3.png){width=90%}
+</center>
+</br>
 
-## Reorder Levels
+### Syntax
 
 <hr>
+
+```{r relevel_3-syntax, eval=FALSE, echo=TRUE}
+fct_relevel(data, "category_name", after = Inf) 
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r relevel_3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Reorder Levels'}
 appear_last <- 
@@ -503,7 +728,7 @@ appear_last <-
 ```
 
 ```{r relevel_3-solution}
-appear_last <- fct_relevel(traffics, "facebook", after = Inf) 
+appear_last <- fct_relevel(referrer, "facebook", after = Inf) 
 levels(appear_last)
 ```
 
@@ -519,18 +744,12 @@ cyclical. It contains response to an imaginary survey.
 
 <hr>
 
-```{r import2b, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Import Data'}
-```
-
-```{r import2b-solution}
+```{r import2b, eval=FALSE, echo=TRUE}
 responses
 ```
-
-## Shift Levels
-
-<hr>
-
-![](/images/fct_shift_1.png){width=90%}
+```{r import2ba, eval=TRUE, echo=FALSE}
+responses
+```
 
 ## Shift Levels
 
@@ -539,6 +758,26 @@ responses
 To shift the levels, we use `fct_shift()`. Use the `n` argument to indicate the 
 direction of the shift. If `n` is positive, the levels are shifted to the left 
 else to the right. In the below example, we shift the levels to the left by 2 positions.
+
+<br>
+<center>
+![](/images/fct_shift_1.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r shift_1-syntax, eval=FALSE, echo=TRUE}
+fct_shift(data, positive_number) 
+```
+
+### Instructions
+
+<hr>
+
+
 
 ```{r shift_1, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Shift Levels'}
 shift_left <- 
@@ -554,15 +793,28 @@ levels(shift_left)
 
 <hr>
 
-![](/images/fct_shift_2.png){width=90%}
-
-## Shift Levels
-
-<hr>
-
 To shift the levels to the right, supply a negative value to the `n` argument 
 in `fct_shift()`. In the below example, we shift the levels to the right by 2 
 positions.
+
+<br>
+<center>
+![](/images/fct_shift_2.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r shift_2-syntax, eval=FALSE, echo=TRUE}
+fct_shift(data, negative_number) 
+```
+
+### Instructions
+
+<hr>
+
 
 ```{r shift_2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Shift Levels'}
 shift_right <- 
@@ -573,3 +825,9 @@ shift_right <- fct_shift(responses, -2)
 levels(shift_right)
 ```
 
+## References
+
+<hr>
+
+- [forcats](https://forcats.tidyverse.org/index.html){target="_blank"}
+- [r4ds](https://r4ds.had.co.nz/factors.html){target="_blank"}

@@ -19,7 +19,8 @@ customer <- read_delim('https://raw.githubusercontent.com/rsquaredacademy/datase
 
 <hr>
 
-In a previous module, we learnt about dplyr verbs and used them to compute average order value for an e-commerce website data. In this module, we will learn to combine tables using different `*_join` functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. 
+In this tutorial, we will learn to combine tables using different `*_join` 
+functions provided in dplyr. Let us assume we have 2 tables **x** and **y**. 
 
 The following types of `join` functions are provided in dplyr:
 
@@ -33,15 +34,27 @@ The following types of `join` functions are provided in dplyr:
 
 ## Case Study
 
-### Introduction
-
 <hr>
 
+<br>
+<center>
 ![](/images/join_data.png){width=90%}
+</center>
+<br>
 
 We have two data sets with details of customers and their orders. We will use 
-the above functions to combine the data sets in different ways to glean 
+the join functions of dplyr to combine the data sets in different ways to glean 
 information about customer orders. 
+
+We will explore the following in the case study:
+
+- details of customers who have placed orders and their order details
+- details of customers and their orders irrespective of whether a customer has 
+placed orders or not
+- customer details for each order
+- details of customers who have placed orders
+- details of customers who have not placed orders
+- details of all customers and all orders
 
 ## Data
 
@@ -49,7 +62,7 @@ information about customer orders.
 
 <hr>
 
-```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Orders'}
+```{r dplyr2, eval=TRUE, echo=TRUE}
 order
 ```
 
@@ -57,7 +70,7 @@ order
 
 <hr>
 
-```{r dplyr, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Customers'}
+```{r dplyr, eval=TRUE, echo=TRUE}
 customer
 ```
 
@@ -65,17 +78,32 @@ customer
 
 <hr>
 
+<br>
+<center>
 ![](/images/join.png){width=90%}
+</center>
+<br>
 
 ## Inner Join
 
 <hr>
 
+<br>
+<center>
 ![](/images/draw_inner.png){width=90%}
+</center>
+<br>
 
 `inner_join()` returns all rows from x where there are matching values in y, 
 and all columns from x and y. If there are multiple matches between x and y, 
 all combination of the matches are returned.
+
+### Instructions
+
+<hr>
+
+- use `inner_join()` to get details of customers who have placed orders and 
+their order details
 
 ```{r dplyr3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Inner Join'}
 
@@ -93,7 +121,18 @@ inner_join(customer, order, by = "id")
 with no match in y will have NA values in the new columns. If there are 
 multiple matches between x and y, all combinations of the matches are returned.
 
+<br>
+<center>
 ![](/images/draw_left.png){width=90%}
+</center>
+<br>
+
+### Instructions
+
+<hr>
+
+- use `left_join()` to get details of customers and their orders irrespective 
+of whether a customer has placed orders or not
 
 ```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Left Join'}
 
@@ -111,7 +150,17 @@ left_join(customer, order, by = "id")
 with no match in x will have NA values in the new columns. If there are 
 multiple matches between x and y, all combinations of the matches are returned.
 
+<br>
+<center>
 ![](/images/draw_right.png){width=90%}
+</center>
+<br>
+
+### Instructions
+
+<hr>
+
+- use `right_join()` to get customer details for each order
 
 ```{r dplyr5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Right Join'}
 
@@ -130,7 +179,17 @@ keeping just columns from x. A semi join differs from an inner join because an
 inner join will return one row of x for each matching row of y, where a semi 
 join will never duplicate rows of x.
 
+<br>
+<center>
 ![](/images/draw_semi.png){width=90%}
+</center>
+<br>
+
+### Instructions
+
+<hr>
+
+- use `semi_join()` to get details of customers who have placed orders
 
 ```{r dplyr6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Semi Join'}
 
@@ -147,7 +206,17 @@ semi_join(customer, order, by = "id")
 `anti_join()` returns all rows from x where there are not matching values in y, 
 keeping just columns from x.
 
+<br>
+<center>
 ![](/images/draw_anti.png){width=90%}
+</center>
+<br>
+
+### Instructions
+
+<hr>
+
+- use `anti_join()` to get details of customers who have not placed orders
 
 ```{r dplyr7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Anti Join'}
 
@@ -164,7 +233,17 @@ anti_join(customer, order, by = "id")
 `full_join()` returns all rows and all columns from both x and y. Where there 
 are not matching values, returns NA for the one missing.
 
+<br>
+<center>
 ![](/images/draw_full.png){width=90%}
+</center>
+<br>
+
+### Instructions
+
+<hr>
+
+- use `full_join()` to get details of all customers and all orders
 
 ```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Full Join'}
 
@@ -178,5 +257,5 @@ full_join(customer, order, by = "id")
 
 <hr>
 
-- https://dplyr.tidyverse.org/
-- http://r4ds.had.co.nz/relational-data.html
+- [dplyr](https://dplyr.tidyverse.org/){target="_blank"}
+- [r4ds](http://r4ds.had.co.nz/relational-data.html){target="_blank"}

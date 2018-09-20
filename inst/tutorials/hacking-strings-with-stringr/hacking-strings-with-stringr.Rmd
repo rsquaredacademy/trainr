@@ -23,31 +23,27 @@ mock_data <-
 
 <hr>
 
-In this module, we will learn to work with string data in R using [stringr](http://stringr.tidyverse.org). As we did in the earlier modules, we will use a case study to explore the various features of the stringr package. You can
-download the data for the case study from [here](https://raw.githubusercontent.com/rsquaredacademy/datasets/master/mock_strings.csv) or directly import the data using the readr package.  Let us begin by installing and loading stringr and a set of other pacakges we will be using.
+In this module, we will learn to work with string data in R using [stringr]
+(https://stringr.tidyverse.org). As we did in the earlier modules, we will use 
+a case study to explore the various features of the stringr package. 
 
-
-## Case Study
-
-### Introduction
+### What will I learn?
 
 <hr>
 
-- extract domain name from random email ids
-- extract image type from url
-- extract image dimension from url
-- extract extension from domain name
-- extract http protocol from url
-- extract domain name from url
-- extract extension from url
-- extract file type from url
+- detect patterns
+- count patterns
+- split strings
+- replace strings
+- extract patterns
+- locate patterns
 
 
 ## Data
 
 <hr>
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r show, eval=TRUE, echo=TRUE}
 mockstring
 ```
 
@@ -55,40 +51,50 @@ mockstring
 
 <hr>
 
-Since the data set has 1000 rows, we will use a smaller sample for better
+Since the `mockstring` data set has 1000 rows, we will use a smaller sample for better
 readability.
 
-```{r sample, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sample Data'}
-mockdata <- 
-mockdata
+```{r sample, eval=TRUE, echo=TRUE}
+mock_data
 ```
 
-```{r sample-solution}
-mockdata <- slice(mockstring, 1:10)
-mockdata
-```
-
-## Detect @
+## Detect 
 
 <hr>
 
-![](/images/str_detect.png){width=90%}
-
-## Detect @
-
-<hr>
-
-One of the columns in the case study data is `email`. It contains random email 
+One of the columns in the sample data is `email`. It contains random email 
 ids. We want to ensure that the email ids adher to a particular format .i.e
 
 - they contain `@`
 - they contain only one `@`
 
-Let us first detect if the email ids contain `@`. Use `str_detect()` to detect 
-`@`.
+Let us first detect if the email ids contain `@` use `str_detect()`.
+
+<br>
+<center>
+![](/images/str_detect.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r detect-syntax, eval=FALSE, echo=TRUE}
+str_detect(string, pattern)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_detect()` to detect the presence of `@` in `email` column of `mock_data`
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `@`
+- ensure the pattern is enclosed in single or double quotes
 
 
-```{r detect, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Detect'}
+```{r detect, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Detect', exercise.lines = 5}
 
 ```
 
@@ -96,19 +102,38 @@ Let us first detect if the email ids contain `@`. Use `str_detect()` to detect
 str_detect(mock_data$email, pattern = "@")
 ```
 
-## Count @
+## Count 
 
 <hr>
 
+You can count the number of times a particular pattern appears in the data 
+using `str_count()`. We will count the number of times `@` appears in the 
+email ids in the sample data `mock_data`.
+
+<br>
+<center>
 ![](/images/str_count.png){width=90%}
+</center>
+<br>
 
-## Count @
+### Syntax
 
 <hr>
 
-Use `str_count()` to count the number of times `@` appears in the email ids.
+```{r count-syntax, eval=FALSE, echo=TRUE}
+str_count(string, pattern)
+```
 
-```{r count, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Count'}
+### Instructions
+
+<hr>
+
+- use `str_count()` to detect the number of `@` in email ids in `mock_data`
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `@`
+- ensure the pattern is enclosed in single or double quotes
+
+```{r count, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Count', exercise.lines = 5}
 
 ```
 
@@ -120,14 +145,30 @@ str_count(mock_data$email, pattern = "@")
 
 <hr>
 
-![](/images/str_c.png){width=90%}
+We can use `str_c()` to concatenate strings. Let us add the string `email id:` 
+before each email id in the sample data set.
 
-## Concatenate
+<br>
+<center>
+![](/images/str_c.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-We can use `str_c()` to concatenate strings. Let us add the string `email id:` 
-before each email id in the data set.
+```{r concatenate-syntax, eval=FALSE, echo=TRUE}
+str_c(string_1, string_2)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_c()` to add `email id:` before each email id in `mock_data`
+- the first argument should be `'email id:'`
+- the second argument should be the `email` column from `mock_data`
 
 ```{r concatenate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Concatenate'}
 
@@ -141,17 +182,33 @@ str_c("email id:", mock_data$email)
 
 <hr>
 
-![](/images/str_split.png){width=90%}
+If we want to split a string into two parts using a particular pattern, we use 
+`str_split()`. Let us split the email id in `mock_train` to extract the 
+username and the service provider or the domain name.
 
-## Split
+<br>
+<center>
+![](/images/str_split.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-If we want to split a string into two parts using a particular pattern, we use 
-`str_split()`. Let us split the domain name and extension from the domain 
-column in the data. The domain name and extension are separated by `.` and we 
-will use it to split the domain column. Since `.` is a special character, we 
-will use two slashes to escape the special character. 
+```{r split-syntax, eval=FALSE, echo=TRUE}
+str_split(string, pattern)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_split()` to split the username and domain in the emaild ids in `mock_data`
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `@`
+- ensure the pattern is enclosed in single or double quotes
+
 
 ```{r split, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Split'}
 
@@ -163,25 +220,46 @@ str_split(mock_data$email, pattern = "@")
 
 ## Truncate
 
+<hr>
+
 We can truncate a string using `str_trunc()`. The default truncation happens at 
 the beggining of the string but we can truncate the central part or the end of 
 the string as well. 
 
-```{r trunc, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Truncate Strings'}
-str_trunc(mockdata$email, width = 10)
-str_trunc(mockdata$email, width = 10, side = "left")
-str_trunc(mockdata$email, width = 10, side = "center")
-```
-
-```{r trunc-solution}
-str_split(mock_data$email, pattern = "@")
-```
-
-## Sort
+### Syntax
 
 <hr>
 
-![](/images/str_sort.png){width=90%}
+```{r trunc-syntax, eval=FALSE, echo=TRUE}
+str_trunc(string, width)
+str_trunc(string, width, side = "left")
+str_trunc(string, width, side = "center")
+```
+
+### Instructions
+
+<hr>
+
+- use `str_trunc()` to truncate the `email` column in `mock_data` to 10 characters
+- specify the `email` column from `mock_data` using `$`
+- specify width to be `10`
+- specify the truncation side to be either `left` or `center`
+
+```{r trunc, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Truncate Strings'}
+# truncate email id to 10 characters
+
+# truncate email id on the left side to 10 characters
+
+
+# truncate email id on the right side to 10 characters
+
+```
+
+```{r trunc-solution}
+str_trunc(mock_data$email, width = 10)
+str_trunc(mock_data$email, width = 10, side = "left")
+str_trunc(mock_data$email, width = 10, side = "center")
+```
 
 ## Sort
 
@@ -190,29 +268,54 @@ str_split(mock_data$email, pattern = "@")
 Strings can be sorted using `str_sort()`. Let us quickly sort the emails in 
 both ascending and descending orders.
 
+### Ascending
+
+<hr>
+
+<br>
+<center>
+![](/images/str_sort.png){width=90%}
+</center>
+<br>
+
+### Descending
+
+<hr>
+
+<br>
+<center>
+![](/images/str_sort_descending.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r sort-syntax, eval=FALSE, echo=TRUE}
+str_sort(string)
+str_sort(string, descending = TRUE)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_sort()` to sort the `email` column from `mock_data`
+- specify the `email` column from `mock_data` using `$`
+- first sort in the ascending order
+- then sort in the descending order by supplying the value `TRUE` to the 
+`descending` argument as shown in the syntax above
+
 ```{r sort, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sort'}
 
 ```
 
 ```{r sort-solution}
+# sort 
 str_sort(mock_data$email)
-```
 
-## Sort
-
-<hr>
-
-![](/images/str_sort_descending.png){width=90%}
-
-## Sort
-
-<hr>
-
-```{r sort2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sort - Descending'}
-
-```
-
-```{r sort2-solution}
+# sort descending
 str_sort(mock_data$email, descending = TRUE)
 ```
 
@@ -220,29 +323,42 @@ str_sort(mock_data$email, descending = TRUE)
 
 <hr>
 
-![](/images/str_to_upper.png){width=90%}
+The case of a string can be changed to upper, lower or title case.
 
-## Case
+<br>
+<center>
+![](/images/str_to_upper.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-The case of a string can be changed to upper, lower or title case as shown 
-below.
+```{r case-syntax, eval=FALSE, echo=TRUE}
+str_to_upper(string)
+str_to_lower(string)
+str_to_title(string)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_to_upper()` to convert the case of `full_name` column in `mock_data`
+- specify the `full_name` column from `mock_data` using `$`
+- next convert the same column to lower case using `str_to_lower()`
+- next convert the same column to title case using `str_to_title()`
 
 ```{r case, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Change Case'}
 
 ```
 
 ```{r case-solution}
-str_to_upper(mockdata$full_name)
-str_to_lower(mockdata$full_name)
+str_to_upper(mock_data$full_name)
+str_to_lower(mock_data$full_name)
+str_to_title(mock_data$full_name)
 ```
-
-## Replace
-
-<hr>
-
-![](/images/str_replace.png){width=90%}
 
 ## Replace
 
@@ -254,6 +370,30 @@ column of the data set, let us replace:
 - Street with ST
 - Road with RD
 
+<br>
+<center>
+![](/images/str_replace.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r replace-syntax, eval=FALSE, echo=TRUE}
+str_replace(string, "old_string", "new_string")
+```
+
+### Instructions
+
+<hr>
+
+- use `str_replace()` to replace `Street` with `ST` in the `address` column of
+`mock_data`
+- specify the `address` column from `mock_data` using `$`
+- the second argument should be `'Street'`
+- the third argument should be `ST`
+
 ```{r replace, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Replace'}
 
 
@@ -261,15 +401,8 @@ column of the data set, let us replace:
 ```
 
 ```{r replace-solution}
-str_replace(mockdata$address, "Street", "ST")
-str_replace(mockdata$address, "Road", "RD")
+str_replace(mock_data$address, "Street", "ST")
 ```
-
-## Extract
-
-<hr>
-
-![](/images/str_extract.png){width=90%}
 
 ## Extract
 
@@ -277,6 +410,27 @@ str_replace(mockdata$address, "Road", "RD")
 
 We can extract parts of the string that match a particular pattern using 
 `str_extract()`.
+
+
+![](/images/str_extract.png){width=90%}
+
+### Syntax
+
+<hr>
+
+```{r extract-syntax, eval=FALSE, echo=TRUE}
+str_extract(string, pattern)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_extract()` to extract all emaild ids in `mock_data` that have the 
+extension `org`
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `org`
+- ensure that the pattern is enclosed in single or double quotes
 
 ```{r extract, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract'}
 
@@ -290,14 +444,33 @@ str_extract(mock_data$email, pattern = "org")
 
 <hr>
 
-![](/images/str_match.png){width=90%}
+Before we extract, we need to know whether the string contains text that match 
+our pattern. Use `str_match()` to see if the pattern is present in the string.
 
-## Match
+<br>
+<center>
+![](/images/str_match.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-Before we extract, we need to know whether the string contains text that match 
-our pattern. Use `str_match()` to see if the pattern is present in the string.
+```{r match-syntax, eval=FALSE, echo=TRUE}
+str_match(string, pattern)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_match()` to check the presence of `org` extension in email ids in 
+the `mock_data` data set
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `org`
+- ensure that the pattern is enclosed in single or double quotes
+
 
 ```{r match, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Match'}
 
@@ -311,16 +484,34 @@ str_match(mock_data$email, pattern = "org")
 
 <hr>
 
-![](/images/str_which.png){width=90%}
+If we are dealing with a character vector and know that the pattern we are 
+looking at is present in the vector, we might want to know the index of the 
+strings in which it is present. Let us use `str_which()` to identify the index 
+of the strings that match our pattern.
 
-## Index
+<br>
+<center>
+![](/images/str_which.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-If we are dealing with a character vector and know that the pattern we are 
-looking at is present in the vector, we might want to know the index of the 
-strings in which it is present. Use `str_which()` to identify the index of 
-the strings that match our pattern.
+```{r which-syntax, eval=FALSE, echo=TRUE}
+str_which(string, pattern)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_which()` to locate the pattern `org` in email ids in the `mock_data` 
+data set
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `org`
+- ensure that the pattern is enclosed in single or double quotes
 
 ```{r which, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Index'}
 
@@ -334,15 +525,33 @@ str_which(mock_data$email, pattern = "org")
 
 <hr>
 
-![](/images/str_locate.png){width=90%}
-
-## Locate
-
-<hr>
-
 Another objective might be to locate the position of the pattern we are looking 
 for in the string. For example, if we want to know the position of `@`  in the 
 email ids, we can use `str_locate()`.
+
+<br>
+<center>
+![](/images/str_locate.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r locate-syntax, eval=FALSE, echo=TRUE}
+str_locate(string, pattern)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_which()` to locate the position of the pattern `com` in email ids in 
+the `mock_data` data set
+- specify the `email` column from `mock_data` using `$`
+- specify the pattern as `com`
+- ensure that the pattern is enclosed in single or double quotes
 
 ```{r locate, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Locate'}
 
@@ -356,28 +565,38 @@ str_locate(mock_data$email, pattern = "com")
 
 <hr>
 
-![](/images/str_length.png){width=90%}
+The length of the string can be computed using `str_length()`. Let us ensure 
+that the length of the strings in the `password` column is 16.
 
-## Length
+<br>
+<center>
+![](/images/str_length.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-The length of the string can be computed using `str_length()`. Let us ensure 
-that the length of the strings in the `password` column is 16.
+```{r length-syntax, eval=FALSE, echo=TRUE}
+str_length(string)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_length()` to compute the length of passwords in the `mock_data` 
+data set
+- specify the `passwords` column from `mock_data` using `$`
 
 ```{r length, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Length'}
 
 ```
 
 ```{r length-solution}
-str_length(mockdata$passwords)
+str_length(mock_data$passwords)
 ```
-
-## Extract
-
-<hr>
-
-![](/images/str_sub.png){width=90%}
 
 ## Extract
 
@@ -385,6 +604,30 @@ str_length(mockdata$passwords)
 
 We can extract parts of a string by specifying the starting and ending position 
 using `str_sub()`. Let us extract the currency type from the `currency` column.
+
+<br>
+<center>
+![](/images/str_sub.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r sub-syntax, eval=FALSE, echo=TRUE}
+str_sub(string, start, end)
+```
+
+### Instructions
+
+<hr>
+
+- use `str_sub()` to extract the currency type from the `currency` column of 
+the `mock_data` data set
+- take a look at the `mock_data` in the **Sample Data** tab
+- decide and specify the starting and ending position from which the currency 
+type must be extracted
 
 ```{r sub, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract'}
 
@@ -396,16 +639,34 @@ str_sub(mock_data$currency, start = 1, end = 1)
 
 ## Word
 
-![](/images/word.png){width=90%}
+<hr>
 
-## Word
+One final function that we will look at is `word()`. It extracts word(s) from 
+sentences. We do not have any sentences in the data set, but let us use it to 
+extract the first and last name from the `full_name` column.
+
+<br>
+<center>
+![](/images/word.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-One final function that we will look at before the case study is `word()`. It 
-extracts word(s) from sentences. We do not have any sentences in the data set, 
-but let us use it to extract the first and last name from the `full_name` 
-column.
+```{r word-syntax, eval=FALSE, echo=TRUE}
+word(string, word_position)
+```
+
+### Instructions
+
+<hr>
+
+- use `word()` to extract the firt name from the `full_name` column of the
+`mock_data` data set
+- specify the `full_name` column from `mock_data` using `$`
+- specify the position of the word to be extracted
 
 ```{r word, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Word'}
 
@@ -414,3 +675,10 @@ column.
 ```{r word-solution}
 word(mock_data$full_name, 1)
 ```
+
+## References
+
+<hr>
+
+- https://stringr.tidyverse.org/
+- http://r4ds.had.co.nz/strings.html

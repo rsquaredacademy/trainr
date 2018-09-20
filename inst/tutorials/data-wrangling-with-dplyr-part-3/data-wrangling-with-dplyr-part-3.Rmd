@@ -21,7 +21,9 @@ ecom_mini <- sample_n(ecom, size = 10)
 ecom_sample <- sample_n(ecom, 30)
 ```
 
-## Introduction
+## What will I learn?
+
+<hr>
 
 In this module, we will explore a set of helper functions in order to:
 
@@ -39,13 +41,15 @@ In this module, we will explore a set of helper functions in order to:
 
 <hr>
 
-Let us look at a case study (e-commerce data) and see how we can use dplyr helper functions to answer questions we have about and to modify/transform the underlying data set. 
+Let us look at a case study (e-commerce data) and see how we can use dplyr 
+helper functions to answer questions we have about and to modify/transform the 
+underlying data set. 
 
 ### Data
 
 <hr>
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r show, eval=TRUE, echo=TRUE}
 ecom
 ```
 
@@ -66,15 +70,15 @@ ecom
 
 <hr>
 
-![](/images/distinct_1.png){width=90%}
-
-## Traffic Sources
-
-<hr>
-
 Let us ensure that the data is sanitized by checking the sources of traffic
 and devices used to visit the site. We will use `distinct()` to examine the
 values in the `referrer` column.
+
+<br>
+<center>
+![](/images/distinct_1.png){width=90%}
+</center>
+<br>
 
 ### Syntax
 
@@ -88,7 +92,9 @@ distinct(ecom, referrer)
 
 <hr>
 
-```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Traffic Sources'}
+- use `distinct` to get the unique values of `device` column from `ecom`
+
+```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Traffic Sources', exercise.lines = 5}
 
 ```
 
@@ -100,15 +106,15 @@ distinct(ecom, device)
 
 <hr>
 
-![](/images/rename_1.png){width=90%}
-
-## Rename Columns
-
-<hr>
-
 Columns can be renamed using `rename()`. 
 
-## Syntax
+<br>
+<center>
+![](/images/rename_1.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
@@ -116,11 +122,13 @@ Columns can be renamed using `rename()`.
 rename(data, new_name = current_name)
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-```{r dplyr3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Rename Columns'}
+- use `rename()` to change the name of `duration` column to `time_on_site`
+
+```{r dplyr3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Rename Columns', exercise.lines = 5}
 
 ```
 
@@ -132,67 +140,43 @@ rename(ecom, time_on_site = duration)
 
 <hr>
 
-![](/images/sample_frac_n.png){width=90%}
-
-## Sampling Data
-
-<hr>
-
 dplyr offers sampling functions which allow us to specify either the
 number or percentage of observations. `sample_n()` allows sampling a specific
-number of observations.  
+number of observations and `sample_frac()` allows sampling a specific 
+percentage of observations.
 
-## Syntax
+<br>
+<center>
+![](/images/sample_frac_n.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
 ```{r dplyr4-syntax, eval=FALSE, echo=TRUE}
-sample_n(ecom, sample_size)
+sample_n(data, size = number)
+sample_frac(data, size = percentage)
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sampling - Part 1'}
+- use `sample_n()` to sample 700 observations from `ecom`
+- use `sample_frac()` to sample 650 observations from `ecom`
 
+```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data Sampling', exercise.lines = 7}
+# sample 700 observations
+
+# sample 650 observations
 ```
 
 ```{r dplyr4-solution}
-sample_n(ecom, 700)
+sample_n(ecom, size = 700)
+sample_frac(ecom, size = 0.65)
 ```
-
-## Sampling Data
-
-<hr>
-
-`sample_frac()` allows a specific percentage of observations.
-
-## Syntax
-
-<hr>
-
-```{r dplyr6-syntax, eval=FALSE, echo=TRUE}
-sample_frac(ecom, sample_percentage)
-```
-
-## Instructions
-
-<hr>
-
-```{r dplyr6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Sampling - Part 3'}
-
-```
-
-```{r dplyr6-solution}
-sample_frac(ecom, size = 0.7)
-```
-
-## Extract Columns
-
-<hr>
-
-![](/images/pull_1.png){width=90%}
 
 ## Extract Columns
 
@@ -200,78 +184,52 @@ sample_frac(ecom, size = 0.7)
 
 dplyr verbs always return a tibble. What if you want to extract a specific 
 column or a bunch of rows but not as a tibble? Use `pull` to extract columns 
-either by name or position. It will return a vector. 
+either by name or position. It will return a vector. You can use `-` before the 
+column position to indicate the position in reverse.
 
-## Syntax
+<br>
+<center>
+![](/images/pull_1.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
 ```{r dplyr8-syntax, eval=FALSE, echo=TRUE}
 pull(data, column_name)
+pull(data, column_postion)
+pull(data, -column_position)
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 1'}
+- use `pull()` to extract the `device` column from `ecom_mini` 
+- use `pull()` to extract the first column from `ecom_mini` 
+- use `pull()` to extract the last column from `ecom_mini`
+
+```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column', exercise.lines = 10}
+# extract device from ecom_mini
+
+
+# extract first column from ecom_mini
+
+
+# extract last column from ecom_mini
 
 ```
 
 ```{r dplyr8-solution}
+# extract device from ecom_mini
 pull(ecom_mini, device)
-```
 
-## Extract Columns
-
-<hr>
-
-Let us extract the first column from `ecom` using column position instead of 
-name.
-
-## Syntax
-
-<hr>
-
-```{r dplyr9-syntax, eval=FALSE, echo=TRUE}
-pull(data, column_position)
-```
-
-## Instructions
-
-<hr>
-
-```{r dplyr9, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 2'}
-
-```
-
-```{r dplyr9-solution}
+# extract first column from ecom_mini
 pull(ecom_mini, 1) 
-```
 
-## Extract Columns
-
-<hr>
-
-You can use `-` before the column position to indicate the position in reverse.
-
-## Syntax
-
-<hr>
-
-```{r dplyr10-syntax, eval=FALSE, echo=TRUE}
-pull(data, -column_position)
-```
-
-## Instructions
-
-<hr>
-
-```{r dplyr10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 3'}
-
-```
-
-```{r dplyr10-solution}
+# extract last column from ecom_mini
 pull(ecom_mini, -1)
 ```
 
@@ -279,52 +237,46 @@ pull(ecom_mini, -1)
 
 <hr>
 
-![](/images/slice_1.png){width=90%}
-
-## Extract Rows
-
-<hr>
-
 Let us now look at extracting rows using `slice()`. 
 
-## Syntax
+<br>
+<center>
+![](/images/slice_1.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
 ```{r dplyr11-syntax, eval=FALSE, echo=TRUE}
 slice(data, row_numbers)
+slice(data, n())
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-```{r dplyr11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 4'}
+- use `slice()` to extract the first 20 rows of `ecom`
+- extract the last row of `ecom` using `n()` instead of the row number
+
+```{r dplyr11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 4', exercise.lines = 7}
+# extract first 20 rows from ecom
+
+
+# extract last row from ecom
+
 
 ```
 
 ```{r dplyr11-solution}
+# extract first 20 rows from ecom
 slice(ecom, 1:20)
-```
 
-## Instructions
-
-<hr>
-
-```{r dplyr12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Extract Column - Part 5'}
-
-```
-
-```{r dplyr12-solution}
+# extract last row from ecom
 slice(ecom, n())
 ```
-
-## Tabulate Data
-
-<hr>
-
-![](/images/tally_count.png){width=90%}
-
 
 ## Tabulate Data
 
@@ -333,7 +285,13 @@ slice(ecom, n())
 Let us now look at the proportion or share of visits driven by different sources
 of traffic. 
 
-## Syntax
+<br>
+<center>
+![](/images/tally_count.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
@@ -343,11 +301,14 @@ data %>%
   tally()
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-```{r dplyr14, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 2'}
+- use `group_by()` and `tally()` to get the frequency counts of referrers 
+(`referrer`) from `ecom`
+
+```{r dplyr14, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate Data', exercise.lines = 5}
 
 
 ```
@@ -364,11 +325,24 @@ ecom %>%
 
 Let us look at how many conversions happen across different devices.
 
-## Instructions
+### Syntax
 
 <hr>
 
-```{r dplyr16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 4'}
+```{r dplyr16-syntax, eval=FALSE, echo=TRUE}
+ecom %>%
+  group_by(column_1, column_2) %>%
+  tally()
+```
+
+### Instructions
+
+<hr>
+
+- use `group_by()` and  `tally()` to get the count of purchases & non-purchases 
+(`purchase`) for each referrer type (`referrer`) from `ecom`
+
+```{r dplyr16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 4', exercise.lines = 5}
 
 
 
@@ -385,33 +359,9 @@ ecom %>%
 
 <hr>
 
-
-
-## Instructions
-
-<hr>
-
-```{r dplyr25, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 5'}
-
-
-
-
-```
-
-```{r dplyr25-solution}
-ecom %>%
-  group_by(referrer, purchase) %>%
-  tally() %>%
-  filter(purchase)
-```
-
-## Count
-
-<hr>
-
 Another way to extract the above information is by using `count`
 
-## Syntax
+### Syntax
 
 <hr>
 
@@ -419,24 +369,20 @@ Another way to extract the above information is by using `count`
 count(data, column_name)
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-```{r dplyr17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate - Part 6'}
+- use `count()` to compute the frequency of purchases and non-purchases for
+each referrer type from `ecom`
+
+```{r dplyr17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Tabulate Data', exercise.lines = 5}
 
 ```
 
 ```{r dplyr17-solution}
 count(ecom, referrer, purchase)
 ```
-
-## Top Referrers
-
-<hr>
-
-![](/images/top_n.png){width=90%}
-
 
 ## Between
 
@@ -445,7 +391,7 @@ count(ecom, referrer, purchase)
 `between()` allows us to test if the values in a column lie between two specific
 values. 
 
-## Syntax
+### Syntax
 
 <hr>
 
@@ -453,13 +399,13 @@ values.
 between(data, lower_value, upper_value)
 ```
 
-## Instructions
+### Instructions
 
 <hr>
 
-- check how many visits browsed pages between 5 and 15
+- check how many visits browsed between 5 and 15 pages
 
-```{r dplyr19, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Between'}
+```{r dplyr19, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Between', exercise.lines = 5}
 
 ```
 
@@ -477,7 +423,7 @@ ecom_sample %>%
 conditions clearly and makes the code more readable. It is used with `mutate()`
 .
 
-## Syntax
+### Syntax
 
 <hr>
 
@@ -492,14 +438,27 @@ mutate(data,
 ```
 
 
-## Instructions
+### Instructions
 
 <hr>
 
-- create a new column `repeat_visit` from `n_visit` (the number of previous visits).
+- create a new column `repeat_visit` from `n_visit` (the number of previous visits)
+- assign it `TRUE` if `n_visit` is greater than `0` else `FALSE`
+- define a repeat visitor as any one who has visited the website at least once 
+before i.e. the `n_visit` column has a value greater than 0
+- select the following columns
+    - `n_visit`
+    - `repeat_visit`
 
-```{r dplyr20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case When'}
-
+```{r dplyr20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case When', exercise.lines = 12}
+ecom %>%
+  mutate(
+    repeat_visit = case_when(
+      ,
+      
+    )
+  ) %>%
+  select() 
 ```
 
 
@@ -514,3 +473,9 @@ ecom %>%
   select(n_visit, repeat_visit) 
 ```
 
+## References
+
+<hr>
+
+- https://dplyr.tidyverse.org/
+- http://r4ds.had.co.nz/transform.html

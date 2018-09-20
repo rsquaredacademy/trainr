@@ -21,7 +21,15 @@ course_interval <- interval(course_start, course_end)
 
 <hr>
 
- In this module, we will learn to work with date/time data in R using [lubridate]( https://CRAN.R-project.org/package=lubridate), an R package that makes it easy to work with dates and time. Let us begin by installing and loading the lubridate pacakge.
+In this module, we will learn to work with date/time data in R using [lubridate]( https://CRAN.R-project.org/package=lubridate){target="_blank"}, an R package that makes it easy to work with dates and time. 
+
+### What will I learn?
+
+<hr>
+
+- extract date and time components
+- date arithmetic
+- compute time interval and duration
 
 ## Origin
 
@@ -29,13 +37,7 @@ course_interval <- interval(course_start, course_end)
 
 Let us look at the origin for the numbering system used for date and time calculations in R.
 
-```{r origin, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Origin'}
-
-
-
-```
-
-```{r origin-solution}
+```{r origin, eval=TRUE, echo=TRUE}
 lubridate::origin
 ```
 
@@ -47,13 +49,7 @@ Next, let us check out the current date, time and whether it occurs in the am or
 pm. `now()` returns the date, time as well as the time zone whereas `today()` 
 will return only the current date. `am()` and `pm()` return TRUE or FALSE.
 
-```{r today, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Current Date and Time'}
-
-
-
-```
-
-```{r today-solution}
+```{r today, eval=TRUE, echo=TRUE, collapse=TRUE}
 now()
 today()
 am(now())
@@ -64,11 +60,13 @@ pm(now())
 
 <hr>
 
-```{r show, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Data'}
+```{r show, eval=TRUE, echo=TRUE}
 transact
 ```
 
-## Data Dictionary
+<br>
+
+### Data Dictionary
 
 <hr>
 
@@ -82,8 +80,8 @@ The data set has 3 columns. All the dates are in the format (yyyy-mm-dd).
 
 <hr>
 
-We will use the functions in the lubridate package to answer a few 
-questions we have about the transact data.
+We will use the functions in the lubridate package to answer a few questions 
+we have about the transact data.
 
 - extract date, month and year from Due
 - compute the number of days to settle invoice
@@ -98,36 +96,36 @@ questions we have about the transact data.
 
 <hr>
 
-![](/images/day_week_month.png){width=90%}
+The first thing we will learn is to extract the date, month and year. Let us 
+now extract the date, month and year from the `Due` column.
 
-## Extract Date, Month & Year 
+<br>
+<center>
+![](/images/day_week_month.png){width=90%}
+</center>
+<br>
+
+### Example
 
 <hr>
 
-The first thing we will learn is to extract the date, month and year.
-
-```{r lub18, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Date, Month & YEar'}
-this_day <- as_date('2017-03-23')
-
-
-
-
-```
-
-```{r lub18-solution}
+```{r lub18, eval=TRUE, echo=TRUE, collapse=TRUE}
 this_day <- as_date('2017-03-23')
 day(this_day)
 month(this_day)
 year(this_day)
 ```
 
-## Case Study
+### Instructions
 
 <hr>
 
-Let us now extract the date, month and year from the `Due` column.
+- extract the following from the `Due` column of `transact` data:
+    - `day`
+    - `month`
+    - `year`
 
-```{r lub2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+```{r lub2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study', exercise.lines = 8}
 mutate(transact, 
   due_day   = ,
   due_month = ,
@@ -147,36 +145,34 @@ mutate(transact,
 
 <hr>
 
+Time to do some arithmetic with the dates. Let us calculate the duration of a 
+course by subtracting the course start date from the course end date. Let us 
+estimate the number of days to settle the invoice by subtracting the date of 
+invoice from the date of payment.
+
+<br>
+<center>
 ![](/images/course_duration.png){width=90%}
+</center>
+<br>
 
-## Course Duration
 
-<hr>
-
-Time to do some arithmetic with the dates. Let us calculate the duration of a course by subtracting the course start date from the course end date.
-
-```{r lub19, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Course Duration'}
-course_start    <- as_date('2017-04-12')
-course_end      <- as_date('2017-04-21')
-course_duration <- 
-course_duration
-```
-
-```{r lub19-solution}
+```{r lub19, eval=TRUE, echo=TRUE}
 course_start    <- as_date('2017-04-12')
 course_end      <- as_date('2017-04-21')
 course_duration <- course_end - course_start
 course_duration
 ```
 
-## Case Study
+### Instructions
 
 <hr>
 
-Let us estimate the number of days to settle the invoice by subtracting the 
-date of invoice from the date of payment.
+- compute the number of days to settle invoices using `Payment` and `Invoice`
+column from `transact` data
+- subtract the invoice date from the payment date
 
-```{r lub3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+```{r lub3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study', exercise.lines = 5}
 mutate(transact,
   days_to_pay = 
 )
@@ -197,14 +193,22 @@ How many of the invoices were settled post the due date? We can find this by:
 - subtracting the due date from the payment date
 - counting the number of rows where delay < 0
 
+### Instructions
 
-```{r lub4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+<hr>
+
+- compute the difference between due date and payment date using `Due` and 
+`Payment` columns from `transact` data
+- filter all rows where the value of delay is greater than 0
+- use `tally()` to compute the number of invoices settled post due date
+
+```{r lub4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study', exercise.lines = 10}
 transact %>%
   mutate(
     delay = 
   ) %>%
   filter() %>%
-  tally()
+  
 ```
 
 ```{r lub4-solution}
@@ -218,42 +222,33 @@ transact %>%
 
 ## Case Study
 
-Just for fun, let us check if the due year happens to be a leap year.
-
 <hr>
-
-```{r lub5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
-mutate(transact
-  is_leap  = 
-)
-```
-
-```{r lub5-solution}
-mutate(transact
-  is_leap  = leap_year(Due)
-)
-```
-
-## Case Study
 
 Let us do some data sanitization. If the due day happens to be February 29, let 
 us ensure that the due year is a leap year. Below are the steps to check if the 
 due year is a leap year:
 
 - we will extract the following from the due date:
-  - day
-  - month
-  - year
+    - day
+    - month
+    - year
 - we will then create a new column is_leap which will have be set to TRUE if 
 the year is a leap year else it will be set to FALSE
 - filter all the payments due on 29th Feb
 - select the following columns:
-  - Due
-  - is_leap
+    - Due
+    - is_leap
+
+### Instructions
 
 <hr>
 
-```{r lub6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+- extract day, month and year from `Due` 
+- check if `due_year` is a leap year using `leap_year()`
+- select all columns except `Invoice` and `Payment`
+- filter all rows where `due_month` is `2` and `due_day` is `29`
+
+```{r lub6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study', exercise.lines = 12}
 transact %>%
   mutate(
     due_day   = ,
@@ -281,37 +276,50 @@ transact %>%
 
 <hr>
 
-![](/images/shift_dates.png){width=90%}
+Time to shift some dates. We can shift a date by days, weeks or months.  
 
-## Shift Date
+<br>
+<center>
+![](/images/shift_dates.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-Time to shift some dates. We can shift a date by days, weeks or months. Let us 
-shift the course start date by:
-
-- 2 days
-- 3 weeks
-- 1 year
-
-
-```{r lab40, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Shifting Dates'}
-course_start + 
-course_start + 
-course_start + 
+```{r lab40-syntax, eval=FALSE, echo=TRUE}
+date + days(number_of_days)
+date + weeks(number_of_weeks)
+date + years(number_of_years)
 ```
 
-```{r lab40-solution}
+### Instructions
+
+<hr>
+
+- shift the course start date by:
+    - 2 days
+    - 3 weeks
+    - 1 year
+
+```{r lub40, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Shift Date', exercise.lines = 10}
+# shift course start date by 2 days
+course_start +
+
+# shift course start date by 3 weeks
+course_start +
+
+# shift course start date by 1 year
+course_start +
+```
+
+```{r lub40-solution}
 course_start + days(2)
 course_start + weeks(1)
 course_start + years(1)
 ```
 
-## Interval
-
-<hr>
-
-![](/images/course_interval.png){width=90%}
 
 ## Interval
 
@@ -321,7 +329,29 @@ Let us calculate the duration of the course using `interval`. If you observe
 carefully, the result is not the duration in days but an object of class 
 `interval`. Now let us learn how we can use intervals.
 
-```{r lub10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Interval'}
+<br>
+<center>
+![](/images/course_interval.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r lub10-syntax, eval=FALSE, echo=TRUE}
+interval(start_date, end_date)
+```
+
+### Instructions
+
+<hr>
+
+- compute the course duration using `interval()`
+- use `course_start` as the course start date
+- use `course_end` as the course end date
+
+```{r lub10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Interval', exercise.lines = 5}
 
 
 
@@ -335,24 +365,42 @@ interval(course_start, course_end)
 
 <hr>
 
-![](/images/shift_interval.png){width=90%}
-
-## Shift Interval
-
-<hr>
-
 Intervals can be shifted too. In the below example, we shift the course interval by:
 
 - 1 day
 - 3 weeks
 - 1 year
 
+<br>
+<center>
+![](/images/shift_interval.png){width=90%}
+</center>
+<br>
 
-```{r lab50, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Shifting Intervals'}
+### Syntax
+
+<hr>
+
+```{r lab50-syntax, eval=FALSE, echo=TRUE}
+int_shift(interval, by = days(number_of_days))
+int_shift(interval, by = weeks(number_of_weeks))
+int_shift(interval, by = years(number_of_years))
+```
+
+### Instructions
+
+<hr>
+
+We have created `course_interval` using the course start and end date. Use 
+`int_shift()` to shift the `course_interval` by:
+
+- `1 day`
+- `3 weeks`
+- `1 year`
+
+```{r lab50, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Shifting Intervals', exercise.lines = 7}
 course_interval <- interval(course_start, course_end)
-int_shift(course_interval, by = )
-int_shift(course_interval, by = )
-int_shift(course_interval, by = )
+
 ```
 
 ```{r lab50-solution}
@@ -366,12 +414,6 @@ int_shift(course_interval, by = years(1))
 
 <hr>
 
-![](/images/interval_overlap.png){width=90%}
-
-## Intervals Overlap
-
-<hr>
-
 Let us say you are planning a vacation and want to check if the vacation dates 
 overlap with the course dates. You can do this by:
 
@@ -379,10 +421,32 @@ overlap with the course dates. You can do this by:
 - use `int_overlaps()` to check if two intervals overlap. It returns `TRUE` if 
 the intervals overlap else `FALSE`.
 
-Let us use the vacation start and end dates to create `vacation_interval` and 
-then check if it overlaps with `course_interval`.
+<br>
+<center>
+![](/images/interval_overlap.png){width=90%}
+</center>
+<br>
 
-```{r lub60, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Overlapping Intervals'}
+### Syntax
+
+<hr>
+
+```{r lub60-syntax, eval=FALSE, echo=TRUE}
+int_overlaps(interval_1, interval_2)
+```
+
+### Instructions
+
+<hr>
+
+Let us use the vacation start and end dates to create `vacation_interval` and 
+then check if it overlaps with `course_interval`:
+
+- create `vacation_interval` using `vacation_start` and `vacation_end`
+- use `interval()` to create `vacation_interval`
+- test if `vacation_interval` overlaps with `course_interval` using `int_overlaps()`
+
+```{r lub60, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Overlapping Intervals', exercise.lines = 6}
 vacation_start    <- as_date('2017-04-19')
 vacation_end      <- as_date('2017-04-25')
 vacation_interval <- 
@@ -405,11 +469,28 @@ the due date. To do this, we will:
 
 - create an interval for the invoice and due date
 - create a new column due_next by incrementing the due date by 1 day
-- another interval for due_next and the payment date
+- another interval for due_next and the payment date 
 - if the intervals overlap, the payment was made within the due date
 
+### Instructions
 
-```{r lub7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+<hr>
+
+- compute the interval for the invoice date (`Invoice`) and due date (`Due`)
+using `interval()` and store it in the variable `inv_due_interval`
+- shift the due date by 1 day using `days()` and store the new due date in the
+variable `due_next`
+- create an interval for the new due date (`due_next`) and payment date (`Payment`)
+using `interval()` and store it in the variable `due_pay_interval`
+- check if the above two intervals overlap using `int_overlaps()` and store the 
+result in the variable `overlaps`
+- select the following columns
+    - `Invoice`
+    - `Due`
+    - `Payment`
+    - `Overlaps`
+
+```{r lub7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study', exercise.lines = 12}
 transact %>%
   mutate(
     inv_due_interval = ,
@@ -439,7 +520,7 @@ Below we show another method to count the number of invoices paid within the
 due date. Instead of using days to change the due date, we use `int_shift` to 
 shift it by 1 day.
 
-```{r lub12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+```{r lub12, eval=TRUE, echo=TRUE}
 # using int_shift
 transact %>%
   mutate(
@@ -455,24 +536,39 @@ transact %>%
 
 <hr>
 
-![](/images/within.png){width=90%}
-
-## Within
-
-<hr>
-
 Let us assume that we have to attend a conference in April 2017. Does it occur 
 during the course duration? We can answer this using `%within%` which will 
 return `TRUE` if a date falls within an interval.
 
-```{r lub30, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Within'}
+<br>
+<center>
+![](/images/within.png){width=90%}
+</center>
+<br>
+
+### Syntax
+
+<hr>
+
+```{r lub30-syntax, eval=FALSE, echo=TRUE}
+date %within% interval
+```
+
+### Instructions
+
+<hr>
+
+- check whether the conference date (`conference`) clashes with `course_interval`
+using `%within%`
+
+```{r lub30, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Within', exercise.lines = 5}
 conference <- as_date('2017-04-15')
 
 ```
 
 ```{r lub30-solution}
 conference <- as_date('2017-04-15')
-conference %within% interval(course_start, course_end)
+conference %within% course_interval
 ```
 
 ## Case Study
@@ -485,7 +581,20 @@ the due date. We will do this by:
 - creating an interval for the invoice and due date
 - check if the payment date falls within the above interval
 
-```{r lub13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
+### Instructions
+
+<hr>
+
+- create an interval (`inv_due_interval`) for the invoice date (`Invoice`) and
+due date (`Due`) using `interval()`
+- check if the payment date (`Payment`) occurs within the above interval using
+`%within%` and store it in the variable `overlaps`
+- and select the following columns:
+    - `Due`
+    - `Payment`
+    - `overlaps`
+
+```{r lub13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study', exercise.lines = 10}
 transact %>%
   mutate(
     inv_due_interval = ,
@@ -507,15 +616,39 @@ transact %>%
 
 <hr>
 
-![](/images/quarter_semester.png){width=90%}
+Let us check the quarter and the semester in which the course starts.
 
-## Quarter
+<br>
+<center>
+![](/images/quarter_semester.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-Let us check the quarter and the semester in which the course starts.
+```{r lub20-syntax, eval=FALSE, echo=TRUE}
+# extract quarter
+quarter(date)
 
-```{r lub20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Quarter & Semester'}
+# extract quarter with year
+quarter(date, with_year = TRUE)
+
+# extract semester 
+semester(date)  
+```
+
+### Instructions
+
+<hr>
+
+- extract the following from the course start date (`course_start`)
+    - quarter
+    - quarter with year
+    - semester
+
+```{r lub20, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Quarter & Semester', exercise.lines = 7}
 course_start
 
 
@@ -530,41 +663,40 @@ quarter(course_start, with_year = TRUE)
 semester(course_start)  
 ```
 
-## Case Study
-
-<hr>
-
-Let us count the invoices due for each quarter.
-
-```{r lub8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Case Study'}
-transact %>%
-  mutate(
-    quarter_due = 
-  ) %>%
-  count()
-```
-
-```{r lub8-solution}
-transact %>%
-  mutate(
-    quarter_due = quarter(Due)
-  ) %>%
-  count(quarter_due)
-```
-
 ## Convert
 
 <hr>
 
+<br>
+<center>
 ![](/images/convert.png){width=90%}
+</center>
+<br>
 
-## Case Study
+### Syntax
 
 <hr>
 
-Let us also get the course interval in different units.
+```{r lub11-syntax, eval=FALSE, echo=TRUE}
+interval / dseconds()
+interval / dminutes()
+interval / dhours()
+interval / dweeks()
+interval / dyears()
+```
 
-```{r lub11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Convert Units'}
+### Instructions
+
+<hr>
+
+- get the `course_interval` in the following units:
+    - seconds
+    - minutes
+    - hours
+    - weeks
+    - years
+
+```{r lub11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Convert Units', exercise.lines = 7}
 course_interval / 
 course_interval / 
 course_interval / 
@@ -584,18 +716,36 @@ course_interval / dyears()
 
 <hr>
 
-![](/images/time_length.png){width=90%}
+We can use `time_length()` to get the course interval in different units.
 
-## Case Study
+<br>
+<center>
+![](/images/time_length.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-We can use `time_length()` to get the course interval in different units.
+```{r lub16-syntax, eval=FALSE, echo=TRUE}
+time_length(interval, unit = "seconds")
+time_length(interval, unit = "minutes")
+time_length(interval, unit = "hours")
+```
 
-```{r lub16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Convert Units'}
-time_length(course_interval, )
-time_length(course_interval, )
-time_length(course_interval, )
+### Instructions
+
+<hr>
+
+- use `time_length()` to get the course interval (`course_interval`) in the
+following units
+    - seconds
+    - minutes
+    - hours
+
+```{r lub16, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Convert Units', exercise.lines = 5}
+
 ```
 
 ```{r lub16-solution}
@@ -608,18 +758,36 @@ time_length(course_interval, unit = "hours")
 
 <hr>
 
-![](/images/as_period.png){width=90%}
+`as.period()` is yet another way to get the course interval in different units.
 
-## Case Study
+<br>
+<center>
+![](/images/as_period.png){width=90%}
+</center>
+<br>
+
+### Syntax
 
 <hr>
 
-`as.period()` is yet another way to get the course interval in different units.
+```{r lub17-syntax, eval=FALSE, echo=TRUE}
+as.period(interval, unit = "seconds")
+as.period(interval, unit = "minutes")
+as.period(interval, unit = "hours")
+```
 
-```{r lub17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Convert Units'}
-as.period(course_interval, )
-as.period(course_interval, )
-as.period(course_interval, )
+### Instructions
+
+<hr>
+
+- use `as.period()` to get the course interval (`course_interval`) in the 
+following units
+    - seconds
+    - minutes
+    - hours
+
+```{r lub17, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Convert Units', exercise.lines = 5}
+
 ```
 
 ```{r lub17-solution}
@@ -628,4 +796,9 @@ as.period(course_interval, unit = "minutes")
 as.period(course_interval, unit = "hours")
 ```
 
+## References
 
+<hr>
+
+- https://lubridate.tidyverse.org/
+- http://r4ds.had.co.nz/dates-and-times.html
