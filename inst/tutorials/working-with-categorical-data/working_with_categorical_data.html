@@ -44,12 +44,10 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div class="topics">
 
-<div id="section-introduction" class="section level2">
-<h2>Introduction</h2>
+<div id="section-what-will-i-learn" class="section level2">
+<h2>What will I learn?</h2>
 <hr>
-<div id="section-what-will-i-learn" class="section level3">
-<h3>What will I learn?</h3>
-<hr>
+<p>You will learn to handle categorical data and be able to :</p>
 <ul>
 <li>tabulate levels</li>
 <li>reorder levels</li>
@@ -58,6 +56,13 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>recode levels</li>
 <li>recategorize levels</li>
 <li>shift levels</li>
+</ul>
+<div id="section-prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<hr>
+<ul>
+<li>Introduction to R</li>
+<li>Readable Code with Pipes</li>
 </ul>
 </div>
 </div>
@@ -88,13 +93,22 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <hr>
 <p>Let us extract the <code>traffics</code> column from the above data and save it in a new variable <code>referrer</code>. Instead of using <code>web_data</code> which is a tibble, we will use <code>referrer</code> which is a vector. We do this to avoid extracting the <code>traffics</code> column from the main data repeatedly.</p>
 <pre class="r"><code>referrer</code></pre>
-<pre><code>##  [1] google google google google google google google google google google
+<pre><code>##   [1] google google google google google google google google google google
+##  [11] google google google google google google google google google google
+##  [21] google google google google google google google google google google
+##  [31] google google google google google google google google google google
+##  [41] google google google google google google google google google google
+##  [51] google google google google google google google google google google
+##  [61] google google google google google google google google google google
+##  [71] google google google google google google google google google google
+##  [81] google google google google google google google google google google
+##  [91] google google google google google google google google google google
 ## 9 Levels: google facebook affiliates bing yahoo twitter ... direct</code></pre>
 </div>
 <div id="section-count" class="section level2">
 <h2>Count</h2>
 <hr>
-<p>Let us compute the traffic driven by different referrers using <code>fct_count</code>.</p>
+<p>Let us compute the traffic driven by different referrers using <code>fct_count()</code>.</p>
 <br>
 <center>
 <img src="/images/fct_count.png" style="width:90.0%" />
@@ -108,7 +122,10 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-instructions" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat2" data-caption="Tabulate Referrers" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>use <code>fct_count()</code> to compute the traffic driven by different referrers (<code>referrer</code>)</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat2" data-caption="Tabulate Referrers" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
@@ -119,20 +136,32 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-levels" class="section level2">
 <h2>Levels</h2>
 <hr>
-<p>Use <code>levels()</code> to display the categories/levels.</p>
+<p>The number of categories in a categorical variable can be known using <code>nlevels()</code>. If you want to view the categories, use <code>levels()</code>.</p>
 <div id="section-syntax-1" class="section level3">
 <h3>Syntax</h3>
 <hr>
-<pre class="r"><code>levels(data)</code></pre>
+<pre class="r"><code>nlevels(data)
+levels(data)</code></pre>
 </div>
 <div id="section-instructions-1" class="section level3">
 <h3>Instructions</h3>
 <hr>
+<ul>
+<li>use <code>nlevels()</code> to display the number of referrers (<code>referrer</code>)</li>
+<li>use <code>levels()</code> to display the different referrers (<code>referrer</code>)</li>
+</ul>
 <div class="tutorial-exercise" data-label="cat2b" data-caption="Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># number of categories in referrer
+
+# referrer categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat2b-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>levels(referrer)</code></pre>
+<pre class="text"><code># number of categories in referrer
+nlevels(referrer)
+
+# referrer categories
+levels(referrer)</code></pre>
 </div>
 </div>
 </div>
@@ -153,11 +182,22 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="section-instructions-2" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat11" data-caption="Reorder Referrers" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>use <code>fct_infreq()</code> to reorder the <code>referrer</code> categories and save the output in <code>freq_traffic</code></li>
+<li>use <code>levels()</code> to view the reordered categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat11" data-caption="Reorder Referrers" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="7">
+<pre class="text"><code># reorder categories
+freq_traffic &lt;- 
+
+# view reordered categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat11-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>freq_traffic &lt;- fct_infreq(referrer)
+<pre class="text"><code># reorder categories
+freq_traffic &lt;- fct_infreq(referrer)
+
+# view reordered categories
 levels(freq_traffic)</code></pre>
 </div>
 </div>
@@ -179,11 +219,22 @@ levels(freq_traffic)</code></pre>
 <div id="section-instructions-3" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat4" data-caption="Reorder Referrers" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>use <code>fct_inorder()</code> to reorder the <code>referrer</code> categories and save the output in <code>order_traffic</code></li>
+<li>use <code>levels()</code> to view the reordered categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat4" data-caption="Reorder Referrers" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="7">
+<pre class="text"><code># reorder categories
+order_traffic &lt;- 
+
+# view reordered categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat4-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>order_traffic &lt;- fct_inorder(referrer)
+<pre class="text"><code># reorder categories
+order_traffic &lt;- fct_inorder(referrer)
+
+# view reordered categories
 levels(order_traffic)</code></pre>
 </div>
 </div>
@@ -205,12 +256,22 @@ levels(order_traffic)</code></pre>
 <div id="section-instructions-4" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat25" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>reversed &lt;- </code></pre>
+<ul>
+<li>use <code>fct_rev()</code> to reverse the order of categories in <code>referrer</code></li>
+<li>use <code>levels()</code> to view the reversed order of categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat25" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="7">
+<pre class="text"><code># reverse order of categories
+reversed &lt;- 
+
+# view reversed order </code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat25-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>reversed &lt;- fct_rev(referrer)
+<pre class="text"><code># reverse order of categories
+reversed &lt;- fct_rev(referrer)
+
+# view reversed order 
 levels(reversed)</code></pre>
 </div>
 </div>
@@ -238,7 +299,19 @@ levels(reversed)</code></pre>
 <div id="section-instructions-5" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat7" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>use <code>fct_collapse()</code> to group the following categories
+<ul>
+<li>group <em>facebook</em>, <em>twitter</em> and <em>instagram</em> as <code>social</code></li>
+<li>group <em>google</em>, <em>bing</em> and <em>yahoo</em> as <code>search</code></li>
+</ul></li>
+<li>use <code>levels()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat7" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code>referrer %&gt;% 
+  fct_collapse(
+  social = ,
+  search = ) %&gt;% </code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat7-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
@@ -246,7 +319,7 @@ levels(reversed)</code></pre>
   fct_collapse(
   social = c(&quot;facebook&quot;, &quot;twitter&quot;, &quot;instagram&quot;),
   search = c(&quot;google&quot;, &quot;bing&quot;, &quot;yahoo&quot;)) %&gt;% 
-  fct_count() </code></pre>
+  levels() </code></pre>
 </div>
 </div>
 </div>
@@ -270,7 +343,17 @@ levels(reversed)</code></pre>
 <div id="section-instructions-6" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="recode" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>use <code>fct_recode()</code> to group the following categories:
+<ul>
+<li>group <em>facebook</em>, <em>twitter</em> and <em>instagram</em> as <code>social</code></li>
+<li>group <em>google</em>, <em>bing</em> and <em>yahoo</em> as <code>search</code></li>
+</ul></li>
+<li>use <code>levels()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="recode" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code>fct_recode(referrer, ) %&gt;%
+  levels()</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="recode-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
@@ -302,13 +385,18 @@ levels(reversed)</code></pre>
 {"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"google","2":"9229"},{"1":"facebook","2":"8135"},{"1":"affiliates","2":"7641"},{"1":"bing","2":"5893"},{"1":"yahoo","2":"4899"},{"1":"twitter","2":"4521"},{"1":"instagram","2":"3907"},{"1":"unknown","2":"2657"},{"1":"direct","2":"1350"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="tutorial-exercise" data-label="cat8b" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>the above data show the frequency of different referrers</li>
+<li>use <code>fct_lump()</code> to lump together categories of <code>referrer</code></li>
+<li>use <code>fct_count()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat8b" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat8b-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>referrer %&gt;% 
   fct_lump() %&gt;% 
-  table()</code></pre>
+  fct_count()</code></pre>
 </div>
 </div>
 </div>
@@ -316,11 +404,6 @@ levels(reversed)</code></pre>
 <h2>Lump Categories</h2>
 <hr>
 <p>We want to retain the top 3 referrers and combine the rest of them into a single category. Use <code>fct_lump()</code> and set the argument <code>n</code> to 3 indicating we want to retain top 3 categories and combine the rest.</p>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"google","2":"9229"},{"1":"facebook","2":"8135"},{"1":"affiliates","2":"7641"},{"1":"bing","2":"5893"},{"1":"yahoo","2":"4899"},{"1":"twitter","2":"4521"},{"1":"instagram","2":"3907"},{"1":"unknown","2":"2657"},{"1":"direct","2":"1350"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
 <div id="section-syntax-8" class="section level3">
 <h3>Syntax</h3>
 <hr>
@@ -329,13 +412,24 @@ levels(reversed)</code></pre>
 <div id="section-instructions-8" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat17" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"google","2":"9229"},{"1":"facebook","2":"8135"},{"1":"affiliates","2":"7641"},{"1":"bing","2":"5893"},{"1":"yahoo","2":"4899"},{"1":"twitter","2":"4521"},{"1":"instagram","2":"3907"},{"1":"unknown","2":"2657"},{"1":"direct","2":"1350"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<ul>
+<li>the above data show the frequency of different referrers in descending order</li>
+<li>use <code>fct_lump()</code> to lump together categories of <code>referrer</code></li>
+<li>retain the top 3 categories and combine the rest</li>
+<li>use <code>fct_count()</code> to view the new categories and their frequency</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat17" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat17-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>referrer %&gt;% 
   fct_lump(n = 3) %&gt;% 
-  table()</code></pre>
+  fct_count()</code></pre>
 </div>
 </div>
 </div>
@@ -361,25 +455,26 @@ levels(reversed)</code></pre>
 {"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["percent"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"google","2":"9229","3":"19.13"},{"1":"facebook","2":"8135","3":"16.87"},{"1":"affiliates","2":"7641","3":"15.84"},{"1":"bing","2":"5893","3":"12.22"},{"1":"yahoo","2":"4899","3":"10.16"},{"1":"twitter","2":"4521","3":"9.37"},{"1":"instagram","2":"3907","3":"8.10"},{"1":"unknown","2":"2657","3":"5.51"},{"1":"direct","2":"1350","3":"2.80"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="tutorial-exercise" data-label="cat18" data-caption="Lump Categories" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<ul>
+<li>the above data show the frequency of different referrers in percentage</li>
+<li>use <code>fct_lump()</code> to lump together categories of <code>referrer</code></li>
+<li>retain referrer categories that drive greater than 10% traffic and combine the rest</li>
+<li>use <code>fct_count()</code> to view the new categories and their frequency</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat18" data-caption="Lump Categories" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat18-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>referrer %&gt;% 
   fct_lump(prop = 0.10) %&gt;% 
-  table()</code></pre>
+  fct_count()</code></pre>
 </div>
 </div>
 </div>
 <div id="section-lump-categories-3" class="section level2">
 <h2>Lump Categories</h2>
 <hr>
-<p>What if we want to retain 3 referrers which drive the lowest traffic to the website and combine the rest? We will still use the n argument but instead of specifying 3, we now specify -3.</p>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"direct","2":"1350"},{"1":"unknown","2":"2657"},{"1":"instagram","2":"3907"},{"1":"twitter","2":"4521"},{"1":"yahoo","2":"4899"},{"1":"bing","2":"5893"},{"1":"affiliates","2":"7641"},{"1":"facebook","2":"8135"},{"1":"google","2":"9229"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<p>What if we want to retain 3 referrers which drive the lowest traffic to the website and combine the rest? We will still use the <code>n</code> argument but instead of specifying 3, we now specify -3.</p>
 <div id="section-syntax-10" class="section level3">
 <h3>Syntax</h3>
 <hr>
@@ -388,13 +483,24 @@ levels(reversed)</code></pre>
 <div id="section-instructions-10" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat19" data-caption="Lump Categories" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"direct","2":"1350"},{"1":"unknown","2":"2657"},{"1":"instagram","2":"3907"},{"1":"twitter","2":"4521"},{"1":"yahoo","2":"4899"},{"1":"bing","2":"5893"},{"1":"affiliates","2":"7641"},{"1":"facebook","2":"8135"},{"1":"google","2":"9229"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<ul>
+<li>the above data show the frequency of different referrers in ascending order</li>
+<li>use <code>fct_lump()</code> to lump together categories of <code>referrer</code></li>
+<li>retain the 3 categories that drive the lowest traffic and combine the rest</li>
+<li>use <code>fct_count()</code> to view the new categories and their frequency</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat19" data-caption="Lump Categories" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat19-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>referrer %&gt;% 
   fct_lump(n = -3) %&gt;% 
-  table()</code></pre>
+  fct_count()</code></pre>
 </div>
 </div>
 </div>
@@ -402,11 +508,6 @@ levels(reversed)</code></pre>
 <h2>Lump Categories</h2>
 <hr>
 <p>Let us see how to retain referrers that drive less than 10 % traffic to the website and combine the rest into a single group.</p>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["percent"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"google","2":"9229","3":"19.13"},{"1":"facebook","2":"8135","3":"16.87"},{"1":"affiliates","2":"7641","3":"15.84"},{"1":"bing","2":"5893","3":"12.22"},{"1":"yahoo","2":"4899","3":"10.16"},{"1":"twitter","2":"4521","3":"9.37"},{"1":"instagram","2":"3907","3":"8.10"},{"1":"unknown","2":"2657","3":"5.51"},{"1":"direct","2":"1350","3":"2.80"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
 <div id="section-syntax-11" class="section level3">
 <h3>Syntax</h3>
 <hr>
@@ -415,13 +516,24 @@ levels(reversed)</code></pre>
 <div id="section-instructions-11" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="cat20" data-caption="Lump Categories" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["f"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["percent"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"google","2":"9229","3":"19.13"},{"1":"facebook","2":"8135","3":"16.87"},{"1":"affiliates","2":"7641","3":"15.84"},{"1":"bing","2":"5893","3":"12.22"},{"1":"yahoo","2":"4899","3":"10.16"},{"1":"twitter","2":"4521","3":"9.37"},{"1":"instagram","2":"3907","3":"8.10"},{"1":"unknown","2":"2657","3":"5.51"},{"1":"direct","2":"1350","3":"2.80"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<ul>
+<li>the above data show the frequency of different referrers in percentage</li>
+<li>use <code>fct_lump()</code> to lump together categories of <code>referrer</code></li>
+<li>retain the categories that drive less than 10% traffic and combine the rest</li>
+<li>use <code>fct_count()</code> to view the new categories and their frequency</li>
+</ul>
+<div class="tutorial-exercise" data-label="cat20" data-caption="Lump Categories" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="cat20-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>referrer %&gt;% 
   fct_lump(prop = -0.1) %&gt;% 
-  table()</code></pre>
+  fct_count()</code></pre>
 </div>
 </div>
 </div>
@@ -442,12 +554,23 @@ levels(reversed)</code></pre>
 <div id="section-instructions-12" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="other_1" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>keep_gy &lt;- </code></pre>
+<ul>
+<li>use <code>fct_other()</code> to replace <code>referrer</code> categories with <code>other</code> and save the output in <code>keep_gy</code></li>
+<li>retain <em>google</em> and <em>yahoo</em>; combine the rest into <code>other</code> category</li>
+<li>use <code>levels()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="other_1" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># retain goole &amp; yahoo; group rest as others
+keep_gy &lt;- 
+
+# view the new categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="other_1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>keep_gy &lt;- fct_other(referrer, keep = c(&quot;google&quot;, &quot;yahoo&quot;))
+<pre class="text"><code># retain goole &amp; yahoo; group rest as others
+keep_gy &lt;- fct_other(referrer, keep = c(&quot;google&quot;, &quot;yahoo&quot;))
+
+# view the new categories
 levels(keep_gy)</code></pre>
 </div>
 </div>
@@ -473,12 +596,27 @@ levels(keep_gy)</code></pre>
 <div id="section-instructions-13" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="other_2" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>drop_it &lt;- </code></pre>
+<ul>
+<li>use <code>fct_other()</code> to drop the follwing <code>referrer</code> categories:
+<ul>
+<li><code>instagram</code></li>
+<li><code>twitter</code></li>
+</ul></li>
+<li>use the <code>drop</code> argument to drop the categories</li>
+<li>use <code>levels()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="other_2" data-caption="Data" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># drop instagram and twitter
+drop_it &lt;- 
+
+# view the new categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="other_2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>drop_it &lt;- fct_other(referrer, drop = c(&quot;instagram&quot;, &quot;twitter&quot;)) 
+<pre class="text"><code># drop instagram and twitter
+drop_it &lt;- fct_other(referrer, drop = c(&quot;instagram&quot;, &quot;twitter&quot;)) 
+
+# view the new categories
 levels(drop_it)</code></pre>
 </div>
 </div>
@@ -500,13 +638,21 @@ levels(drop_it)</code></pre>
 <div id="section-instructions-14" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<p>Similarly, in the below example, we reorder the levels to ensure twitter appears first irrespective of its frequency or order of appearance in the data.</p>
-<div class="tutorial-exercise" data-label="relevel_1" data-caption="Reorder Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>move_twitter &lt;- </code></pre>
+<ul>
+<li>use <code>fct_relevel()</code> to reorder the levels to ensure <em>twitter</em> appears first irrespective of its frequency or order of appearance in the data.</li>
+</ul>
+<div class="tutorial-exercise" data-label="relevel_1" data-caption="Reorder Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># ensure twitter is the first category
+move_twitter &lt;- 
+
+# view the reordered categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="relevel_1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>move_twitter &lt;- fct_relevel(referrer, &quot;twitter&quot;) 
+<pre class="text"><code># ensure twitter is the first category
+move_twitter &lt;- fct_relevel(referrer, &quot;twitter&quot;) 
+
+# view the reordered categories
 levels(move_twitter)</code></pre>
 </div>
 </div>
@@ -528,12 +674,23 @@ levels(move_twitter)</code></pre>
 <div id="section-instructions-15" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="relevel_2" data-caption="Reorder Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>appear_2 &lt;- </code></pre>
+<ul>
+<li>use <code>fct_relevel()</code> to reorder the levels to ensure <em>google</em> is the third category irrespective of its frequency or order of appearance in the data.</li>
+<li>use the <code>after</code> argument to specify it’s position</li>
+<li>use <code>levels()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="relevel_2" data-caption="Reorder Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># google should be the third category
+appear_2 &lt;- 
+
+# view the new categories </code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="relevel_2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>appear_2 &lt;- fct_relevel(referrer, &quot;google&quot;, after = 2)
+<pre class="text"><code># google should be the third category
+appear_2 &lt;- fct_relevel(referrer, &quot;google&quot;, after = 2)
+
+# view the new categories 
 levels(appear_2)</code></pre>
 </div>
 </div>
@@ -555,12 +712,23 @@ levels(appear_2)</code></pre>
 <div id="section-instructions-16" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="relevel_3" data-caption="Reorder Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>appear_last &lt;- </code></pre>
+<ul>
+<li>use <code>fct_relevel()</code> to reorder the levels to ensure <em>facebook</em> is the last category irrespective of its frequency or order of appearance in the data.</li>
+<li>use the <code>after</code> argument and supply it the value <code>Inf</code> to reorder the categories</li>
+<li>use <code>levels()</code> to view the new categories</li>
+</ul>
+<div class="tutorial-exercise" data-label="relevel_3" data-caption="Reorder Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># facebook should be the last category
+appear_last &lt;- 
+
+# view the new categories</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="relevel_3-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>appear_last &lt;- fct_relevel(referrer, &quot;facebook&quot;, after = Inf) 
+<pre class="text"><code># facebook should be the last category
+appear_last &lt;- fct_relevel(referrer, &quot;facebook&quot;, after = Inf) 
+
+# view the new categories
 levels(appear_last)</code></pre>
 </div>
 </div>
@@ -843,12 +1011,22 @@ levels(appear_last)</code></pre>
 <div id="section-instructions-17" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="shift_1" data-caption="Shift Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>shift_left &lt;- </code></pre>
+<ul>
+<li>use <code>fct_shift()</code> to shift the levels of <code>responses</code> by 2 positions to the left</li>
+<li>use <code>levels()</code> to view the new order of the levels</li>
+</ul>
+<div class="tutorial-exercise" data-label="shift_1" data-caption="Shift Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># shift levels to the left by 2 positions
+shift_left &lt;- 
+
+# use levels to view the new order </code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="shift_1-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>shift_left &lt;- fct_shift(responses, 2) 
+<pre class="text"><code># shift levels to the left by 2 positions
+shift_left &lt;- fct_shift(responses, 2) 
+
+# use levels to view the new order 
 levels(shift_left)</code></pre>
 </div>
 </div>
@@ -870,12 +1048,22 @@ levels(shift_left)</code></pre>
 <div id="section-instructions-18" class="section level3">
 <h3>Instructions</h3>
 <hr>
-<div class="tutorial-exercise" data-label="shift_2" data-caption="Shift Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>shift_right &lt;- </code></pre>
+<ul>
+<li>use <code>fct_shift()</code> to shift the levels of <code>responses</code> by 2 positions to the right</li>
+<li>use <code>levels()</code> to view the new order of the levels</li>
+</ul>
+<div class="tutorial-exercise" data-label="shift_2" data-caption="Shift Levels" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="8">
+<pre class="text"><code># shift levels to the right by 2 positions
+shift_right &lt;- 
+
+# use levels to view the new order </code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="shift_2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
-<pre class="text"><code>shift_right &lt;- fct_shift(responses, -2) 
+<pre class="text"><code># shift levels to the right by 2 positions
+shift_right &lt;- fct_shift(responses, -2) 
+
+# use levels to view the new order 
 levels(shift_right)</code></pre>
 </div>
 </div>
