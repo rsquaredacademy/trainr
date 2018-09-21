@@ -13,9 +13,16 @@ ecom <-
   read_csv('https://raw.githubusercontent.com/rsquaredacademy/datasets/master/web.csv',
     col_types = cols_only(device = col_factor(levels = c("laptop", "tablet", "mobile")),
       referrer = col_factor(levels = c("bing", "direct", "social", "yahoo", "google")),
-      purchase = col_logical(), n_pages = col_double(), order_value = col_double()
+      purchase = col_logical(), n_pages = col_double(), order_value = col_double(), 
+      duration = col_double(), n_visit = col_double()
     )
   )
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
+ecom5 <- mutate(ecom4, aov = revenue / orders)
+ecom6 <- select(ecom5, device, aov)
 ```
 
 
@@ -74,9 +81,11 @@ Below is the description of the data set:
 
 - referrer: referrer website/search engine
 - device: device used to visit the website
+- duration: time spent on the website (in seconds)
 - n_pages: number of pages visited
 - purchase: whether visitor purchased
 - order_value: order value of visitor (in dollars)
+- n_visit: number of visits
 
 
 ## Average Order Value
@@ -129,13 +138,34 @@ few examples:
 </center>
 <br>
 
-```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Filter - Part 1'}
+#### Syntax
+
+```{r dplyr2-syntax, eval=FALSE, echo=TRUE}
+filter(data, filter_condition)
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- filter all visits from mobile using `filter()`
+- the first argument should be the data set i.e. `ecom`
+- the next argument should be the condition for filtering which includes:
+    - the column name (`device`)
+    - the value based on which data must be filtered (`'mobile'`)
+    - the equality operator (`==`)
+
+```{r dplyr2, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Filter - Part 1', exercise.lines = 5}
 filter(ecom,  == )
 ```
 
 ```{r dplyr2-solution}
 filter(ecom, device == "mobile")
 ```
+
+<br>
 
 ### Multiple Filters
 
@@ -147,8 +177,32 @@ filter(ecom, device == "mobile")
 </center>
 </br>
 
+#### Syntax
+
+<hr>
+
+```{r dplyr3-syntax, eval=FALSE, echo=TRUE}
+filter(data, condition1, condition2, ...)
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- use `filter()` to filter visits from mobile which resulted in purchase
+- the first argument should be the data set i.e. `ecom`
+- you have to filter data using two columns which results in two conditions
+- the first condition is the same as in the previous example
+- the second condtion is related to `purchase` column
+- when you filter based on a `logical` value, you just use the column
+name when filtering for `TRUE` and `!` along with column name for `FALSE`
+- since we are filtering observations which resulted in a purchase i.e. 
+`purchase` column has value `TRUE`, we will just specify the column name
+
 ```{r dplyr3, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Filter - Part 2'}
-filter(ecom, device == "mobile",      ==     )
+filter(ecom, , )
 ```
 
 ```{r dplyr3-solution}
@@ -159,7 +213,13 @@ filter(ecom, device == "mobile", purchase)
 
 <hr>
 
-```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Filter - Part 3'}
+- use `filter()` to filter visits from mobile and browsed more than 5 pages (`n_pages`)
+- the first argument should be the data set i.e. `ecom`
+- the first condition must be same as the last two examples
+- the second condition is related to the number of pages browsed; use the `>` operator
+to compare the `n_pages` column to `5`
+
+```{r dplyr4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Filter - Part 3', exercise.lines = 5}
 filter(ecom, device == "mobile",       )
 ```
 
@@ -170,6 +230,9 @@ filter(ecom, device == "mobile", n_pages > 5)
 ### Case Study
 
 <hr>
+
+- for our case study, we need to filter all visits that resulted in a purchase
+- use `filter()` to filter observations where `purchase` column has the value `TRUE`
 
 ```{r dplyr5, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Filter - Part 4'}
 filter(ecom,            )
@@ -195,13 +258,29 @@ arguments specify the columns by name or position. Let us look at a few examples
 </center>
 <br>
 
-```{r dplyr6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 1'}
+#### Syntax
+
+```{r dplyr6-syntax, eval=FALSE, echo=TRUE}
+select(data, column_name, column_name, ...)
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- select the `device` and `purchase` column from `ecom`
+
+```{r dplyr6, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 1', exercise.lines = 5}
 select(ecom,     ,    )
 ```
 
 ```{r dplyr6-solution}
 select(ecom, device, purchase)
 ```
+
+<br>
 
 ### Select Multiple Columns
 
@@ -213,7 +292,22 @@ select(ecom, device, purchase)
 </center>
 </br>
 
-```{r dplyr7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 2'}
+#### Syntax
+
+```{r dplyr7-syntax, eval=FALSE, echo=TRUE}
+select(data, column_a:column_n)
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- select all columns from `device` upto `purchase` 
+- use `:` to specify the columns
+
+```{r dplyr7, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 2', exercise.lines = 5}
 select(ecom,         )
 ```
 
@@ -231,7 +325,23 @@ select(ecom, device:purchase)
 </center>
 </br>
 
-```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 3'}
+#### Syntax
+
+<hr>
+
+```{r dplyr8-syntax, eval=FALSE, echo=TRUE}
+select(data, -column_name, -column_name)
+```
+
+<br>
+
+#### Instructions
+
+<hr>
+
+- select all columns from `ecom` except `device` and `n_pages`
+
+```{r dplyr8, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 3', exercise.lines = 5}
 select(ecom,    ,     )
 ```
 
@@ -243,12 +353,12 @@ select(ecom, -device, -n_pages)
 
 <hr>
 
-For our case study, we need to select the columns order value and order items 
-to calculate the AOV. We also need to select the device column as we are 
-computing the AOV for different devices.
+- select the following columns from `ecom`:
+    - `device`
+    - `order_value`
 
 
-```{r dplyr9, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 4'}
+```{r dplyr9, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 4', exercise.lines = 5}
 
 ```
 
@@ -256,23 +366,21 @@ computing the AOV for different devices.
 select(ecom, device, order_value)
 ```
 
-But we want the above data only for purchasers. We will combine `filter()` and 
-`select()` functions to extract data related to purchasers.
+- but we want the above data only for purchasers, combine `filter()` and 
+`select()` functions to extract data related to purchasers
 
-### Instructions
 
-<hr>
-
-```{r dplyr10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 5'}
+```{r dplyr10, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Select - Part 5', exercise.lines = 10}
+# filter visits that related in a purchase
 ecom1 <- filter(ecom,       )
-ecom2 <- select(ecom1,      )
-ecom2
+
+# select device and order_value 
+select(ecom1,      )
 ```
 
 ```{r dplyr10-solution}
 ecom1 <- filter(ecom, purchase)
-ecom2 <- select(ecom1, device, order_value)
-ecom2
+select(ecom1, device, order_value)
 ```
 
 ## Group Data 
@@ -290,31 +398,44 @@ on which the data will be split. Let us look at a few examples:
 
 <hr>
 
-```{r dplyr11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Group - Part 1'}
-group_by(ecom,     )
-```
-
-```{r dplyr11-solution}
-group_by(ecom, referrer)
+```{r dplyr11-syntax, eval=FALSE, echo=TRUE}
+group_by(data, grouping_variable)
 ```
 
 ### Instructions
 
 <hr>
 
-In the second line in the previous output, you can observe 
-`Groups: referrer [5]`. The data is split into 5 groups as the referrer 
-variable has 5 distinct values. For our case study, we need to group the data 
-by device type.
+- use `group_by()` to group `ecom` by `referrer` 
+- the first argument should be the name of the data set i.e. `ecom`
+- the second argument should be the name of the grouping variable i.e. `referrer`
 
-```{r dplyr12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Group - Part 2'}
-ecom3 <- group_by(ecom2,      )
-ecom3
+```{r dplyr11, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Group - Part 1', exercise.lines = 5}
+
+```
+
+```{r dplyr11-solution}
+group_by(ecom, referrer)
+```
+
+### Case Study
+
+<hr>
+
+- use the `ecom2` data set
+- use `group_by()` to group the data by device type i.e. `device` column
+- we have provided the partial code, enter the name of the grouping variable
+
+```{r dplyr12, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Group - Part 2', exercise.lines = 5}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+group_by(ecom2,      )
 ```
 
 ```{r dplyr12-solution}
-ecom3 <- group_by(ecom2, device)
-ecom3
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+group_by(ecom2, device)
 ```
 
 ## Summarize 
@@ -335,41 +456,104 @@ summary. For example, we can use `min`, `max`, `sum`, `mean` etc.
 </center>
 </br>
 
-### Instructions
+Let us compute the average number of pages browsed by referrer type:
 
-<hr>
+- split data by `referrer` type
+- compute the average number of pages using `mean`
 
-For our case study, we need the totals of order value and order items. What 
-function can we use to obtain them? The `sum()` function will generate the sum 
-of the values and hence we will use it inside the `summarise()` function. 
-Remember, we need to provide a name to the summary being generated. 
 
-```{r dplyr13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Summarize - Part 1'}
-ecom4 <- summarise(ecom3, revenue = sum(order_value),
-          orders = n())
-ecom4
+```{r sumeg, eval=TRUE, echo=TRUE, collapse=TRUE}
+# split data by referrer type
+step_1 <- group_by(ecom, referrer)
+
+# compute average number of pages
+summarise(step_1, mean(n_pages))
 ```
 
-There you go, we have the total order value and total order items for each 
-device type. Another way to achieve the above result is to use the 
+Now let us compute both the `mean` and the `median`.
+
+```{r sumeg2, eval=TRUE, echo=TRUE, collapse=TRUE}
+# split data by referrer type
+step_1 <- group_by(ecom, referrer)
+
+# compute average number of pages
+summarise(step_1, mean(n_pages), median(n_pages))
+```
+
+Another way to achieve the above result is to use the 
 `summarise_all()` function. How does that work? It generates the specified 
 summary for all the columns in the data set except for the column based on 
-which the data has been grouped. So we need to ensure that the data frame does 
-not have any irrelevant columns.
+which the data has been grouped or split. So we need to ensure that the data 
+does not have any irrelevant columns.
+
+- split data by `referrer` type
+- select `order_value`
+- compute the average number of pages by applying the `mean` function to all 
+the columns
+
+
+```{r sumall_eg, eval=TRUE, echo=TRUE, collapse=TRUE}
+# select relevant columns
+step_1 <- select(ecom, referrer, order_value)
+
+# split data by referrer type
+step_2 <- group_by(step_1, referrer)
+
+# compute average number of pages
+summarise_all(step_2, funs(mean))
+```
+
+Let us compute `mean` and `median` number of pages for each referre type using 
+`summarise_all`.
+
+```{r sumall_eg2, eval=TRUE, echo=TRUE, collapse=TRUE}
+# select relevant columns
+step_1 <- select(ecom, referrer, order_value)
+
+# split data by referrer type
+step_2 <- group_by(step_1, referrer)
+
+# compute mean and median number of pages
+summarise_all(step_2, funs(mean, median))
+```
+
 
 ### Case Study
 
-<hr>
+- use the `ecom3` data set
+- use `summarise()` to compute the sum of order value and count of orders  
+- use `sum()` and `n()` to generate the sum of the values and to count orders
 
-In our case study, we have split the data based on the device type and we have 
-2 other columns which are order value and order items. If we use 
-`summarise_all()` function, it will generate the summary for the two columns 
-based on the function specified. To specify the functions, we need to use 
-another argument `funs` and it can take any number of valid functions.
+```{r dplyr13, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Summarize', exercise.lines = 5}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+summarise(ecom3, revenue = , orders = )
 
-```{r dplyr14, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Summarize - Part 2'}
-ecom4 <- summarise_all(ecom3, funs(sum))
-ecom4
+```
+
+```{r dplyr13-solution}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+summarise(ecom3, revenue = sum(order_value), orders = n())
+```
+
+- use the `ecom3` data set
+- use `summarise_all()` and `funs()` to reproduce the above result
+
+```{r dplyr14, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Summarize All', exercise.lines = 5}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+summarise_all(ecom3, funs(revenue = , orders = ))
+```
+
+```{r dplyr14-solution}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+summarise_all(ecom3, funs(revenue = sum, orders = n()))
 ```
 
 ## Mutate
@@ -388,22 +572,128 @@ expressions for creating new columns based out of existing columns.
 </center>
 </br>
 
-### Syntax
+Let us add a new column `avg_page_time` i.e. time on site divided by number of
+pages visited.
+
+```{r mutateg, eval=TRUE, echo=TRUE}
+# select duration and n_pages from ecom
+mutate_1 <- select(ecom, n_pages, duration)
+mutate(mutate_1, avg_page_time = duration / n_pages)
+```
+
+We can create new columns based on other columns created using `mutate`. Let us 
+create another column `sqrt_avg_page_time` i.e. square root of the average time
+on page using `avg_page_time`.
+
+```{r mutateg2, eval=TRUE, echo=TRUE}
+mutate(mutate_1,
+       avg_page_time = duration / n_pages,
+       sqrt_avg_page_time = sqrt(avg_page_time))
+```
+
+### Case Study
 
 <hr>
+
+- from the last step we have the total order value and total orders for each 
+device category 
+- use the `ecom4` data set
+- create a new column `AOV` using `mutate()`  
+- divide `revenue` by `orders` to arrive at the average order value for each 
+device category
 
 ### Instructions
 
 <hr>
 
-```{r dplyr15, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Mutate'}
-ecom5 <- mutate(ecom4, aov =                          )
-ecom5
+```{r dplyr15, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Mutate', exercise.lines = 5}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
+mutate(ecom4, aov =                          )
+
 ```
 
 ```{r dplyr15-solution}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
+mutate(ecom4, aov = revenue / orders)
+```
+
+## Arrange Data
+
+<hr>
+
+Arranging data in ascending or descending order is one of the most common tasks
+in data manipulation. We can use `arrange` to arrange data by different columns.
+
+
+<br>
+<center>
+![](/images/arrange_1.png){width=90%}
+</center>
+</br>
+
+### Syntax
+
+<hr>
+
+```{r arrange-syntax, eval=FALSE, echo=TRUE}
+arrange(data, column_name)
+```
+
+Let us say we want to arrange data by the number of pages browsed.
+
+```{r arrange_eg, eval= TRUE, echo=TRUE}
+arrange(ecom, n_pages)
+```
+
+If we want to arrange the data in descending order, we can use `desc()`. Let us 
+arrange the data in descending order.
+
+```{r arrange_eg2, eval=TRUE, echo=TRUE}
+arrange(ecom , desc(n_pages))
+```
+
+Data can be arranged by multiple variables as well. Let us arrange data first by 
+number of visits and then by number of pages in a descending order.
+
+```{r arrange_eg3, eval=TRUE, echo=TRUE}
+arrange(ecom, n_visit, desc(n_pages))
+```
+
+### Case Study
+
+<hr>
+
+- use the `ecom6` data set
+- sort the `aov` column in ascending order using `arrange()`
+
+```{r arrange4, exercise = TRUE, exercise.eval = FALSE, exercise.cap = 'Arrange', exercise.lines = 12}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
 ecom5 <- mutate(ecom4, aov = revenue / orders)
-ecom5
+ecom6 <- select(ecom5, device, aov)
+
+# sort aov in ascending order
+
+```
+
+```{r arrange4-solution}
+ecom1 <- filter(ecom, purchase)
+ecom2 <- select(ecom1, device, order_value)
+ecom3 <- group_by(ecom2, device)
+ecom4 <- summarise_all(ecom3, funs(revenue = sum, orders = n()))
+ecom5 <- mutate(ecom4, aov = revenue / orders)
+ecom6 <- select(ecom5, device, aov)
+
+# sort aov in ascending order
+arrange(ecom6, aov)
 ```
 
 ## AOV by Devices
