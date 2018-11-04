@@ -7,5 +7,11 @@
 tr_string_manipulation()
 }
 \description{
-Hacking strings with stringr.
+Launch string manipulation tutorial.
+}
+\examples{
+\dontrun{
+tr_string_manipulation()
+}
+
 }

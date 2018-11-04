@@ -7,5 +7,11 @@
 tr_dplyr_part_3()
 }
 \description{
-dplyr tutorial
+Launch dplyr helpers tutorial.
+}
+\examples{
+\dontrun{
+tr_dplyr_part_3()
+}
+
 }

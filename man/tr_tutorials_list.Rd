@@ -2,10 +2,16 @@
 % Please edit documentation in R/tutorials.R
 \name{tr_tutorials_list}
 \alias{tr_tutorials_list}
-\title{Display Tutorials}
+\title{Display tutorials}
 \usage{
 tr_tutorials_list()
 }
 \description{
-Show all tutorials
+Display all tutorials.
+}
+\examples{
+\dontrun{
+tr_tutorials_list()
+}
+
 }

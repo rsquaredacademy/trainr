@@ -7,5 +7,11 @@
 tr_categorical_analysis()
 }
 \description{
-Launch tutorial to learn working with categorical data.
+Launch categorical data analysis tutorial.
+}
+\examples{
+\dontrun{
+tr_categorical_analysis()
+}
+
 }

@@ -7,5 +7,11 @@
 tr_intro_pipes()
 }
 \description{
-Readable code with pipes.
+Launch pipes tutorial.
+}
+\examples{
+\dontrun{
+tr_intro_pipes()
+}
+
 }

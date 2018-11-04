@@ -7,5 +7,11 @@
 tr_launch_tutorial()
 }
 \description{
-Launch interactive tutorials
+Launch interactive tutorials.
+}
+\examples{
+\dontrun{
+tr_launch_tutorial()
+}
+
 }

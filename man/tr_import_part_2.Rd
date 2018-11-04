@@ -7,5 +7,11 @@
 tr_import_part_2()
 }
 \description{
-Read data from excel spreadsheet.
+Launch import data tutorial part 2.
+}
+\examples{
+\dontrun{
+tr_import_part_2()
+}
+
 }

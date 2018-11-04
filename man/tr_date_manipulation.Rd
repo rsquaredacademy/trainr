@@ -7,5 +7,11 @@
 tr_date_manipulation()
 }
 \description{
-Working with date and time using lubridate.
+Launch date and time manipulation tutorial.
+}
+\examples{
+\dontrun{
+tr_date_manipulation()
+}
+
 }

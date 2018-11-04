@@ -7,5 +7,11 @@
 tr_intro_tibbles()
 }
 \description{
-Introduction to tibbles.
+Launch tibbles tutorial.
+}
+\examples{
+\dontrun{
+tr_intro_tibbles()
+}
+
 }

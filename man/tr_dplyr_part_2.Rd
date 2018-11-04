@@ -7,5 +7,11 @@
 tr_dplyr_part_2()
 }
 \description{
-dplyr tutorial
+Launch dplyr joins tutorial.
+}
+\examples{
+\dontrun{
+tr_dplyr_part_2()
+}
+
 }

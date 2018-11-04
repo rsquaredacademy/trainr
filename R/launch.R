@@ -1,5 +1,10 @@
 #' @title Launch tutorials
-#' @description Launch interactive tutorials
+#' @description Launch interactive tutorials.
+#' @examples 
+#' \dontrun{
+#' tr_launch_tutorial()
+#' }
+#' 
 #' @export
 #'
 tr_launch_tutorial <- function() {
@@ -39,16 +44,19 @@ tr_launch_tutorial <- function() {
   
 }
 
-#' @importFrom learnr run_tutorial
-#' @importFrom pingr ping
 #' @title Learn dplyr
-#' @description dplyr tutorial
+#' @description Launch dplyr verbs tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_dplyr_part_1()
+#' }
+#' 
 #' @export
 #'
 tr_dplyr_part_1 <- function() {
 
   if (is_online()) {
-    run_tutorial(name = 'data-wrangling-with-dplyr-part-1', package = 'trainr')
+    learnr::run_tutorial(name = 'data-wrangling-with-dplyr-part-1', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -56,13 +64,18 @@ tr_dplyr_part_1 <- function() {
 }
 
 #' @title Learn dplyr
-#' @description dplyr tutorial
+#' @description Launch dplyr joins tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_dplyr_part_2()
+#' }
+#' 
 #' @export
 #'
 tr_dplyr_part_2 <- function() {
 
   if (is_online()) {
-    run_tutorial(name = 'data-wrangling-with-dplyr-part-2', package = 'trainr')
+    learnr::run_tutorial(name = 'data-wrangling-with-dplyr-part-2', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -71,13 +84,18 @@ tr_dplyr_part_2 <- function() {
 
 
 #' @title Learn dplyr
-#' @description dplyr tutorial
+#' @description Launch dplyr helpers tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_dplyr_part_3()
+#' }
+#' 
 #' @export
 #'
 tr_dplyr_part_3 <- function() {
 
-  if (is_online()) {
-    run_tutorial(name = 'data-wrangling-with-dplyr-part-3', package = 'trainr')
+  if (pingr::is_online()) {
+    learnr::run_tutorial(name = 'data-wrangling-with-dplyr-part-3', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -85,17 +103,21 @@ tr_dplyr_part_3 <- function() {
 }
 
 #' @title Import Data
-#' @description Read data from flat and delimited files.
-#' @importFrom fs dir_exists
+#' @description Launch import data tutorial part 1.
+#' @examples 
+#' \dontrun{
+#' tr_import_part_1()
+#' }
+#' 
 #' @export
 #'
 tr_import_part_1 <- function() {
 
-  if (is_online()) {
-    if (!dir_exists("datasets")) {
+  if (pingr::is_online()) {
+    if (!fs::dir_exists("datasets")) {
       tr_download_data()
     }
-    run_tutorial(name = 'import-data-in-r-part-1', package = 'trainr')
+    learnr::run_tutorial(name = 'import-data-in-r-part-1', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -103,16 +125,21 @@ tr_import_part_1 <- function() {
 }
 
 #' @title Import Data
-#' @description Read data from excel spreadsheet.
+#' @description Launch import data tutorial part 2.
+#' @examples 
+#' \dontrun{
+#' tr_import_part_2()
+#' }
+#' 
 #' @export
 #'
 tr_import_part_2 <- function() {
 
-  if (is_online()) {
-    if (!dir_exists("datasets")) {
+  if (pingr::is_online()) {
+    if (!fs::dir_exists("datasets")) {
       tr_download_data()
     }
-    run_tutorial(name = 'import-data-in-r-part-2', package = 'trainr')
+    learnr::run_tutorial(name = 'import-data-in-r-part-2', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -120,13 +147,18 @@ tr_import_part_2 <- function() {
 }
 
 #' @title tibbles
-#' @description Introduction to tibbles.
+#' @description Launch tibbles tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_intro_tibbles()
+#' }
+#' 
 #' @export
 #'
 tr_intro_tibbles <- function() {
 
-  if (is_online()) {
-    run_tutorial(name = 'introduction-to-tibbles', package = 'trainr')
+  if (pingr::is_online()) {
+    learnr::run_tutorial(name = 'introduction-to-tibbles', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -134,13 +166,18 @@ tr_intro_tibbles <- function() {
 }
 
 #' @title Pipes
-#' @description Readable code with pipes.
+#' @description Launch pipes tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_intro_pipes()
+#' }
+#' 
 #' @export
 #'
 tr_intro_pipes <- function() {
 
-  if (is_online()) {
-    run_tutorial(name = 'readable-code-with-pipes', package = 'trainr')
+  if (pingr::is_online()) {
+    learnr::run_tutorial(name = 'readable-code-with-pipes', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -148,13 +185,18 @@ tr_intro_pipes <- function() {
 }
 
 #' @title String manipulation
-#' @description Hacking strings with stringr.
+#' @description Launch string manipulation tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_string_manipulation()
+#' }
+#' 
 #' @export
 #'
 tr_string_manipulation <- function() {
 
-  if (is_online()) {
-    run_tutorial(name = 'hacking-strings-with-stringr', package = 'trainr')
+  if (pingr::is_online()) {
+    learnr::run_tutorial(name = 'hacking-strings-with-stringr', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -162,13 +204,18 @@ tr_string_manipulation <- function() {
 }
 
 #' @title Date manipulation
-#' @description Working with date and time using lubridate.
+#' @description Launch date and time manipulation tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_date_manipulation()
+#' }
+#' 
 #' @export
 #'
 tr_date_manipulation <- function() {
 
-  if (is_online()) {
-    run_tutorial(name = 'work-with-date-and-time-in-R', package = 'trainr')
+  if (pingr::is_online()) {
+    learnr::run_tutorial(name = 'work-with-date-and-time-in-R', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
@@ -176,13 +223,18 @@ tr_date_manipulation <- function() {
 }
 
 #' @title Categorical data analysis
-#' @description Launch tutorial to learn working with categorical data.
+#' @description Launch categorical data analysis tutorial.
+#' @examples 
+#' \dontrun{
+#' tr_categorical_analysis()
+#' }
+#' 
 #' @export
 #'
 tr_categorical_analysis <- function() {
 
-  if (is_online()) {
-    run_tutorial(name = 'working-with-categorical-data', package = 'trainr')
+  if (pingr::is_online()) {
+    learnr::run_tutorial(name = 'working-with-categorical-data', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }

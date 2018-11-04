@@ -7,5 +7,11 @@
 tr_import_part_1()
 }
 \description{
-Read data from flat and delimited files.
+Launch import data tutorial part 1.
+}
+\examples{
+\dontrun{
+tr_import_part_1()
+}
+
 }

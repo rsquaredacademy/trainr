@@ -1,11 +1,12 @@
-#' @importFrom learnr run_tutorial
-#' @importFrom clisymbols symbol
-#' @importFrom crayon red green
-#' @importFrom rstudioapi showQuestion
-#' @title Display Tutorials
-#' @description Show all tutorials
+#' @title Display tutorials
+#' @description Display all tutorials.
+#' @examples 
+#' \dontrun{
+#' tr_tutorials_list()
+#' }
+#' 
 #' @export
-
+#' 
 tr_tutorials_list <- function() {
   
   tutorial <- menu(c("Importing Data into R - Part 1", 
@@ -39,7 +40,7 @@ tr_tutorials_list <- function() {
           "and skip columns while reading data"), "\n\n"
     )
     
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -64,7 +65,7 @@ tr_tutorials_list <- function() {
           "read data from SAS, STATA and SPSS files")
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -87,7 +88,7 @@ tr_tutorials_list <- function() {
           "create new variables")
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -112,7 +113,7 @@ tr_tutorials_list <- function() {
           "full join")
     )
     
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -139,7 +140,7 @@ tr_tutorials_list <- function() {
           "generate counts"), "\n"
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -166,7 +167,7 @@ tr_tutorials_list <- function() {
           "change case of a string"), "\n"
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -193,7 +194,7 @@ tr_tutorials_list <- function() {
           "change case of a string"), "\n"
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -220,7 +221,7 @@ tr_tutorials_list <- function() {
           "change case of a string"), "\n"
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -247,7 +248,7 @@ tr_tutorials_list <- function() {
           "change case of a string"), "\n"
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {
@@ -274,7 +275,7 @@ tr_tutorials_list <- function() {
           "change case of a string"), "\n"
     )
 
-    launch_tutorial <- showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
+    launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
     if (launch_tutorial) {

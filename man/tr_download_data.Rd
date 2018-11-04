@@ -10,6 +10,8 @@ tr_download_data()
 Download data used in the tutorials from GitHub repository.
 }
 \examples{
+\dontrun{
 tr_download_data()
+} 
 
 }
