@@ -9,7 +9,7 @@
 #' 
 tr_tutorials_list <- function() {
   
-  tutorial <- menu(c("Importing Data into R - Part 1", 
+  tutorial <- utils::menu(c("Importing Data into R - Part 1", 
                      "Importing Data into R - Part 2",
                      "Data Wrangling with dplyr - Part 1",
                      "Data Wrangling with dplyr - Part 2",

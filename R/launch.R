@@ -74,7 +74,7 @@ tr_dplyr_part_1 <- function() {
 #'
 tr_dplyr_part_2 <- function() {
 
-  if (is_online()) {
+  if (pingr::is_online()) {
     learnr::run_tutorial(name = 'data-wrangling-with-dplyr-part-2', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
