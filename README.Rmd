@@ -14,7 +14,10 @@ knitr::opts_chunk$set(
 ```
 # trainr
 
-The goal of trainr is to offer a set of interactive tutorials to beginner R users to hone their R skills.
+> Interactive R tutorials.
+
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/trainr)](https://cran.r-project.org/package=trainr) 
+[![Travis-CI Build Status](https://travis-ci.org/rsquaredacademy/trainr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/trainr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/trainr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/trainr) ![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 
 ## Installation
 
