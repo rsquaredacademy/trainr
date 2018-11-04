@@ -7,7 +7,9 @@
 ^codecov\.yml$
 ^\.travis\.yml$
 ^cran-comments\.md$
+^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^LICENSE\.md$
 ^debug.log$
+^hex_trainr\.png$

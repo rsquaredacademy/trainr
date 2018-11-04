@@ -9,7 +9,7 @@
 #'
 tr_launch_tutorial <- function() {
   
-  tutorial <- menu(c("Importing Data into R - Part 1", 
+  tutorial <- utils::menu(c("Importing Data into R - Part 1", 
                      "Importing Data into R - Part 2",
                      "Introduction to tibbles", 
                      "Readable Code with Pipes",
@@ -55,7 +55,7 @@ tr_launch_tutorial <- function() {
 #'
 tr_dplyr_part_1 <- function() {
 
-  if (is_online()) {
+  if (pingr::is_online()) {
     learnr::run_tutorial(name = 'data-wrangling-with-dplyr-part-1', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)

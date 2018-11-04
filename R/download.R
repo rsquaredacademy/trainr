@@ -16,8 +16,8 @@ tr_download_data <- function() {
   folder_name <- "datasets.zip"
   
   if (pingr::is_online()) {
-    download.file(data_url, folder_name)
-    unzip("datasets.zip")
+    utils::download.file(data_url, folder_name)
+    utils::unzip("datasets.zip")
     fs::dir_copy("datasets-master", "datasets")
     fs::dir_delete("datasets-master")
     unlink("datasets.zip")
