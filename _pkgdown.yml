@@ -1,6 +1,13 @@
+url: https://trainr.rsquaredacademy.com
+
+authors:
+  Aravind Hebbali:
+    href: https://www.aravindhebbali.com
+
 templates:
   params:
     bootswatch: cosmo
+
 
 navbar:
   title: "trainr"
@@ -21,18 +28,37 @@ navbar:
 home:
   links:
   - text: Learn more
-    href: http://www.rsquaredacademy.com
+    href: https://www.rsquaredacademy.com
 
 
 reference:
-- title: List of tuorials
+- title: List & launch tutorials
 
   contents:
-  - learn_tutorials_list
-
+  - tr_tutorials_list
+  - tr_launch_tutorial
 
 - title: Tutorials
 
   contents:
-  - learn_dplyr
-  - learn_matrix
+  - tr_import_part_1
+  - tr_import_part_2
+  - tr_dplyr_part_1
+  - tr_dplyr_part_2
+  - tr_dplyr_part_3
+  - tr_intro_pipes
+  - tr_intro_tibbles
+  - tr_categorical_analysis
+  - tr_date_manipulation
+  - tr_string_manipulation
+
+- title: Download data
+  
+  contents:
+  - tr_download_data
+
+
+
+
+
+
