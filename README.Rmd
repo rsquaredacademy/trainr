@@ -21,12 +21,12 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
-
 ``` r
+# Install development version from GitHub
 # install.packages("devtools")
 devtools::install_github("rsquaredacademy/trainr")
 ```
+
 ## List Tutorials
 
 You can list all the tutorials using:
@@ -34,6 +34,8 @@ You can list all the tutorials using:
 ```{r example, eval=FALSE}
 tr_tutorials_list()
 ```
+
+## Community Guidelines
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project you agree to abide by its terms.
