@@ -101,7 +101,7 @@ now extract the date, month and year from the `Due` column.
 
 <br>
 <center>
-![](/images/day_week_month.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/day_week_month.png){width=90%}
 </center>
 <br>
 
@@ -152,7 +152,7 @@ invoice from the date of payment.
 
 <br>
 <center>
-![](/images/course_duration.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/course_duration.png){width=90%}
 </center>
 <br>
 
@@ -280,7 +280,7 @@ Time to shift some dates. We can shift a date by days, weeks or months.
 
 <br>
 <center>
-![](/images/shift_dates.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/shift_dates.png){width=90%}
 </center>
 <br>
 
@@ -331,7 +331,7 @@ carefully, the result is not the duration in days but an object of class
 
 <br>
 <center>
-![](/images/course_interval.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/course_interval.png){width=90%}
 </center>
 <br>
 
@@ -373,7 +373,7 @@ Intervals can be shifted too. In the below example, we shift the course interval
 
 <br>
 <center>
-![](/images/shift_interval.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/shift_interval.png){width=90%}
 </center>
 <br>
 
@@ -423,7 +423,7 @@ the intervals overlap else `FALSE`.
 
 <br>
 <center>
-![](/images/interval_overlap.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/interval_overlap.png){width=90%}
 </center>
 <br>
 
@@ -542,7 +542,7 @@ return `TRUE` if a date falls within an interval.
 
 <br>
 <center>
-![](/images/within.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/within.png){width=90%}
 </center>
 <br>
 
@@ -620,7 +620,7 @@ Let us check the quarter and the semester in which the course starts.
 
 <br>
 <center>
-![](/images/quarter_semester.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/quarter_semester.png){width=90%}
 </center>
 <br>
 
@@ -669,7 +669,7 @@ semester(course_start)
 
 <br>
 <center>
-![](/images/convert.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/convert.png){width=90%}
 </center>
 <br>
 
@@ -720,7 +720,7 @@ We can use `time_length()` to get the course interval in different units.
 
 <br>
 <center>
-![](/images/time_length.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/time_length.png){width=90%}
 </center>
 <br>
 
@@ -762,7 +762,7 @@ time_length(course_interval, unit = "hours")
 
 <br>
 <center>
-![](/images/as_period.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/as_period.png){width=90%}
 </center>
 <br>
 

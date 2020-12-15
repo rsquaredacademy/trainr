@@ -38,7 +38,7 @@ The following types of `join` functions are provided in dplyr:
 
 <br>
 <center>
-![](/images/join_data.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/join_data.png){width=90%}
 </center>
 <br>
 
@@ -80,7 +80,7 @@ customer
 
 <br>
 <center>
-![](/images/join.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/join.png){width=90%}
 </center>
 <br>
 
@@ -90,7 +90,7 @@ customer
 
 <br>
 <center>
-![](/images/draw_inner.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/draw_inner.png){width=90%}
 </center>
 <br>
 
@@ -123,7 +123,7 @@ multiple matches between x and y, all combinations of the matches are returned.
 
 <br>
 <center>
-![](/images/draw_left.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/draw_left.png){width=90%}
 </center>
 <br>
 
@@ -152,7 +152,7 @@ multiple matches between x and y, all combinations of the matches are returned.
 
 <br>
 <center>
-![](/images/draw_right.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/draw_right.png){width=90%}
 </center>
 <br>
 
@@ -181,7 +181,7 @@ join will never duplicate rows of x.
 
 <br>
 <center>
-![](/images/draw_semi.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/draw_semi.png){width=90%}
 </center>
 <br>
 
@@ -208,7 +208,7 @@ keeping just columns from x.
 
 <br>
 <center>
-![](/images/draw_anti.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/draw_anti.png){width=90%}
 </center>
 <br>
 
@@ -235,7 +235,7 @@ are not matching values, returns NA for the one missing.
 
 <br>
 <center>
-![](/images/draw_full.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/draw_full.png){width=90%}
 </center>
 <br>
 

@@ -42,7 +42,7 @@ importing data.
 #### Comma Separated Values
 
 <br>
-![](/images/mtcars_comma.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_comma.png){width=60%}
 <br>
 
 <br>
@@ -50,7 +50,7 @@ importing data.
 #### Semi Colon Separated Values
 
 <br>
-![](/images/mtcars_semicolon.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_semicolon.png){width=60%}
 <br>
 
 <br>
@@ -58,7 +58,7 @@ importing data.
 #### Space Separated Values
 
 <br>
-![](/images/mtcars_space.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_space.png){width=60%}
 <br>
 
 <br>
@@ -66,7 +66,7 @@ importing data.
 #### Tab Separated Values
 
 <br>
-![](/images/mtcars_tab.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_tab.png){width=60%}
 <br>
 
 ## Read Data
@@ -124,14 +124,14 @@ a quick look at the data to check for the presence/absence of column names.
 #### Column names are present
 
 <br>
-![](/images/mtcars_comma.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_comma.png){width=60%}
 <br>
 <br>
 
 #### Column names are absent
 
 <br>
-![](/images/mtcars_column_false.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_column_false.png){width=60%}
 <br>
 
 ## Column Names
@@ -224,7 +224,7 @@ such files, we need to skip all the rows where the text is present. If we do
 not skip them, `readr` will consider them as part of the data.
 
 <br>
-![](/images/mtcars_skip.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mtcars_skip.png){width=80%}
 <br>
 
 ## Skip Lines
@@ -339,7 +339,7 @@ of data. The data can be of the following types:
 
 <br>
 <center>
-![](/images/column_types_list_canva.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/column_types_list_canva.png){width=80%}
 </center>
 <br>
 
@@ -349,7 +349,7 @@ of data. The data can be of the following types:
 
 <br>
 <center>
-![](/images/column_objective_function_map.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/column_objective_function_map.png){width=60%}
 </center>
 <br>
 
@@ -510,7 +510,7 @@ read_csv('/datasets/hsb2.csv', col_types = cols_only(id = col_integer(),
 
 <br>
 <center>
-![](/images/import_func.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/import_func.png){width=60%}
 </center>
 <br>
 

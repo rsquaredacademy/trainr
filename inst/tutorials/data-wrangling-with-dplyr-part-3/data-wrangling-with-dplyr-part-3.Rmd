@@ -76,7 +76,7 @@ values in the `referrer` column.
 
 <br>
 <center>
-![](/images/distinct_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/distinct_1.png){width=90%}
 </center>
 <br>
 
@@ -110,7 +110,7 @@ Columns can be renamed using `rename()`.
 
 <br>
 <center>
-![](/images/rename_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/rename_1.png){width=90%}
 </center>
 <br>
 
@@ -147,7 +147,7 @@ percentage of observations.
 
 <br>
 <center>
-![](/images/sample_frac_n.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/sample_frac_n.png){width=90%}
 </center>
 <br>
 
@@ -189,7 +189,7 @@ column position to indicate the position in reverse.
 
 <br>
 <center>
-![](/images/pull_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/pull_1.png){width=90%}
 </center>
 <br>
 
@@ -241,7 +241,7 @@ Let us now look at extracting rows using `slice()`.
 
 <br>
 <center>
-![](/images/slice_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/slice_1.png){width=90%}
 </center>
 <br>
 
@@ -287,7 +287,7 @@ of traffic.
 
 <br>
 <center>
-![](/images/tally_count.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/tally_count.png){width=90%}
 </center>
 <br>
 

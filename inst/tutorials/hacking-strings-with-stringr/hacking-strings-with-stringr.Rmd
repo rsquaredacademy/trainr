@@ -72,7 +72,7 @@ Let us first detect if the email ids contain `@` use `str_detect()`.
 
 <br>
 <center>
-![](/images/str_detect.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_detect.png){width=90%}
 </center>
 <br>
 
@@ -112,7 +112,7 @@ email ids in the sample data `mock_data`.
 
 <br>
 <center>
-![](/images/str_count.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_count.png){width=90%}
 </center>
 <br>
 
@@ -150,7 +150,7 @@ before each email id in the sample data set.
 
 <br>
 <center>
-![](/images/str_c.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_c.png){width=90%}
 </center>
 <br>
 
@@ -188,7 +188,7 @@ username and the service provider or the domain name.
 
 <br>
 <center>
-![](/images/str_split.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_split.png){width=90%}
 </center>
 <br>
 
@@ -274,7 +274,7 @@ both ascending and descending orders.
 
 <br>
 <center>
-![](/images/str_sort.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_sort.png){width=90%}
 </center>
 <br>
 
@@ -284,7 +284,7 @@ both ascending and descending orders.
 
 <br>
 <center>
-![](/images/str_sort_descending.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_sort_descending.png){width=90%}
 </center>
 <br>
 
@@ -327,7 +327,7 @@ The case of a string can be changed to upper, lower or title case.
 
 <br>
 <center>
-![](/images/str_to_upper.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_to_upper.png){width=90%}
 </center>
 <br>
 
@@ -372,7 +372,7 @@ column of the data set, let us replace:
 
 <br>
 <center>
-![](/images/str_replace.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_replace.png){width=90%}
 </center>
 <br>
 
@@ -412,7 +412,7 @@ We can extract parts of the string that match a particular pattern using
 `str_extract()`.
 
 
-![](/images/str_extract.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_extract.png){width=90%}
 
 ### Syntax
 
@@ -449,7 +449,7 @@ our pattern. Use `str_match()` to see if the pattern is present in the string.
 
 <br>
 <center>
-![](/images/str_match.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_match.png){width=90%}
 </center>
 <br>
 
@@ -491,7 +491,7 @@ of the strings that match our pattern.
 
 <br>
 <center>
-![](/images/str_which.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_which.png){width=90%}
 </center>
 <br>
 
@@ -531,7 +531,7 @@ email ids, we can use `str_locate()`.
 
 <br>
 <center>
-![](/images/str_locate.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_locate.png){width=90%}
 </center>
 <br>
 
@@ -570,7 +570,7 @@ that the length of the strings in the `password` column is 16.
 
 <br>
 <center>
-![](/images/str_length.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_length.png){width=90%}
 </center>
 <br>
 
@@ -607,7 +607,7 @@ using `str_sub()`. Let us extract the currency type from the `currency` column.
 
 <br>
 <center>
-![](/images/str_sub.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/str_sub.png){width=90%}
 </center>
 <br>
 
@@ -647,7 +647,7 @@ extract the first and last name from the `full_name` column.
 
 <br>
 <center>
-![](/images/word.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/word.png){width=90%}
 </center>
 <br>
 

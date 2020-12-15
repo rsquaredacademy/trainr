@@ -144,7 +144,7 @@ Let us break down the above computation into small steps:
 
 <br>
 <center>
-![](/images/pipes_square_root.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/pipes_square_root.png){width=80%}
 </center>
 
 ## Square Root 
@@ -248,7 +248,7 @@ for computing correlation:
 
 <br>
 <center>
-![](/images/pipes_correlation.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/pipes_correlation.png){width=80%}
 </center>
 
 ```{r mag32, eval=TRUE, echo=TRUE}
@@ -326,7 +326,7 @@ barplot(table(subset(ecom, purchase)$referrer))
 <hr>
 
 <center>
-![](/images/pipes_data_visualization.png){width=60%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/pipes_data_visualization.png){width=60%}
 </center>
 
 <br>
@@ -449,7 +449,7 @@ convert it to upper case. Below are the steps to achieve this:
 
 <br>
 <center>
-![](/images/pipes_string.png){width=50%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/pipes_string.png){width=50%}
 </center>
 
 <br>

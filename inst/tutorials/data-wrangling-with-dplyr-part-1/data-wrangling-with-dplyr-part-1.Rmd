@@ -34,7 +34,7 @@ According to  a [survey](http://visit.crowdflower.com/rs/416-ZBE-142/images/Crow
 
 <br>
 <center>
-![](/images/crowd_flower3.png){width=100%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/crowd_flower3.png){width=100%}
 </center>
 </br>
 
@@ -100,7 +100,7 @@ steps to calculate AOV from the ecommerce data set.
 
 <br>
 <center>
-![](/images/aov.png)
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/aov.png)
 </center>
 <br>
 
@@ -117,7 +117,7 @@ steps to calculate AOV from the ecommerce data set.
 
 <br>
 <center>
-![](/images/aov_flow_canva.png){width=100%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/aov_flow_canva.png){width=100%}
 </center>
 <br>
 
@@ -134,7 +134,7 @@ few examples:
 
 <br>
 <center>
-![](/images/filter_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/filter_1.png){width=90%}
 </center>
 <br>
 
@@ -173,7 +173,7 @@ filter(ecom, device == "mobile")
 
 <br>
 <center>
-![](/images/filter_2.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/filter_2.png){width=90%}
 </center>
 </br>
 
@@ -254,7 +254,7 @@ arguments specify the columns by name or position. Let us look at a few examples
 
 <br>
 <center>
-![](/images/select_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/select_1.png){width=90%}
 </center>
 <br>
 
@@ -288,7 +288,7 @@ select(ecom, device, purchase)
 
 <br>
 <center>
-![](/images/select_2.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/select_2.png){width=90%}
 </center>
 </br>
 
@@ -321,7 +321,7 @@ select(ecom, device:purchase)
 
 <br>
 <center>
-![](/images/select_3.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/select_3.png){width=90%}
 </center>
 </br>
 
@@ -452,7 +452,7 @@ summary. For example, we can use `min`, `max`, `sum`, `mean` etc.
 
 <br>
 <center>
-![](/images/groupby_summarise.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/groupby_summarise.png){width=90%}
 </center>
 </br>
 
@@ -568,7 +568,7 @@ expressions for creating new columns based out of existing columns.
 
 <br>
 <center>
-![](/images/mutate_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/mutate_1.png){width=90%}
 </center>
 </br>
 
@@ -633,7 +633,7 @@ in data manipulation. We can use `arrange` to arrange data by different columns.
 
 <br>
 <center>
-![](/images/arrange_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/arrange_1.png){width=90%}
 </center>
 </br>
 

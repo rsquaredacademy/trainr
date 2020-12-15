@@ -93,7 +93,7 @@ Let us compute the traffic driven by different referrers using `fct_count()`.
 
 <br>
 <center>
-![](/images/fct_count.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_count.png){width=90%}
 </center>
 </br>
 
@@ -165,7 +165,7 @@ The levels can be reordered based on their frequency using `fct_infreq()`.
 
 <br>
 <center>
-![](/images/fct_infreq.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_infreq.png){width=90%}
 </center>
 </br>
 
@@ -207,7 +207,7 @@ The levels can be reordered based on the order of appearance using `fct_inorder(
 
 <br>
 <center>
-![](/images/fct_inorder.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_inorder.png){width=90%}
 </center>
 </br>
 
@@ -251,7 +251,7 @@ The levels can be reversed using `fct_rev()`.
 
 <br>
 <center>
-![](/images/fct_rev.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_rev.png){width=90%}
 </center>
 </br>
 
@@ -299,7 +299,7 @@ To group categories/levels, we will use `fct_collapse()`.
 
 <br>
 <center>
-![](/images/fct_collapse.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_collapse.png){width=90%}
 </center>
 </br>
 
@@ -345,7 +345,7 @@ Categories/levels can be grouped using `fct_recode()` as well:
 
 <br>
 <center>
-![](/images/fct_recode.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_recode.png){width=90%}
 </center>
 </br>
 
@@ -390,7 +390,7 @@ Let us group together referrer types that drive low traffic to the website. Use
 
 <br>
 <center>
-![](/images/fct_lump_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_lump_1.png){width=90%}
 </center>
 </br>
 
@@ -481,7 +481,7 @@ and combine the rest.
 
 <br>
 <center>
-![](/images/fct_lump_2.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_lump_2.png){width=90%}
 </center>
 </br>
 
@@ -617,7 +617,7 @@ while grouping the rest as others using `fct_other()`.
 
 <br>
 <center>
-![](/images/fct_others_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_others_1.png){width=90%}
 </center>
 </br>
 
@@ -667,7 +667,7 @@ In the below example, we drop the following referrer categories:
 
 <br>
 <center>
-![](/images/fct_others_2.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_others_2.png){width=90%}
 </center>
 </br>
 
@@ -714,7 +714,7 @@ we reorder the categories to ensure google appears first.
 
 <br>
 <center>
-![](/images/fct_relevel_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_relevel_1.png){width=90%}
 </center>
 </br>
 
@@ -761,7 +761,7 @@ google should come after the 2nd position (i.e. third position).
 
 <br>
 <center>
-![](/images/fct_relevel_2.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_relevel_2.png){width=90%}
 </center>
 </br>
 
@@ -806,7 +806,7 @@ If the category should appear last, supply the value `Inf` (infinity) to the
 
 <br>
 <center>
-![](/images/fct_relevel_3.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_relevel_3.png){width=90%}
 </center>
 </br>
 
@@ -871,7 +871,7 @@ positions.
 
 <br>
 <center>
-![](/images/fct_shift_1.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_shift_1.png){width=90%}
 </center>
 </br>
 
@@ -915,7 +915,7 @@ positions.
 
 <br>
 <center>
-![](/images/fct_shift_2.png){width=90%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/fct_shift_2.png){width=90%}
 </center>
 </br>
 

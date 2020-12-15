@@ -128,7 +128,7 @@ in single/double quotes.
 
 <br>
 <center>
-![](/images/readxl_range.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/readxl_range.png){width=80%}
 </center>
 <br>
 
@@ -174,7 +174,7 @@ cell and the number of rows and columns to read. It takes two arguments:
 
 <br>
 <center>
-![](/images/readxl_anchored_lucid.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/readxl_anchored_lucid.png){width=80%}
 </center>
 <br>
 
@@ -227,7 +227,7 @@ initial cell and the number of rows and columns to read. It takes two arguments:
 
 <br>
 <center>
-![](/images/readxl_cell_limits_lucid.png){width=80%}
+![](https://raw.githubusercontent.com/rsquaredacademy-education/img/master/images/readxl_cell_limits_lucid.png){width=80%}
 </center>
 <br>
 
