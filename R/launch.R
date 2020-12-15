@@ -177,7 +177,7 @@ tr_intro_tibbles <- function() {
 tr_intro_pipes <- function() {
 
   if (pingr::is_online()) {
-    learnr::run_tutorial(name = 'readable-code-with-pipes', package = 'trainr')
+    learnr::run_tutorial(name = 'pipes', package = 'trainr')
   } else {
     stop('Please ensure that you are connected to the internet.', call. = FALSE)
   }
