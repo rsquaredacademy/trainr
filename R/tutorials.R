@@ -40,6 +40,8 @@ tr_tutorials_list <- function() {
           "and skip columns while reading data"), "\n\n"
     )
     
+    Sys.sleep(5)
+    
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
     
@@ -64,6 +66,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "read data from SAS, STATA and SPSS files")
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -87,6 +91,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "create new variables")
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -112,6 +118,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "full join")
     )
+    
+    Sys.sleep(5)
     
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -139,6 +147,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "generate counts"), "\n"
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -166,6 +176,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -193,6 +205,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -220,6 +234,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -247,6 +263,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
@@ -274,6 +292,8 @@ tr_tutorials_list <- function() {
     paste(crayon::blue(clisymbols::symbol$tick), 
           "change case of a string"), "\n"
     )
+    
+    Sys.sleep(5)
 
     launch_tutorial <- rstudioapi::showQuestion("Run tutorial", "Do you want to lauch the tutorial?",
       "Yes", "No")
