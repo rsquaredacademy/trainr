@@ -3,15 +3,15 @@
 
 # trainr
 
-> Interactive R
-tutorials.
+> Interactive R tutorials.
+
+<!-- badges: start -->
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/trainr)](https://cran.r-project.org/package=trainr)
-[![Travis-CI Build
-Status](https://travis-ci.org/rsquaredacademy/trainr.svg?branch=master)](https://travis-ci.org/rsquaredacademy/trainr)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/rsquaredacademy/trainr?branch=master&svg=true)](https://ci.appveyor.com/project/rsquaredacademy/trainr)
+[![R build
+status](https://github.com/rsquaredacademy/trainr/workflows/R-CMD-check/badge.svg)](https://github.com/rsquaredacademy/trainr/actions)
 ![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
+<!-- badges: end -->
 
 ## Installation
 
